@@ -19,7 +19,7 @@
 他们实现的功能是一样的，都是打印vi编辑器的帮助文档。python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。
 代码举例：
 12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;if __name__ == &apos;__mai">
-<meta property="og:updated_time" content="2015-08-20T15:38:59.130Z">
+<meta property="og:updated_time" content="2015-08-20T15:39:50.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 实现命令行参数">
 <meta name="twitter:description" content="在终端中输入1vi -h
@@ -223,7 +223,7 @@
 <pre><code>opts 为分析出的格式信息.
 args 为不属于格式信息的剩余的命令行参数.
 其中opts 是一个两元组的列表,每个元素为：( 选项名称, 该选项参数) ,即上面举例代码中的(opt, value).
-如果没有选项附加参数则value为空串.所有为确保上述举例代码健全性,应在有                  参数的选项的value处做是否为空串判断.
+如果没有选项附加参数则value为空串.所有为确保上述举例代码健全性,应该有参数的选项的value处做是否为空串判断.
 </code></pre>
       
     </div>
