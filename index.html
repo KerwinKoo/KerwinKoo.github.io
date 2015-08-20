@@ -103,7 +103,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/python/" style="font-size: 10px;">python</a>
+						
 					</div>
 				</section>
 				
@@ -164,72 +164,6 @@
 	</div>
 </nav>
       <div class="body-wrap">
-  
-    <article id="post-python/python-command-line-analysis" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/20/python/python-command-line-analysis/" class="article-date">
-  	<time datetime="2015-08-20T03:41:25.000Z" itemprop="datePublished">2015-08-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/20/python/python-command-line-analysis/">python 实现命令行参数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在终端中输入</p>
-<pre><code><span class="title">vi</span> -h
-</code></pre><p>或者</p>
-<pre><code><span class="keyword">vi</span> --<span class="keyword">help</span>
-</code></pre><p>他们实现的功能是一样的，都是打印vi编辑器的帮助文档。python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。</p>
-<p>代码举例：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import getopt</span><br><span class="line"></span><br><span class="line">__version__ = '1.0'</span><br><span class="line"></span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    longargs = ['version', '<span class="operator"><span class="keyword">help</span><span class="string">', '</span><span class="keyword">file</span>=<span class="string">', '</span><span class="built_in">record</span>=<span class="string">']</span><br><span class="line">    shortargs = '</span>vhf:<span class="string">'</span><br><span class="line"></span><br><span class="line">    opts, args = getopt.getopt(sys.argv[1:], shortargs, longargs)</span><br><span class="line">    for opt, value in opts:</span><br><span class="line">        if opt in ('</span>-v<span class="string">', '</span><span class="comment">--version'):</span></span><br><span class="line">            print __version__</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt <span class="keyword">in</span> (<span class="string">'--help'</span>, <span class="string">'-h):</span><br><span class="line">            print '</span>this <span class="keyword">is</span> a <span class="keyword">test</span><span class="string">'</span><br><span class="line">            </span><br><span class="line">        if opt in ('</span>-<span class="keyword">f</span><span class="string">', '</span><span class="comment">--file'):</span></span><br><span class="line">            print <span class="string">'handle file: '</span> + <span class="keyword">value</span>    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="keyword">file</span> <span class="keyword">name</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">'--record'</span>:</span><br><span class="line">            print get_records_by_date(<span class="keyword">value</span>)    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="built_in">record</span> <span class="keyword">content</span></span></span><br></pre></td></tr></table></figure>
-<p>上面例子中,longargs为长选项列表,其中<code>=</code>表示该长选项后必须跟有参数<br>shortargs为短选项列表,在选项后面加<code>:</code>表示该短选项后必须跟有参数</p>
-<p>函数<code>getopt.getopt(sys.argv[1:], shortargs, longargs)</code>表示对命令行进行解析,返回值为opts和args,含义如下:</p>
-<blockquote>
-<p>opts 为分析出的格式信息.<br>args 为不属于格式信息的剩余的命令行参数.<br>其中opts 是一个两元组的列表,每个元素为：( 选项名称, 该选项参数) ,即上面举例代码中的(opt, value).<br>如果没有选项附加参数则value为空串.所有为确保上述举例代码健全性,应该有参数的选项的value处做是否为空串判断.</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
