@@ -196,15 +196,12 @@
 <p>他们实现的功能是一样的，都是打印vi编辑器的帮助文档。python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。</p>
 <p>代码举例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import getopt</span><br><span class="line"></span><br><span class="line">__version__ = '1.0'</span><br><span class="line"></span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    longargs = ['version', '<span class="operator"><span class="keyword">help</span><span class="string">', '</span><span class="keyword">file</span>=<span class="string">', '</span><span class="built_in">record</span>=<span class="string">']</span><br><span class="line">    shortargs = '</span>vhf:<span class="string">'</span><br><span class="line"></span><br><span class="line">    opts, args = getopt.getopt(sys.argv[1:], shortargs, longargs)</span><br><span class="line">    for opt, value in opts:</span><br><span class="line">        if opt in ('</span>-v<span class="string">', '</span><span class="comment">--version'):</span></span><br><span class="line">            print __version__</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt <span class="keyword">in</span> (<span class="string">'--help'</span>, <span class="string">'-h):</span><br><span class="line">            print '</span>this <span class="keyword">is</span> a <span class="keyword">test</span><span class="string">'</span><br><span class="line">            </span><br><span class="line">        if opt in ('</span>-<span class="keyword">f</span><span class="string">', '</span><span class="comment">--file'):</span></span><br><span class="line">            print <span class="string">'handle file: '</span> + <span class="keyword">value</span>    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="keyword">file</span> <span class="keyword">name</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">'--record'</span>:</span><br><span class="line">            print get_records_by_date(<span class="keyword">value</span>)    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="built_in">record</span> <span class="keyword">content</span></span></span><br></pre></td></tr></table></figure>
-<pre><code>上面例子中,<span class="atom">longargs</span>为长选项列表,其中<span class="string">`=`</span>表示该长选项后必须跟有参数
-<span class="atom">shortargs</span>为短选项列表,在选项后面加<span class="string">`:`</span>表示该短选项后必须跟有参数
-
-函数<span class="string">`getopt.getopt(sys.argv[1:], shortargs, longargs)`</span>表示对命令行进行解析,返回值为<span class="atom">opts</span>和<span class="atom">args</span>,含义如下:
-
-    <span class="atom">opts</span> 为分析出的格式信息.
-    <span class="atom">args</span> 为不属于格式信息的剩余的命令行参数.
-    其中<span class="atom">opts</span> 是一个两元组的列表,每个元素为：( 选项名称, 该选项参数) ,即上面举例代码中的(<span class="atom">opt</span>, <span class="atom">value</span>).
-    如果没有选项附加参数则<span class="atom">value</span>为空串.所有为确保上述举例代码健全性,应在有                  参数的选项的<span class="atom">value</span>处做是否为空串判断.
+<p>上面例子中,longargs为长选项列表,其中<code>=</code>表示该长选项后必须跟有参数<br>shortargs为短选项列表,在选项后面加<code>:</code>表示该短选项后必须跟有参数</p>
+<p>函数<code>getopt.getopt(sys.argv[1:], shortargs, longargs)</code>表示对命令行进行解析,返回值为opts和args,含义如下:</p>
+<pre><code>opts 为分析出的格式信息.
+args 为不属于格式信息的剩余的命令行参数.
+其中opts 是一个两元组的列表,每个元素为：( 选项名称, 该选项参数) ,即上面举例代码中的(opt, value).
+如果没有选项附加参数则value为空串.所有为确保上述举例代码健全性,应在有                  参数的选项的value处做是否为空串判断.
 </code></pre>
       
     </div>
