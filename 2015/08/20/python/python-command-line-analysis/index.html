@@ -5,28 +5,46 @@
   
   <title>python 实现命令行参数 | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在终端中输入1vi -h
-或者1vi --help
+  <meta name="description" content="在终端中输入
+
+vi -h
+
+或者
+
+vi –help
+
 他们实现的功能是一样的，都是打印vi编辑器的帮助文档。python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。
 代码举例：
-12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;if __name__ == &apos;__mai">
+12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;if __name__ == &apos;__">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 实现命令行参数">
 <meta property="og:url" content="http://yoursite.com/2015/08/20/python/python-command-line-analysis/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="在终端中输入1vi -h
-或者1vi --help
+<meta property="og:description" content="在终端中输入
+
+vi -h
+
+或者
+
+vi –help
+
 他们实现的功能是一样的，都是打印vi编辑器的帮助文档。python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。
 代码举例：
-12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;if __name__ == &apos;__mai">
-<meta property="og:updated_time" content="2015-08-20T15:46:09.314Z">
+12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;if __name__ == &apos;__">
+<meta property="og:updated_time" content="2015-08-20T15:47:31.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 实现命令行参数">
-<meta name="twitter:description" content="在终端中输入1vi -h
-或者1vi --help
+<meta name="twitter:description" content="在终端中输入
+
+vi -h
+
+或者
+
+vi –help
+
 他们实现的功能是一样的，都是打印vi编辑器的帮助文档。python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。
 代码举例：
-12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;if __name__ == &apos;__mai">
+12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;if __name__ == &apos;__">
   
   
     <link rel="icon" href="/favicon.png">
@@ -213,8 +231,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在终端中输入<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">vi</span> -h</span><br></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vi</span> --<span class="keyword">help</span></span><br></pre></td></tr></table></figure></p>
+        <p>在终端中输入</p>
+<blockquote>
+<p>vi -h</p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p>vi –help</p>
+</blockquote>
 <p>他们实现的功能是一样的，都是打印vi编辑器的帮助文档。python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。</p>
 <p>代码举例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import getopt</span><br><span class="line"></span><br><span class="line">__version__ = '1.0'</span><br><span class="line"></span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    longargs = ['version', '<span class="operator"><span class="keyword">help</span><span class="string">', '</span><span class="keyword">file</span>=<span class="string">', '</span><span class="built_in">record</span>=<span class="string">']</span><br><span class="line">    shortargs = '</span>vhf:<span class="string">'</span><br><span class="line"></span><br><span class="line">    opts, args = getopt.getopt(sys.argv[1:], shortargs, longargs)</span><br><span class="line">    for opt, value in opts:</span><br><span class="line">        if opt in ('</span>-v<span class="string">', '</span><span class="comment">--version'):</span></span><br><span class="line">            print __version__</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt <span class="keyword">in</span> (<span class="string">'--help'</span>, <span class="string">'-h):</span><br><span class="line">            print '</span>this <span class="keyword">is</span> a <span class="keyword">test</span><span class="string">'</span><br><span class="line">            </span><br><span class="line">        if opt in ('</span>-<span class="keyword">f</span><span class="string">', '</span><span class="comment">--file'):</span></span><br><span class="line">            print <span class="string">'handle file: '</span> + <span class="keyword">value</span>    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="keyword">file</span> <span class="keyword">name</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">'--record'</span>:</span><br><span class="line">            print get_records_by_date(<span class="keyword">value</span>)    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="built_in">record</span> <span class="keyword">content</span></span></span><br></pre></td></tr></table></figure>
