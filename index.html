@@ -192,15 +192,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。</p>
-<h2 id="包的引用">包的引用</h2><hr>
-<p>Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。<br>其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql" target="_blank" rel="external">github.com/go-sql-driver/mysql</a></p>
+<h2 id="包的引用">包的引用</h2><p>Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。<br>其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql" target="_blank" rel="external">github.com/go-sql-driver/mysql</a></p>
 <figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> (</span></span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h3 id="注意：">注意：</h3><ul>
 <li>通过引入空白倒入Mysql包（<code>短横线-</code>），完成数据库驱动注册。</li>
 <li>出现问题：<code>failed to open database: sql: unknown driver &quot;mysql&quot; (forgotten import?)</code>说明数据库驱动引用有误（上次出现这个问题是没有空白导入Mysql数据库驱动）。</li>
 </ul>
-<h2 id="Go连接Mysql">Go连接Mysql</h2><hr>
-<p>指定数据库DSN[^DSN]：<br>    username:password@protocol(address)/dbname?param=value</p>
+<h2 id="Go连接Mysql">Go连接Mysql</h2><p>指定数据库DSN[^DSN]：<br>    username:password@protocol(address)/dbname?param=value</p>
 <p>[^DSN]: Data Source Name, 数据源名称。</p>
 
       
