@@ -194,31 +194,13 @@
         <p>因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。</p>
 <h2>包的引用</h2>
 <p>Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
-其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql" target="_blank" rel="external">github.com/go-sql-driver/mysql</a></p>
-<p><figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> (</span></span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql">github.com/go-sql-driver/mysql</a></p>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> (</span></span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h3>注意：</h3>
 <ul>
 <li>通过引入空白倒入Mysql包（<code>短横线-</code>），完成数据库驱动注册。</li>
 <li>出现问题：<code>failed to open database: sql: unknown driver &quot;mysql&quot; (forgotten import?)</code>说明数据库驱动引用有误（上次出现这个问题是没有空白导入Mysql数据库驱动）。</li>
 </ul>
-<p>&lt;!--more--&gt;</p>
-<h2>Go连接Mysql</h2>
-<p>指定数据库 DSN<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>：</p>
-<blockquote>
-<p>username:password@protocol(address)/dbname?param=value</p>
-</blockquote>
-<h3>脚注：</h3>
-<blockquote>
-<p>目前没有找到Markdown脚注语法在Hexo中无法解析的解决方案，已在Github中提交<a href="https://github.com/hexojs/hexo/issues/1467" target="_blank" rel="external">Issues</a></p>
-</blockquote>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>Data Source Name, 数据源名称。 <a href="#fnref1" class="footnote-backref">↩</a></p>
-</li>
-</ol>
-</section>
-
       
     </div>
     
@@ -235,6 +217,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/23/go/Go-DB-Simple-for-mysql/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -283,20 +269,7 @@
 <pre><code>vi --help
 </code></pre>
 <p>他们实现的功能是一样的，都是打印vi编辑器的帮助文档。
-python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。
-&lt;!--more--&gt;
-代码举例：</p>
-<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import getopt</span><br><span class="line"></span><br><span class="line">__version__ = '1.0'</span><br><span class="line"></span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    longargs = ['version', '<span class="operator"><span class="keyword">help</span><span class="string">', '</span><span class="keyword">file</span>=<span class="string">', '</span><span class="built_in">record</span>=<span class="string">']</span><br><span class="line">    shortargs = '</span>vhf:<span class="string">'</span><br><span class="line"></span><br><span class="line">    opts, args = getopt.getopt(sys.argv[1:], shortargs, longargs)</span><br><span class="line">    for opt, value in opts:</span><br><span class="line">        if opt in ('</span>-v<span class="string">', '</span><span class="comment">--version'):</span></span><br><span class="line">            print __version__</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt <span class="keyword">in</span> (<span class="string">'--help'</span>, <span class="string">'-h):</span><br><span class="line">            print '</span>this <span class="keyword">is</span> a <span class="keyword">test</span><span class="string">'</span><br><span class="line">            </span><br><span class="line">        if opt in ('</span>-<span class="keyword">f</span><span class="string">', '</span><span class="comment">--file'):</span></span><br><span class="line">            print <span class="string">'handle file: '</span> + <span class="keyword">value</span>    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="keyword">file</span> <span class="keyword">name</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">'--record'</span>:</span><br><span class="line">            print get_records_by_date(<span class="keyword">value</span>)    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="built_in">record</span> <span class="keyword">content</span></span></span><br></pre></td></tr></table></figure></p>
-<p>上面例子中,longargs为长选项列表,其中<code>=</code>表示该长选项后必须跟有参数
-shortargs为短选项列表,在选项后面加<code>:</code>表示该短选项后必须跟有参数</p>
-<p>函数<code>getopt.getopt(sys.argv[1:], shortargs, longargs)</code>表示对命令行进行解析,返回值为opts和args,含义如下:</p>
-<blockquote>
-<p>opts 为分析出的格式信息.
-args 为不属于格式信息的剩余的命令行参数.
-其中opts 是一个两元组的列表,每个元素为：( 选项名称, 该选项参数) ,即上面举例代码中的(opt, value).
-如果没有选项附加参数则value为空串.所有为确保上述举例代码健全性,应该有参数的选项的value处做是否为空串判断.</p>
-</blockquote>
-
+python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。</p>
       
     </div>
     
@@ -313,6 +286,10 @@ args 为不属于格式信息的剩余的命令行参数.
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/20/python/python-command-line-analysis/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -354,22 +331,7 @@ args 为不属于格式信息的剩余的命令行参数.
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.
-&lt;!--more--&gt;</p>
-<h2>Quick Start</h2>
-<h3>Create a new post</h3>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure></p>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3>Run server</h3>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3>Generate static files</h3>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></p>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3>Deploy to remote sites</h3>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
       
     </div>
     
@@ -378,6 +340,10 @@ args 为不属于格式信息的剩余的命令行参数.
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/18/hello-world/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

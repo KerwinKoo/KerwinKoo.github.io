@@ -12,10 +12,7 @@ vi -h
 vi --help
 
 他们实现的功能是一样的，都是打印vi编辑器的帮助文档。
-python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。
-&amp;lt;!--more--&amp;gt;
-代码举例：
-12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;">
+python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 实现命令行参数">
 <meta property="og:url" content="http://yoursite.com/2015/08/20/python/python-command-line-analysis/index.html">
@@ -27,10 +24,7 @@ vi -h
 vi --help
 
 他们实现的功能是一样的，都是打印vi编辑器的帮助文档。
-python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。
-&amp;lt;!--more--&amp;gt;
-代码举例：
-12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;">
+python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。">
 <meta property="og:updated_time" content="2015-08-20T17:22:24.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 实现命令行参数">
@@ -41,10 +35,7 @@ vi -h
 vi --help
 
 他们实现的功能是一样的，都是打印vi编辑器的帮助文档。
-python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。
-&amp;lt;!--more--&amp;gt;
-代码举例：
-12345678910111213141516171819202122import sysimport getopt__version__ = &apos;1.0&apos;">
+python通过标准库getopt，对终端命令行参数进行解析，可以轻松达到以上效果。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -242,10 +233,10 @@ python通过标准库getopt，对终端命令行参数进行解析，可以轻�
 <pre><code>vi --help
 </code></pre>
 <p>他们实现的功能是一样的，都是打印vi编辑器的帮助文档。
-python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。
-&lt;!--more--&gt;
-代码举例：</p>
-<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import getopt</span><br><span class="line"></span><br><span class="line">__version__ = '1.0'</span><br><span class="line"></span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    longargs = ['version', '<span class="operator"><span class="keyword">help</span><span class="string">', '</span><span class="keyword">file</span>=<span class="string">', '</span><span class="built_in">record</span>=<span class="string">']</span><br><span class="line">    shortargs = '</span>vhf:<span class="string">'</span><br><span class="line"></span><br><span class="line">    opts, args = getopt.getopt(sys.argv[1:], shortargs, longargs)</span><br><span class="line">    for opt, value in opts:</span><br><span class="line">        if opt in ('</span>-v<span class="string">', '</span><span class="comment">--version'):</span></span><br><span class="line">            print __version__</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt <span class="keyword">in</span> (<span class="string">'--help'</span>, <span class="string">'-h):</span><br><span class="line">            print '</span>this <span class="keyword">is</span> a <span class="keyword">test</span><span class="string">'</span><br><span class="line">            </span><br><span class="line">        if opt in ('</span>-<span class="keyword">f</span><span class="string">', '</span><span class="comment">--file'):</span></span><br><span class="line">            print <span class="string">'handle file: '</span> + <span class="keyword">value</span>    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="keyword">file</span> <span class="keyword">name</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">'--record'</span>:</span><br><span class="line">            print get_records_by_date(<span class="keyword">value</span>)    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="built_in">record</span> <span class="keyword">content</span></span></span><br></pre></td></tr></table></figure></p>
+python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。</p>
+<a id="more"></a>
+<p>代码举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import getopt</span><br><span class="line"></span><br><span class="line">__version__ = '1.0'</span><br><span class="line"></span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    longargs = ['version', '<span class="operator"><span class="keyword">help</span><span class="string">', '</span><span class="keyword">file</span>=<span class="string">', '</span><span class="built_in">record</span>=<span class="string">']</span><br><span class="line">    shortargs = '</span>vhf:<span class="string">'</span><br><span class="line"></span><br><span class="line">    opts, args = getopt.getopt(sys.argv[1:], shortargs, longargs)</span><br><span class="line">    for opt, value in opts:</span><br><span class="line">        if opt in ('</span>-v<span class="string">', '</span><span class="comment">--version'):</span></span><br><span class="line">            print __version__</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt <span class="keyword">in</span> (<span class="string">'--help'</span>, <span class="string">'-h):</span><br><span class="line">            print '</span>this <span class="keyword">is</span> a <span class="keyword">test</span><span class="string">'</span><br><span class="line">            </span><br><span class="line">        if opt in ('</span>-<span class="keyword">f</span><span class="string">', '</span><span class="comment">--file'):</span></span><br><span class="line">            print <span class="string">'handle file: '</span> + <span class="keyword">value</span>    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="keyword">file</span> <span class="keyword">name</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">'--record'</span>:</span><br><span class="line">            print get_records_by_date(<span class="keyword">value</span>)    #<span class="keyword">value</span> <span class="keyword">is</span> <span class="built_in">record</span> <span class="keyword">content</span></span></span><br></pre></td></tr></table></figure>
 <p>上面例子中,longargs为长选项列表,其中<code>=</code>表示该长选项后必须跟有参数
 shortargs为短选项列表,在选项后面加<code>:</code>表示该短选项后必须跟有参数</p>
 <p>函数<code>getopt.getopt(sys.argv[1:], shortargs, longargs)</code>表示对命令行进行解析,返回值为opts和args,含义如下:</p>
