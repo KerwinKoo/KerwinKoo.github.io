@@ -15,7 +15,7 @@
 <meta property="og:description" content="实现需求：
 在终端机启动一个server，该Server在mips系统架构下不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
 实现一个守护进程，使该服务在此进程下启动，实现无论何种情况退出，均重启该server。">
-<meta property="og:updated_time" content="2015-09-07T07:04:35.721Z">
+<meta property="og:updated_time" content="2015-09-07T07:28:00.029Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux Daemon的C语言应用">
 <meta name="twitter:description" content="实现需求：
@@ -224,7 +224,19 @@
 <p>解释下上面这段函数的实现：</p>
 <ul>
 <li>两个宏需要定义：<code>SERVER_CMD</code>  指定程序执行的命令;<code>WORKING_DIR</code>  指定该server运行时的环境路径。</li>
+<li>for(;;)循环中，无论因何种原因server退出，均再次启动。启动后，需要在system()函数处执行时阻塞。</li>
+<li>为实现上面的执行时阻塞，需要保证server_cmd本身不包含daemon。即nodaemon server。</li>
 </ul>
+<h2>daemon函数</h2>
+<pre><code>daemon - run in the background
+ #include &lt;unistd.h&gt;
+ int daemon(int nochdir, int noclose);
+ 
+ If nochdir is zero, daemon()  changes  the  calling  process's  current working  directory  to the root directory (&quot;/&quot;);otherwise, the current working directory is left unchanged.
+ 
+ If noclose is zero, daemon() redirects standard input, standard  output and  standard  error  to  /dev/null;  otherwise, no changes are made to these file descriptors.
+</code></pre>
+<p>将<code>nochdir</code> 设为1是因为我不需要在根目录中执行，而是在server实现体中自己chdir到我指定的目录。</p>
 
       
     </div>
