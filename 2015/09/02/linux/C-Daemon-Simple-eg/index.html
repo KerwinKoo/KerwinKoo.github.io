@@ -15,7 +15,7 @@
 <meta property="og:description" content="实现需求：
 在终端机启动一个server，该Server在mips系统架构下不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
 实现一个守护进程，使该服务在此进程下启动，实现无论何种情况退出，均重启该server。">
-<meta property="og:updated_time" content="2015-09-07T03:51:40.267Z">
+<meta property="og:updated_time" content="2015-09-07T07:04:35.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux Daemon的C语言应用">
 <meta name="twitter:description" content="实现需求：
@@ -219,18 +219,11 @@
 <p>目前项目的该模块功能已实现，这里记录下实现过程。</p>
 <h2>主函数实现：</h2>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;syslog.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    daemon(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    start_server();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要执行的部分放在函数start_server()中实现。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">start_server</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> server_cmd[<span class="number">64</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">strcpy</span>(server_cmd, SERVER_CMD);</span><br><span class="line">    <span class="keyword">for</span>(;;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> stat = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> working_dir[<span class="number">64</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">        chdir(WORKING_DIR);</span><br><span class="line">        getcwd(working_dir, <span class="number">64</span>);</span><br><span class="line">        openlog(<span class="string">"server-daemon.log"</span>, LOG_CONS | LOG_PID, <span class="number">0</span>);</span><br><span class="line">        syslog(LOG_USER | LOG_INFO, <span class="string">"working directory:%s\n"</span>, working_dir);</span><br><span class="line">        syslog(LOG_USER | LOG_INFO, <span class="string">"now start running server cmd:%s\n"</span>, server_cmd);</span><br><span class="line"></span><br><span class="line">        stat = system(server_cmd);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(stat != <span class="number">0</span>) &#123;</span><br><span class="line">            syslog(LOG_USER | LOG_INFO, <span class="string">"server quited with error code:%d\n"</span>, stat);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释下上面这段函数的实现：</p>
 <ul>
-<li>
-<p>daemon函数：
-#include &lt;unistd.h&gt;
-int daemon(int nochdir, int noclose);</p>
-<p>If nochdir is zero, daemon() changes the calling process's current
-working directory to the root directory (&quot;/&quot;); otherwise, the current
-working directory is left unchanged.</p>
-<p>If noclose is zero, daemon() redirects standard input, standard
-output and standard error to /dev/null; otherwise, no changes are
-made to these file descriptors.</p>
-</li>
+<li>两个宏需要定义：<code>SERVER_CMD</code>  指定程序执行的命令;<code>WORKING_DIR</code>  指定该server运行时的环境路径。</li>
 </ul>
 
       
