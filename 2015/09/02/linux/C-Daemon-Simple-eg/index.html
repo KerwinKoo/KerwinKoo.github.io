@@ -15,7 +15,7 @@
 <meta property="og:description" content="实现需求：
 在终端机启动一个server，该Server在mips系统架构下不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
 实现一个守护进程，使该服务在此进程下启动，实现无论何种情况退出，均重启该server。">
-<meta property="og:updated_time" content="2015-09-07T03:49:36.466Z">
+<meta property="og:updated_time" content="2015-09-07T03:51:40.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux Daemon的C语言应用">
 <meta name="twitter:description" content="实现需求：
@@ -227,10 +227,9 @@ int daemon(int nochdir, int noclose);</p>
 <p>If nochdir is zero, daemon() changes the calling process's current
 working directory to the root directory (&quot;/&quot;); otherwise, the current
 working directory is left unchanged.</p>
-<pre><code> If noclose is zero, daemon() redirects standard input, standard
- output and standard error to ```/dev/null```; otherwise, no changes are
- made to these file descriptors.
-</code></pre>
+<p>If noclose is zero, daemon() redirects standard input, standard
+output and standard error to /dev/null; otherwise, no changes are
+made to these file descriptors.</p>
 </li>
 </ul>
 
