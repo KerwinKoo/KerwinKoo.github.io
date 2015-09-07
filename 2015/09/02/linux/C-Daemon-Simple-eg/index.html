@@ -6,20 +6,20 @@
   <title>linux Daemon的C语言应用 | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="实现需求：
-在终端机启动一个server，该Server在mips系统中不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
+在终端机启动一个server，该Server在mips系统架构下不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
 实现一个守护进程，使该服务在此进程下启动，实现无论何种情况退出，均重启该server。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux Daemon的C语言应用">
 <meta property="og:url" content="http://yoursite.com/2015/09/02/linux/C-Daemon-Simple-eg/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="实现需求：
-在终端机启动一个server，该Server在mips系统中不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
+在终端机启动一个server，该Server在mips系统架构下不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
 实现一个守护进程，使该服务在此进程下启动，实现无论何种情况退出，均重启该server。">
-<meta property="og:updated_time" content="2015-09-02T02:16:30.290Z">
+<meta property="og:updated_time" content="2015-09-07T03:49:36.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux Daemon的C语言应用">
 <meta name="twitter:description" content="实现需求：
-在终端机启动一个server，该Server在mips系统中不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
+在终端机启动一个server，该Server在mips系统架构下不太稳定，在第一次启动和第一次连接Client时均会ACK退出。
 实现一个守护进程，使该服务在此进程下启动，实现无论何种情况退出，均重启该server。">
   
   
@@ -212,8 +212,27 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2>实现需求：</h2>
-<p>在终端机启动一个server，该Server在mips系统中不太稳定，在第一次启动和第一次连接Client时均会ACK退出。</p>
+<p>在终端机启动一个server，该Server在mips系统架构下不太稳定，在第一次启动和第一次连接Client时均会ACK退出。</p>
 <p>实现一个守护进程，使该服务在此进程下启动，实现无论何种情况退出，均重启该server。</p>
+<a id="more"></a>
+<h2>Update</h2>
+<p>目前项目的该模块功能已实现，这里记录下实现过程。</p>
+<h2>主函数实现：</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;syslog.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    daemon(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    start_server();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>daemon函数：
+#include &lt;unistd.h&gt;
+int daemon(int nochdir, int noclose);</p>
+<p>If nochdir is zero, daemon() changes the calling process's current
+working directory to the root directory (&quot;/&quot;); otherwise, the current
+working directory is left unchanged.</p>
+<pre><code> If noclose is zero, daemon() redirects standard input, standard
+ output and standard error to ```/dev/null```; otherwise, no changes are
+ made to these file descriptors.
+</code></pre>
+</li>
+</ul>
 
       
     </div>
