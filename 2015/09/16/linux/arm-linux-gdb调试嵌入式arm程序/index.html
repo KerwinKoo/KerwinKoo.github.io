@@ -9,13 +9,15 @@
 0.下载安装:
 从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
 解压缩.
+
 cd 进入解压缩后的文件目录.
+
 开始编译安装:
 ./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
 make
 make install
 
-这一步通过之后,如">
+这一步通过之后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="arm-linux-gdb调试嵌入式arm程序">
 <meta property="og:url" content="http://yoursite.com/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/index.html">
@@ -24,27 +26,31 @@ make install
 0.下载安装:
 从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
 解压缩.
+
 cd 进入解压缩后的文件目录.
+
 开始编译安装:
 ./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
 make
 make install
 
-这一步通过之后,如">
-<meta property="og:updated_time" content="2015-09-16T09:52:32.433Z">
+这一步通过之后">
+<meta property="og:updated_time" content="2015-09-16T09:54:29.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="arm-linux-gdb调试嵌入式arm程序">
 <meta name="twitter:description" content="目前已经到了非GDB调试不可的地步.....
 0.下载安装:
 从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
 解压缩.
+
 cd 进入解压缩后的文件目录.
+
 开始编译安装:
 ./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
 make
 make install
 
-这一步通过之后,如">
+这一步通过之后">
   
   
     <link rel="icon" href="/favicon.png">
@@ -239,7 +245,9 @@ make install
 <h2>0.下载安装:</h2>
 <p>从 <a href="http://ftp.gnu.org/gnu/gdb/" target="_blank" rel="external">GNU GDB库</a> 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).</p>
 <p>解压缩.</p>
+<blockquote>
 <p>cd 进入解压缩后的文件目录.</p>
+</blockquote>
 <p>开始编译安装:</p>
 <pre><code>./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
 make
@@ -247,8 +255,10 @@ make install
 </code></pre>
 <p>这一步通过之后,如果没有出错就基本完成一半,看看arm-linux-gdb是否已经加入到PATH中.</p>
 <h2>1.编译gdbserver</h2>
-<p>首先进入gdbserver所在目录
-cd gdb/gdbserver</p>
+<p>首先进入gdbserver所在目录</p>
+<blockquote>
+<p>cd gdb/gdbserver</p>
+</blockquote>
 <p>编译安装</p>
 <pre><code>./configure --target=arm-linux --host=arm-linux
 CC=/home/gkq/opt/toolschain/4.5.1/bin/arm-linux-gcc
