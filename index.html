@@ -193,40 +193,8 @@
       
         <p>目前已经到了非GDB调试不可的地步.....</p>
 <h2>0.下载安装:</h2>
-<p>从 <a href="http://ftp.gnu.org/gnu/gdb/" target="_blank" rel="external">GNU GDB库</a> 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).</p>
+<p>从 <a href="http://ftp.gnu.org/gnu/gdb/">GNU GDB库</a> 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).</p>
 <p>解压缩.</p>
-<blockquote>
-<p>cd 进入解压缩后的文件目录.</p>
-</blockquote>
-<p>开始编译安装:</p>
-<pre><code>./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
-make
-make install
-</code></pre>
-<p>这一步通过之后,如果没有出错就基本完成一半,看看arm-linux-gdb是否已经加入到PATH中.</p>
-<h2>1.编译gdbserver</h2>
-<p>首先进入gdbserver所在目录</p>
-<blockquote>
-<p>cd gdb/gdbserver</p>
-</blockquote>
-<p>编译安装</p>
-<pre><code>./configure --target=arm-linux --host=arm-linux
-CC=/home/gkq/opt/toolschain/4.5.1/bin/arm-linux-gcc
-make 
-</code></pre>
-<p>注</p>
-<ul>
-<li>
-<p>1.<code>CC=</code>是指定arm-linux编译器至CC变量,实际使用中,具体地址需要通过命令 `which arm-linux-gcc``` 来查找,我们这里默认已经将arm-linux-*编译环境配置完成.</p>
-</li>
-<li>
-<p>2.报错: <code>/bin/bash: line 9: makeinfo: command not found</code> 缺少makeinfo命令,安装即可.<a href="http://stackoverflow.com/questions/338317/what-is-makeinfo-and-how-do-i-get-it" target="_blank" rel="external">解决方案</a>: <code>sudo apt-get install texinfo</code></p>
-</li>
-<li>
-<p>3.在网上寻找解决方案时,发现有人遇到这样的问题: <a href="http://blog.sina.com.cn/s/blog_591eaae601016auu.html" target="_blank" rel="external">hostio.c  PATH_MAX宏找不到</a> 解决方案是在hostio.c中增加值为4095的PATH_MAX宏.</p>
-</li>
-</ul>
-
       
     </div>
     
@@ -243,6 +211,10 @@ make
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
