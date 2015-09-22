@@ -3,17 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/9 | KaiQ.Gu Blog</title>
+  <title>Writing The Disk Image Into Raspberry Pi 2 | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KaiQ.Gu Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2015/09/index.html">
+  <meta name="description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 CODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
+0.硬件准备:
+
+硬件平台:Raspberry Pi 2
+显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
+存储设备:C1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writing The Disk Image Into Raspberry Pi 2">
+<meta property="og:url" content="http://yoursite.com/2015/09/22/linux/Writing-The-Disk-Image/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description">
+<meta property="og:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 CODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
+0.硬件准备:
+
+硬件平台:Raspberry Pi 2
+显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
+存储设备:C1">
+<meta property="og:updated_time" content="2015-09-22T09:34:10.623Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KaiQ.Gu Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Writing The Disk Image Into Raspberry Pi 2">
+<meta name="twitter:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 CODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
+0.硬件准备:
+
+硬件平台:Raspberry Pi 2
+显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
+存储设备:C1">
   
   
     <link rel="icon" href="/favicon.png">
@@ -163,127 +179,121 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-linux/Writing-The-Disk-Image" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/09/22/linux/Writing-The-Disk-Image/" class="archive-article-date">
-  	<time datetime="2015-09-22T09:07:41.000Z" itemprop="datePublished">9月 22</time>
+    <div class="article-meta">
+      <a href="/2015/09/22/linux/Writing-The-Disk-Image/" class="article-date">
+  	<time datetime="2015-09-22T09:07:41.000Z" itemprop="datePublished">2015-09-22</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/22/linux/Writing-The-Disk-Image/">Writing The Disk Image Into Raspberry Pi 2</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Writing The Disk Image Into Raspberry Pi 2
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openelec，-raspberry/">openelec， raspberry</a></li></ul>
 	</div>
 
-          
+        
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/linux/">linux</a>
 	</div>
 
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>OpenELEC</code> 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 <code>CODI</code> 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。</p>
+<h2>0.硬件准备:</h2>
+<ul>
+<li>硬件平台:Raspberry Pi 2</li>
+<li>显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)</li>
+<li>存储设备:C10 8G TF card(TF Card 读取速度直接影响播放流畅性). TF card读卡器.</li>
+</ul>
+<h2>1.镜像下载:</h2>
+<p><a href="http://openelec.tv/get-openelec" target="_blank" rel="external">openelec官网</a> 下载镜像,要注意选择是<a href="http://releases.openelec.tv/OpenELEC-RPi2.arm-5.0.8.img.gz" target="_blank" rel="external">树莓派2 B版 镜像下载</a>.</p>
+<p>由于目前没有对Openelec 或 CODI做任何定制化开发,因此还没有开始使用 OpenElEC的源码做交叉编译.关于定制化开发,日后研究.</p>
+<h2>2.镜像写入.</h2>
+<p>进入镜像下载后存放的目录,解压,或通过命令解压:</p>
+<blockquote>
+<p>gunzip -d OpenELEC-RPi2.arm-5.0.8.img</p>
+</blockquote>
+
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">arm-linux-gdb调试嵌入式arm程序</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" class="archive-article-date">
-  	<time datetime="2015-09-16T09:26:37.000Z" itemprop="datePublished">9月 16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/">arm-linux-gdb调试嵌入式arm程序</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/">gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/09/02/linux/C-Daemon-Simple-eg/" class="archive-article-date">
-  	<time datetime="2015-09-02T01:48:34.000Z" itemprop="datePublished">9月 2</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/02/linux/C-Daemon-Simple-eg/">linux Daemon的C语言应用</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/daemon/">daemon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="linux/Writing-The-Disk-Image" data-title="Writing The Disk Image Into Raspberry Pi 2" data-url="http://yoursite.com/2015/09/22/linux/Writing-The-Disk-Image/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"kerwinkoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
 
 </div>
       <footer id="footer">
@@ -309,8 +319,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

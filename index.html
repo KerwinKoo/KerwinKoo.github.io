@@ -103,7 +103,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/arm/" style="font-size: 15px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/openelec，-raspberry/" style="font-size: 10px;">openelec， raspberry</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
 					</div>
 				</section>
 				
@@ -164,6 +164,79 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-linux/Writing-The-Disk-Image" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/22/linux/Writing-The-Disk-Image/" class="article-date">
+  	<time datetime="2015-09-22T09:07:41.000Z" itemprop="datePublished">2015-09-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/22/linux/Writing-The-Disk-Image/">Writing The Disk Image Into Raspberry Pi 2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>OpenELEC</code> 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 <code>CODI</code> 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。</p>
+<h2>0.硬件准备:</h2>
+<ul>
+<li>硬件平台:Raspberry Pi 2</li>
+<li>显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)</li>
+<li>存储设备:C10 8G TF card(TF Card 读取速度直接影响播放流畅性). TF card读卡器.</li>
+</ul>
+<h2>1.镜像下载:</h2>
+<p><a href="http://openelec.tv/get-openelec" target="_blank" rel="external">openelec官网</a> 下载镜像,要注意选择是<a href="http://releases.openelec.tv/OpenELEC-RPi2.arm-5.0.8.img.gz" target="_blank" rel="external">树莓派2 B版 镜像下载</a>.</p>
+<p>由于目前没有对Openelec 或 CODI做任何定制化开发,因此还没有开始使用 OpenElEC的源码做交叉编译.关于定制化开发,日后研究.</p>
+<h2>2.镜像写入.</h2>
+<p>进入镜像下载后存放的目录,解压,或通过命令解压:</p>
+<blockquote>
+<p>gunzip -d OpenELEC-RPi2.arm-5.0.8.img</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openelec，-raspberry/">openelec， raspberry</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-linux/arm-linux-gdb调试嵌入式arm程序" class="article article-type-post" itemscope itemprop="blogPost">
   
