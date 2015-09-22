@@ -21,7 +21,7 @@
 硬件平台:Raspberry Pi 2
 显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
 存储设备:C1">
-<meta property="og:updated_time" content="2015-09-22T14:51:34.573Z">
+<meta property="og:updated_time" content="2015-09-22T14:58:31.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Writing The Disk Image Into Raspberry Pi 2">
 <meta name="twitter:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 CODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
@@ -235,6 +235,26 @@
 <p>进入镜像下载后存放的目录,解压,或通过命令解压:</p>
 <blockquote>
 <p>gunzip -d OpenELEC-RPi2.arm-5.0.8.img</p>
+</blockquote>
+<p>插入USB存储设备(TF card读卡器),查看该设备的DEV名称:</p>
+<blockquote>
+<p>parted -l</p>
+</blockquote>
+<ul>
+<li>我们这里假设找到的设备名为/dev/sdb</li>
+</ul>
+<p>找到该设备后,现解挂载:</p>
+<blockquote>
+<p>umount /dev/sdb1</p>
+</blockquote>
+<p>开始通过dd命令拷贝镜像:</p>
+<blockquote>
+<p>sudo dd if=OpenELEC-RPi2.arm-5.0.8.img of=/dev/sdb bs=4M</p>
+</blockquote>
+<p>完成后将内存信息写回存储设备:</p>
+<blockquote>
+<p>sync
+安全退出USB设备.完成.</p>
 </blockquote>
 
       
