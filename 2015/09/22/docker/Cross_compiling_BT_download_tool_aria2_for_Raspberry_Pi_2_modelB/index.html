@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/09/22/docker/Cross_compiling_BT_download_tool_aria2_for_Raspberry_Pi_2_modelB/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="因为功能性的原因,路由器MIPS平台下的BT下载工具 Aria2c 比较容易适配和安装,但Raspberry Pi下的编译介绍比较少.在没有找到合适的解决方案之前,我尝试着做一下Raspberry的aria2交叉编译.">
-<meta property="og:updated_time" content="2015-09-22T16:00:53.854Z">
+<meta property="og:updated_time" content="2015-09-22T16:02:09.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为RaspberryPi2做BT下载工具aria2的交叉编译">
 <meta name="twitter:description" content="因为功能性的原因,路由器MIPS平台下的BT下载工具 Aria2c 比较容易适配和安装,但Raspberry Pi下的编译介绍比较少.在没有找到合适的解决方案之前,我尝试着做一下Raspberry的aria2交叉编译.">
@@ -214,14 +214,13 @@
 </blockquote>
 <p>截止本日志编写,可以看到github中有专门为Raspberry写的交叉编译环境,是一个 <a href="https://github.com/tatsuhiro-t/aria2/blob/master/Dockerfile.raspberrypi" target="_blank" rel="external">Dockerfile</a> 从这个文件中,可以看出该Docker镜像Build时需要做的工作:</p>
 <ul>
-<li>
-<p>step1: <code>FROM ubuntu:trusty</code>
-基础镜像为ubuntu:trusty.
+<li>step1:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">FROM</span> <span class="rule"><span class="attribute">ubuntu</span>:<span class="value">trusty</span></span></span><br></pre></td></tr></table></figure>
+<p>基础镜像为ubuntu:trusty.
 目前我使用 <a href="http://dockone.io/article/160" target="_blank" rel="external">docloud的镜像加速服务</a>, 因此ubuntu pull时还是蛮快的.</p>
-</li>
-<li>
-<p>step2:</p>
-</li>
+<ul>
+<li>step2:</li>
 </ul>
 <figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-<span class="built_in">get</span> <span class="keyword">update</span> &amp;&amp; \</span><br><span class="line">    apt-<span class="built_in">get</span> install -y make binutils autoconf automake autotools-<span class="built_in">dev</span> libtool \</span><br><span class="line">    pkg-config git curl dpkg-<span class="built_in">dev</span> autopoint libcppunit-<span class="built_in">dev</span> libxml2-<span class="built_in">dev</span> \</span><br><span class="line">    libgcrypt11-<span class="built_in">dev</span> lzip</span><br></pre></td></tr></table></figure>
 <p>这里不难理解,ubuntu基础镜像安装完成后,进行安装源的更新和编译环境的配置.但是,由于国内情况,这一步耗时特别长,经常会出现TIME OUT ERROR,针对这个问题,需要对次Dockerfile做一下修改.</p>
