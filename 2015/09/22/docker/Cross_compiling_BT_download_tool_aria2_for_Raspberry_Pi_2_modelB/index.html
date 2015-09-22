@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/09/22/docker/Cross_compiling_BT_download_tool_aria2_for_Raspberry_Pi_2_modelB/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="因为功能性的原因,路由器MIPS平台下的BT下载工具 Aria2c 比较容易适配和安装,但Raspberry Pi下的编译介绍比较少.在没有找到合适的解决方案之前,我尝试着做一下Raspberry的aria2交叉编译.">
-<meta property="og:updated_time" content="2015-09-22T16:20:42.682Z">
+<meta property="og:updated_time" content="2015-09-22T16:31:22.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为RaspberryPi2做BT下载工具aria2的交叉编译">
 <meta name="twitter:description" content="因为功能性的原因,路由器MIPS平台下的BT下载工具 Aria2c 比较容易适配和安装,但Raspberry Pi下的编译介绍比较少.在没有找到合适的解决方案之前,我尝试着做一下Raspberry的aria2交叉编译.">
@@ -231,7 +231,14 @@
 <li>step 3:</li>
 </ul>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">RUN</span> <span class="bash">git <span class="built_in">clone</span> https://github.com/raspberrypi/tools.git --depth=<span class="number">1</span> /tools</span></span><br></pre></td></tr></table></figure>
-<p>从GitHub中下载RaspberryPi工具链,由于国内情况,又要折腾一番.</p>
+<p>从GitHub中下载RaspberryPi工具链,由于国内情况,又要折腾一番.没有VPN的情况下, <code>git clone</code> 会出现如下错误:</p>
+<blockquote>
+<p>error: RPC failed; result=56, HTTP code = 200
+fatal: The remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+The command '/bin/sh -c git clone https://github.com/raspberrypi/tools.git --depth=1 /tools' returned a non-zero code: 128</p>
+</blockquote>
 <h2>2.镜像安装</h2>
 
       
