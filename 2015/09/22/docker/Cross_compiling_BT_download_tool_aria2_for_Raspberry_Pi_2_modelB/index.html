@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/09/22/docker/Cross_compiling_BT_download_tool_aria2_for_Raspberry_Pi_2_modelB/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="因为功能性的原因,路由器MIPS平台下的BT下载工具 Aria2c 比较容易适配和安装,但Raspberry Pi下的编译介绍比较少.在没有找到合适的解决方案之前,我尝试着做一下Raspberry的aria2交叉编译.">
-<meta property="og:updated_time" content="2015-09-22T16:02:09.286Z">
+<meta property="og:updated_time" content="2015-09-22T16:07:54.552Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为RaspberryPi2做BT下载工具aria2的交叉编译">
 <meta name="twitter:description" content="因为功能性的原因,路由器MIPS平台下的BT下载工具 Aria2c 比较容易适配和安装,但Raspberry Pi下的编译介绍比较少.在没有找到合适的解决方案之前,我尝试着做一下Raspberry的aria2交叉编译.">
@@ -104,7 +104,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 15px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 15px;">raspberry</a>
+						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 15px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 15px;">raspberry</a>
 					</div>
 				</section>
 				
@@ -223,7 +223,11 @@
 <li>step2:</li>
 </ul>
 <figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-<span class="built_in">get</span> <span class="keyword">update</span> &amp;&amp; \</span><br><span class="line">    apt-<span class="built_in">get</span> install -y make binutils autoconf automake autotools-<span class="built_in">dev</span> libtool \</span><br><span class="line">    pkg-config git curl dpkg-<span class="built_in">dev</span> autopoint libcppunit-<span class="built_in">dev</span> libxml2-<span class="built_in">dev</span> \</span><br><span class="line">    libgcrypt11-<span class="built_in">dev</span> lzip</span><br></pre></td></tr></table></figure>
-<p>这里不难理解,ubuntu基础镜像安装完成后,进行安装源的更新和编译环境的配置.但是,由于国内情况,这一步耗时特别长,经常会出现TIME OUT ERROR,针对这个问题,需要对次Dockerfile做一下修改.</p>
+<p>这里不难理解,ubuntu基础镜像安装完成后,进行安装源的更新和编译环境的配置.但是,由于国内情况,这一步耗时特别长,经常会出现TIME OUT ERROR,针对这个问题,需要对次Dockerfile用拆分法做一下修改.</p>
+<blockquote>
+<p>目前在家里搞,网络环境好了,上面的问题突然解决了,有时间再Update下上面的解决思路.</p>
+</blockquote>
+<h2>2.镜像安装</h2>
 
       
     </div>
@@ -232,6 +236,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/09/23/docker/Docker-Problems-solutions/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Docker问题及解决方案汇总
+        
+      </div>
+    </a>
   
   
     <a href="/2015/09/22/linux/Writing-The-Disk-Image/" id="article-nav-older" class="article-nav-link-wrap">
