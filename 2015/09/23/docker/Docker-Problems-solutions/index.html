@@ -17,7 +17,7 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
 
 
 Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;a">
-<meta property="og:updated_time" content="2015-09-22T16:15:20.365Z">
+<meta property="og:updated_time" content="2015-09-22T16:22:41.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker问题及解决方案汇总">
 <meta name="twitter:description" content="无论执行docker的什么命令均报错:
@@ -218,11 +218,11 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
 <li>无论执行docker的什么命令均报错:</li>
 </ul>
 <blockquote>
-<p>Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;memory=0&amp;memswap=0&amp;rm=1&amp;t=: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
-解决方案:
+<p>Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;memory=0&amp;memswap=0&amp;rm=1&amp;t=: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</p>
+</blockquote>
+<p>解决方案:
 检查docker的服务启动状态,root权限重启docker服务.
 sudo service docker start</p>
-</blockquote>
 <a id="more"></a>
       
     </div>
