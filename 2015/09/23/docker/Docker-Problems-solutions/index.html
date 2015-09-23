@@ -5,25 +5,25 @@
   
   <title>Docker问题及解决方案汇总 | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="无论执行docker的什么命令均报错:
+  <meta name="description" content="0.无论执行docker的什么命令均报错:
 
 
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;a">
+Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker问题及解决方案汇总">
 <meta property="og:url" content="http://yoursite.com/2015/09/23/docker/Docker-Problems-solutions/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="无论执行docker的什么命令均报错:
+<meta property="og:description" content="0.无论执行docker的什么命令均报错:
 
 
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;a">
-<meta property="og:updated_time" content="2015-09-22T16:22:41.597Z">
+Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0">
+<meta property="og:updated_time" content="2015-09-23T02:30:04.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker问题及解决方案汇总">
-<meta name="twitter:description" content="无论执行docker的什么命令均报错:
+<meta name="twitter:description" content="0.无论执行docker的什么命令均报错:
 
 
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;a">
+Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0">
   
   
     <link rel="icon" href="/favicon.png">
@@ -215,7 +215,7 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>无论执行docker的什么命令均报错:</li>
+<li>0.无论执行docker的什么命令均报错:</li>
 </ul>
 <blockquote>
 <p>Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;memory=0&amp;memswap=0&amp;rm=1&amp;t=: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</p>
@@ -224,6 +224,16 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
 检查docker的服务启动状态,root权限重启docker服务.
 sudo service docker start</p>
 <a id="more"></a>
+<ul>
+<li>1.保存某个container在使用的image,或将该image更名:
+image创建或build时不注意时会造成image的 <code>REPOSITORY</code> 和 <code>TAG</code> 都为 <code>&lt;none&gt;</code>,更名方案:</li>
+</ul>
+<blockquote>
+<p>docker ps -a | grep 镜像 ID # 拿这个镜像的 ID 得到正确的 container 的 id
+docker commit -a 'message aaaa' CONTAINER_ID NEW_IMAGE_NAME # 把该容器保存为一个新镜像。</p>
+</blockquote>
+<p>此方案是将该image进行保存,同时给予保存信息和镜像名.</p>
+
       
     </div>
     
