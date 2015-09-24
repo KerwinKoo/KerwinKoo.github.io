@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Docker问题及解决方案汇总 | KaiQ.Gu Blog</title>
+  <title>Edit-config.txt-for-RPi2-On-Openelec | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0.无论执行docker的什么命令均报错:
-
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;">
+  <meta name="description">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker问题及解决方案汇总">
-<meta property="og:url" content="http://yoursite.com/2015/09/23/docker/Docker-Problems-solutions/index.html">
+<meta property="og:title" content="Edit-config.txt-for-RPi2-On-Openelec">
+<meta property="og:url" content="http://yoursite.com/2015/09/23/raspberrypi2/Edit-config-txt-for-RPi2-On-Openelec/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="0.无论执行docker的什么命令均报错:
-
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;">
-<meta property="og:updated_time" content="2015-09-23T02:54:32.874Z">
+<meta property="og:description">
+<meta property="og:updated_time" content="2015-09-23T08:12:40.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker问题及解决方案汇总">
-<meta name="twitter:description" content="0.无论执行docker的什么命令均报错:
-
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;">
+<meta name="twitter:title" content="Edit-config.txt-for-RPi2-On-Openelec">
+<meta name="twitter:description">
   
   
     <link rel="icon" href="/favicon.png">
@@ -170,11 +164,11 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-docker/Docker-Problems-solutions" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-raspberrypi2/Edit-config-txt-for-RPi2-On-Openelec" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/23/docker/Docker-Problems-solutions/" class="article-date">
-  	<time datetime="2015-09-22T16:08:19.000Z" itemprop="datePublished">2015-09-23</time>
+      <a href="/2015/09/23/raspberrypi2/Edit-config-txt-for-RPi2-On-Openelec/" class="article-date">
+  	<time datetime="2015-09-23T08:12:40.000Z" itemprop="datePublished">2015-09-23</time>
 </a>
     </div>
   
@@ -187,7 +181,7 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
         
   
     <h1 class="article-title" itemprop="name">
-      Docker问题及解决方案汇总
+      Edit-config.txt-for-RPi2-On-Openelec
     </h1>
   
 
@@ -195,15 +189,7 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
       
       <div class="article-info article-info-post">
         
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
-	</div>
-
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -211,26 +197,7 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2>0.无论执行docker的什么命令均报错:</h2>
-<blockquote>
-<p>Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;memory=0&amp;memswap=0&amp;rm=1&amp;t=: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</p>
-</blockquote>
-<p>解决方案:
-检查docker的服务启动状态,root权限重启docker服务.
-sudo service docker start</p>
-<a id="more"></a>
-<h2>1.保存某个container在使用的image,或将该image更名:</h2>
-<p>image创建或build时不注意时会造成image的 <code>REPOSITORY</code> 和 <code>TAG</code> 都为 <code>&lt;none&gt;</code>,更名方案:
-docker ps -a | grep 镜像 ID # 拿这个镜像的 ID 得到正确的 container 的 id
-docker commit -a 'message aaaa' CONTAINER_ID NEW_IMAGE_NAME # 把该容器保存为一个新镜像。</p>
-<p>此方案是将该image进行保存,同时给予保存信息和镜像名.</p>
-<h2>2.在Docker Container中互传文件(数据):</h2>
-<ul>
-<li>从container中拷贝文件到主机上:
-docker ps -a | grep 镜像 ID
-docker cp <containerid>:/file/path/within/container /host/path/target</containerid></li>
-</ul>
-
+        
       
     </div>
     
@@ -239,18 +206,9 @@ docker cp <containerid>:/file/path/within/container /host/path/target</container
     
 <nav id="article-nav">
   
-    <a href="/2015/09/23/raspberrypi2/Edit-config-txt-for-RPi2-On-Openelec/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Edit-config.txt-for-RPi2-On-Openelec
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/22/docker/Cross_compiling_BT_download_tool_aria2_for_Raspberry_Pi_2_modelB/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">为RaspberryPi2做BT下载工具aria2的交叉编译</div>
+    <a href="/2015/09/23/docker/Docker-Problems-solutions/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Docker问题及解决方案汇总</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -279,7 +237,7 @@ docker cp <containerid>:/file/path/within/container /host/path/target</container
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="docker/Docker-Problems-solutions" data-title="Docker问题及解决方案汇总" data-url="http://yoursite.com/2015/09/23/docker/Docker-Problems-solutions/"></div>
+	<div class="ds-thread" data-thread-key="raspberrypi2/Edit-config-txt-for-RPi2-On-Openelec" data-title="Edit-config.txt-for-RPi2-On-Openelec" data-url="http://yoursite.com/2015/09/23/raspberrypi2/Edit-config-txt-for-RPi2-On-Openelec/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -5,7 +5,7 @@
   
   <title>Writing The Disk Image Into Raspberry Pi 2 | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 CODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
+  <meta name="description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 KODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
 0.硬件准备:
 
 硬件平台:Raspberry Pi 2
@@ -15,16 +15,16 @@
 <meta property="og:title" content="Writing The Disk Image Into Raspberry Pi 2">
 <meta property="og:url" content="http://yoursite.com/2015/09/22/linux/Writing-The-Disk-Image/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 CODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
+<meta property="og:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 KODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
 0.硬件准备:
 
 硬件平台:Raspberry Pi 2
 显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
 存储设备:C1">
-<meta property="og:updated_time" content="2015-09-22T15:25:30.387Z">
+<meta property="og:updated_time" content="2015-09-24T05:28:23.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Writing The Disk Image Into Raspberry Pi 2">
-<meta name="twitter:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 CODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
+<meta name="twitter:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 KODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
 0.硬件准备:
 
 硬件平台:Raspberry Pi 2
@@ -220,7 +220,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>OpenELEC</code> 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 <code>CODI</code> 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。</p>
+        <p><code>OpenELEC</code> 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 <code>KODI</code> 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。</p>
 <h2>0.硬件准备:</h2>
 <ul>
 <li>硬件平台:Raspberry Pi 2</li>
@@ -230,7 +230,7 @@
 <a id="more"></a>
 <h2>1.镜像下载:</h2>
 <p><a href="http://openelec.tv/get-openelec" target="_blank" rel="external">openelec官网</a> 下载镜像,要注意选择是<a href="http://releases.openelec.tv/OpenELEC-RPi2.arm-5.0.8.img.gz" target="_blank" rel="external">树莓派2 B版 镜像下载</a>.</p>
-<p>由于目前没有对Openelec 或 CODI做任何定制化开发,因此还没有开始使用 OpenElEC的源码做交叉编译.关于定制化开发,日后研究.</p>
+<p>由于目前没有对 <code>Openelec</code> 或 <code>KODI</code> 做任何定制化开发,因此还没有开始使用 OpenElEC的源码做交叉编译.关于定制化开发,日后研究.</p>
 <h2>2.镜像写入.</h2>
 <p>进入镜像下载后存放的目录,解压,或通过命令解压:</p>
 <blockquote>
