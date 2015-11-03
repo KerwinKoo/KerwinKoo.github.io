@@ -13,7 +13,7 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="前言：
 REST 表征性状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding发表文章Principled Design of the Modern Web Architecture，系统介绍了REST Web Architecture在现代W">
-<meta property="og:updated_time" content="2015-11-03T01:38:46.551Z">
+<meta property="og:updated_time" content="2015-11-03T02:06:40.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta name="twitter:description" content="前言：
@@ -213,31 +213,29 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 REST 表征性状态传输（英文：Representational State Transfer，简称REST）是<code>Roy Fielding</code>博士于2000年在他的<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank" rel="external">博士论文</a>中提出来的一种软件架构风格。两年后，Roy Fielding发表文章<a href="https://www.ics.uci.edu/~taylor/documents/2002-REST-TOIT.pdf" target="_blank" rel="external">Principled Design of the Modern Web Architecture</a>，系统介绍了REST Web Architecture在现代Web架构环境下扮演的角色和作用，蕴含REST设计思想及原则。本人以有限的英文水平对此论文进行中文翻译。</li>
 </ul>
 <ul>
-<li>
-<p>Translator: <strong>Kerwin Koo</strong></p>
-</li>
-<li>
-<p>正文：</p>
-</li>
+<li>Translator: <strong>Kerwin Koo</strong></li>
 </ul>
+<h1>正文：</h1>
 <hr>
 <p>Title: ** Principled Design of the Modern Web Architecture **     ** 现代Web架构设计原理 **</p>
 <p>Author: <strong>Roy T. Fielding</strong> and <strong>Richard N. Taylor</strong></p>
 <hr>
 <h1>摘要</h1>
-<p>万维网(<code>The World Wide Web</code>)的成功，在很大程度上是因为它的软件体系结构在设计上更加符合互联网级（Internet-scale）的分布式超媒体系统。现代Web架构强调的是组件交互的可拓展性（<code>scalability of component interactions</code>），接口的通用性（<code>generality of interfaces</code>），组件之间的部署独立性（<code>ndependent deployment of components</code>）和中间化组件（<code>intermediary components</code>）来减少交互延迟，确保执行安全，并对 保留系统<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 进行封装。在本论文中，我们介绍了表征性状态传输的架构模式，作为一种Web架构的抽象模型，来指导我们对超文本传输协议和 统一资源标识符<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 的设计和定义。我们描述了REST的软件工程学方面的指导原则和保留这些原则在交互上的限制，并与其他架构模式的限制做对照。然后我们会与当前部署的一些Web架构的的抽象模型做比对，来引出目前一些协议和他们所对应的应用程序之间的不协调。</p>
+<p>万维网(<code>The World Wide Web</code>)的成功，在很大程度上是因为它的 软件体系架构<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 在设计上更加符合互联网级（Internet-scale）的分布式超媒体系统。现代Web架构强调的是组件交互的可拓展性（<code>scalability of component interactions</code>），接口的通用性（<code>generality of interfaces</code>），组件之间的部署独立性（<code>ndependent deployment of components</code>）和中间化组件（<code>intermediary components</code>）来减少交互延迟，确保执行安全，并对 保留系统<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 进行封装。在本论文中，我们介绍了表征性状态传输的架构模式，作为一种Web架构的抽象模型，来指导我们对超文本传输协议和 统一资源标识符<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> 的设计和定义。我们描述了REST的软件工程学方面的指导原则和保留这些原则在交互上的限制，并与其他架构模式的限制做对照。然后我们会与当前部署的一些Web架构的的抽象模型做比对，来引出目前一些协议和他们所对应的应用程序之间的不协调。</p>
 <a id="more"></a>
 <h2>关键字</h2>
 <p>软件架构（<code>software architecture</code>），软件架构模式（<code>software architectural style</code>）， WWW</p>
 <h1>1 前言</h1>
 <p>一开始，在IETF小组（Internet Engineering Task Force）努力地定义HTTP 1.0协议并为新标准HTTP 1.1和URI（Uniform Resource Identifiers ）做延伸时，我们就已经意识到，我们缺少一种模型（model）来描述万维网到底应该怎样运作。这种理想化的交互模型，存在于整个Web应用中，我们所提出的REST结构模式，成为现代Web体系结构的基础，为之前的Web架构，在部署之前，提供缺陷识别和拓展验证的指导原则。</p>
-<p>软件架构决定了该系统元素之间如何交互和分配，元素之间如何相互作用形成系统，交互所需要的通信量和通信粒度（the amount and granularity of communication），</p>
+<p>软件的体系架构决定了该系统元素之间如何交互和分配，元素之间如何相互作用形成系统，交互所需要的通信量和通信粒度（the amount and granularity of communication）以及通信接口协议。体系架构模式是</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>译者注，摘自<a href="https://en.wikipedia.org/wiki/Legacy_system#cite_note-1" target="_blank" rel="external">WIKI</a>：legacy systems.In computing, a legacy system is an old method, technology, computer system, or application program, &quot;of, relating to, or being a previous or outdated computer system.&quot;Often a pejorative term, referencing a system as &quot;legacy&quot; often implies that the system is out of date or in need of replacement. <a href="#fnref1" class="footnote-backref">↩</a></p>
+<li id="fn1" class="footnote-item"><p>译者注：原文是Software architecture，是本论文的关键词之一，贯穿整篇文章，并包含软件或Web组件，彼此间与环境间的关系，软件设计、发展和交互原则，包括系统形态的抽象化和基础结构的实现化，因此本译文中，将 Architecture 翻译为 <strong>架构、体系架构</strong>。 <a href="#fnref1" class="footnote-backref">↩</a></p>
 </li>
-<li id="fn2" class="footnote-item"><p>译者注，摘自<a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6" target="_blank" rel="external">WIKI</a>：在电脑术语中，统一资源标识符（Uniform Resource Identifier，或URI)是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对网络中（一般指万维网）的资源通过特定的协议进行交互操作。URI的最常见的形式是统一资源定位符（URL），经常指定为非正式的网址。更罕见的用法是统一资源名称（URN），其目的是通过提供一种途径。用于在特定的命名空间资源的标识，以补充网址。 <a href="#fnref2" class="footnote-backref">↩</a></p>
+<li id="fn2" class="footnote-item"><p>译者注，摘自<a href="https://en.wikipedia.org/wiki/Legacy_system#cite_note-1" target="_blank" rel="external">WIKI</a>：legacy systems.In computing, a legacy system is an old method, technology, computer system, or application program, &quot;of, relating to, or being a previous or outdated computer system.&quot;Often a pejorative term, referencing a system as &quot;legacy&quot; often implies that the system is out of date or in need of replacement. <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>译者注，摘自<a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6" target="_blank" rel="external">WIKI</a>：在电脑术语中，统一资源标识符（Uniform Resource Identifier，或URI)是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对网络中（一般指万维网）的资源通过特定的协议进行交互操作。URI的最常见的形式是统一资源定位符（URL），经常指定为非正式的网址。更罕见的用法是统一资源名称（URN），其目的是通过提供一种途径。用于在特定的命名空间资源的标识，以补充网址。 <a href="#fnref3" class="footnote-backref">↩</a></p>
 </li>
 </ol>
 </section>
