@@ -13,7 +13,7 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="前言：
 REST 表征性状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST">
-<meta property="og:updated_time" content="2015-11-06T02:53:09.849Z">
+<meta property="og:updated_time" content="2015-11-06T07:51:58.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta name="twitter:description" content="前言：
@@ -233,6 +233,9 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <p>现代Web就是一种REST风格架构的一个实例。虽然基于网络的应用程序可以包括与其他架构风格交互的接口，但他们的协议和性能问题的重心仍是分布式超媒体。REST只着重阐述那些在互联网级分布式多媒体交互最重要的部分。在Web架构优化领域存在这样一个现象，现存的协议很难表达在各组件交互过程中可能存在的全部语义，并且某些语法细节可以用一些更加高效的框架来代替，并且不改变现有架构功能。同样地，将 后继扩展<sup class="footnote-ref"><a href="#fn10" id="fnref10">[10]</a></sup> 与REST进行比较，来看是否还符合架构要求；如果不符合，那么在不改变功能的情况下，使用一个更恰当的架构风格来运行系统，会更有效率<sup class="footnote-ref"><a href="#fn11" id="fnref11">[11]</a></sup>。</p>
 <p>本论文提出REST时，已在完成现代（1993年后）Web系统架构标准方面工作长达六年。这里并不会强调架构本身细节，因为这些都包含在标准之内。相反，我们重点专注于那些并未被发表的、位于现代Web架构设计和软件工程原则
 底层的基础理论。在这个过程中，我们会明确出当前Web协议哪些地方与架构风格不相符，通过健全协议，可以短时间内完善这些缺陷，并且以在交互风格架构使用中学到的经验，来指导分布式架构的设计。</p>
+<h1>2 万维网网域特征</h1>
+<p>为了更好地理解REST原理，我们需要先WWW项目的目标，以及为实现这些目标需要信息系统所具备的特征。</p>
+<p>Berners-Lee[^Berners-Lee] 写道“”</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
