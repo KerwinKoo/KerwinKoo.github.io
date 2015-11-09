@@ -13,7 +13,7 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="前言：
 REST 表征性状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST">
-<meta property="og:updated_time" content="2015-11-09T03:25:54.364Z">
+<meta property="og:updated_time" content="2015-11-09T03:28:14.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta name="twitter:description" content="前言：
@@ -237,7 +237,7 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <p>为了更好地理解REST原理，我们需要先回顾一下WWW项目的目标，以及为实现这些目标，而需要信息系统所具备的特征。</p>
 <p>Berners-Lee<sup class="footnote-ref"><a href="#fn12" id="fnref12">[12]</a></sup> 曾写道：“网络的主要目标是成为一个共享的信息空间，通过它人和机器可以交流。“我们需要一种方式来根据实际情况，长期或临时存储和组织用户的信息，它可以被多方使用，也可以被他人引用或重构到新的信息存储，因此它无需为每人维持一个本地副本。通过Internet使用该系统人可以遍布全世界，在不同的大学，政府，物理研究实验室。他们的终端设备是多种多样的，可以是工作站，服务器和超级计算机，运行着各种各样的操作系统和文件系统。信息范围从个人的研究记录到机构电话监听各个领域。它的目标，是要建立一个系统，提供通用且统一的组织信息接口，兼容多种平台，并逐渐向新组织和个人开放或加入项目。</p>
 <p>选择超媒体作为用户接口是因为它的简易性和通用性：使用统一接口可以忽略信息源，超媒体关系（链接）的灵活性对信息结构没有要求，并且直接对链接进行操作，可以允许信息内部复杂的关系，来引导用户使用应用。在大型数据库中，信息往往是被用于搜索而不是浏览，网络也因此拓展出根据用户输入的数据进行简单的查询服务，进而以超媒体的方式来展现的功能。</p>
-<p>超媒体交互的可用性对用户体验的时间延迟高度敏感：</p>
+<p>超媒体交互的可用性对用户体验的时间延迟----从用户点击链接到展现出有价值的结果的时间----高度敏感。</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
