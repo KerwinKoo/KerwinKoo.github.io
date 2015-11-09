@@ -13,7 +13,7 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="前言：
 REST 表征性状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST">
-<meta property="og:updated_time" content="2015-11-09T03:48:39.092Z">
+<meta property="og:updated_time" content="2015-11-09T06:36:32.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta name="twitter:description" content="前言：
@@ -240,8 +240,10 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <p>超媒体交互的可用性对用户体验的时间延迟----从用户点击链接到展现出有价值的结果的时间----高度敏感。由于网络信息的来源覆盖整个因特网，因此网络架构需要网络交互（协议内部交互）的耦合度达到最小。在应用交互的整个过程中，延迟产生于以下几点：</p>
 <ul>
 <li>1）客户端识别用户行为并对该行为进行分析的初始化操作所用的时间；</li>
-<li>2）设置组件间任何交互所需要的时间；</li>
-<li>3）</li>
+<li>2）设置组件交互所需要的时间；</li>
+<li>3）将交互传送给组件所需要的时间；</li>
+<li>4）组件间执行以上交互所需要的时间；</li>
+<li>5）在用户终端能够开始呈现一个可用结果之前，需要完成全部传输和处理结果的时间。</li>
 </ul>
 <hr class="footnotes-sep">
 <section class="footnotes">
