@@ -6,18 +6,18 @@
   <title>翻译:Principled Design of the Modern Web Architecture | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言：
-REST 表征性状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST">
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta property="og:url" content="http://yoursite.com/2015/11/02/translations/Chinese-Translation-of-Principled-Design-of-the-ModernWeb-Architecture/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="前言：
-REST 表征性状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST">
-<meta property="og:updated_time" content="2015-11-11T06:39:19.534Z">
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
+<meta property="og:updated_time" content="2015-11-11T06:50:39.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta name="twitter:description" content="前言：
-REST 表征性状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST">
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
   
   
     <link rel="icon" href="/favicon.png">
@@ -210,7 +210,7 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
       
         <ul>
 <li>前言：
-REST 表征性状态传输（英文：Representational State Transfer，简称REST）是<code>Roy Fielding</code>博士于2000年在他的<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank" rel="external">博士论文</a>中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文<a href="https://www.ics.uci.edu/~taylor/documents/2002-REST-TOIT.pdf" target="_blank" rel="external">Principled Design of the Modern Web Architecture</a>，系统介绍了REST Web Architecture在现代Web架构环境下扮演的角色和作用，蕴含REST设计思想及原则。本人以有限的英文水平对此论文进行中文翻译。</li>
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是<code>Roy Fielding</code>博士于2000年在他的<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank" rel="external">博士论文</a>中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文<a href="https://www.ics.uci.edu/~taylor/documents/2002-REST-TOIT.pdf" target="_blank" rel="external">Principled Design of the Modern Web Architecture</a>，系统介绍了REST Web Architecture在现代Web架构环境下扮演的角色和作用，蕴含REST设计思想及原则。本人以有限的英文水平对此论文进行中文翻译。</li>
 </ul>
 <p>关于论文标题 <strong>Principled Design of the Modern Web Architecture</strong>，本译文中将其翻译为 <strong>关于现代Web架构的原则性设计</strong>，因为“原则性”代表约束性，RESTful本身是一种Web设计风格，是对Web架构设计的约束的抽象体现。</p>
 <ul>
@@ -248,7 +248,8 @@ REST 表征性状态传输（英文：Representational State Transfer，简称RE
 <p>需要强调的是，虽然只有（3）和（5）代表实际的网络通信，但以上五点均被包含在架构风格的范畴之内。此外，多元化非并行交互也会增加延迟时间。</p>
 <p>由于对统一资源的引用数和对此信息感兴趣的人数成正比，尤其是有新闻价值的信息将会导致“瞬间高峰”----突然而至的访问高峰----因此可拓展性也是一个重点。</p>
 <p>由于参与信息的组织和加工的各方是志愿的，因此准入门槛需要足够低（来吸引更多加入者）。当分布式系统的初步部署变得简单化时，拓展性确保我们不会因为该系统的条件限制而卡住，使其无法部署。即使目前软件系统可以完美符合用户需求，但随着社会环境的变化和时间的推移，用户的需求也会随之改变。一个像万维网一样长期运作的系统需要做好更深层的准备，因为组成网络应用的各个环节直接往往是跨界的，（当新需求增加时）需要系统能够利用其可拓展性，做逐渐的适应及零散的改变，使新旧需求共存而不妨碍新需求的实现。</p>
-<p>所有的这些项目目标和信息系统的特征组成了网络的架构设计。万维网的发展已足够有能力支撑更大的合作和分布协作<sup class="footnote-ref"><a href="#fn13" id="fnref13">[13]</a></sup>。这些我们所引入的新的目标向我们提出了一个挑战：在一个被如此广泛地部署的架构中如何成功地再引入一组新功能，我们如何保证它所引入的新的功能不会排异，甚至瘫痪掉目前已在使用的Web网络架构功能？</p>
+<p>所有的这些项目目标和信息系统的特征组成了网络的架构设计。万维网的发展已足够有能力支撑更大的合作和分布协作<sup class="footnote-ref"><a href="#fn13" id="fnref13">[13]</a></sup>。这些我们所引入的新的目标向我们提出了一个挑战：在一个被如此广泛地部署的架构中如何成功地再引入一组新功能，我们如何保证它所引入的新的功能不会排异，甚至瘫痪掉目前已在使用的Web网络架构功能？正是这个问题促使了我们对REST架构风格的开发。</p>
+<h1>表征状态传输（REST）</h1>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
