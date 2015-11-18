@@ -6,18 +6,21 @@
   <title>Golang File IO Operations | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Read File into []byte in Package:ioutil
-12345678910111213141516func readFileIntoByte(filename string) []byte &amp;#123;	var fmwConfigJsonBuf []byte	fin, err := os.Open(filename)	if err != nil &amp;#123;		pani">
+
+12345678910111213141516func readFileIntoByte(filename string) []byte &amp;#123;	var fmwConfigJsonBuf []byte	fin, err := os.Open(filename)	if err != nil &amp;#123;		pan">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang File IO Operations">
 <meta property="og:url" content="http://yoursite.com/2015/11/18/go/Golang-File-IO-Operations/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="Read File into []byte in Package:ioutil
-12345678910111213141516func readFileIntoByte(filename string) []byte &amp;#123;	var fmwConfigJsonBuf []byte	fin, err := os.Open(filename)	if err != nil &amp;#123;		pani">
-<meta property="og:updated_time" content="2015-11-18T08:22:50.822Z">
+
+12345678910111213141516func readFileIntoByte(filename string) []byte &amp;#123;	var fmwConfigJsonBuf []byte	fin, err := os.Open(filename)	if err != nil &amp;#123;		pan">
+<meta property="og:updated_time" content="2015-11-18T08:24:05.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang File IO Operations">
 <meta name="twitter:description" content="Read File into []byte in Package:ioutil
-12345678910111213141516func readFileIntoByte(filename string) []byte &amp;#123;	var fmwConfigJsonBuf []byte	fin, err := os.Open(filename)	if err != nil &amp;#123;		pani">
+
+12345678910111213141516func readFileIntoByte(filename string) []byte &amp;#123;	var fmwConfigJsonBuf []byte	fin, err := os.Open(filename)	if err != nil &amp;#123;		pan">
   
   
     <link rel="icon" href="/favicon.png">
@@ -209,6 +212,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1>Read File into []byte in Package:ioutil</h1>
+<hr>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> readFileIntoByte(filename <span class="typename">string</span>) []<span class="typename">byte</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> fmwConfigJsonBuf []<span class="typename">byte</span></span><br><span class="line"></span><br><span class="line">	fin, err := os.Open(filename)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmwConfigJsonBuf, err = ioutil.ReadAll(fin)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fin.Close()</span><br><span class="line">	<span class="keyword">return</span> fmwConfigJsonBuf</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
