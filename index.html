@@ -193,19 +193,19 @@
       
         <h1>Read File into []byte in Package:ioutil</h1>
 <pre><code>func ReadFileIntoByte(filename string) []byte {
-        var FileBuf []byte = nil
-        fin, err := os.Open(ConfigPath)
+    var FileBuf []byte = nil
+    fin, err := os.Open(ConfigPath)
+    if err != nil {
+        panic(err)
+    } else {
+        FileBuf, err = ioutil.ReadAll(fin)
         if err != nil {
             panic(err)
-        } else {
-                    FileBuf, err = ioutil.ReadAll(fin)
-                    if err != nil {
-                        panic(err)
-                    }
         }
-        fin.Close()
-        
-        return FileBuf
+    }
+    fin.Close()
+    
+    return FileBuf
 }
 </code></pre>
 
