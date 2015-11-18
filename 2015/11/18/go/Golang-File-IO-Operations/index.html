@@ -3,17 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: arm | KaiQ.Gu Blog</title>
+  <title>Golang File IO Operations | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KaiQ.Gu Blog">
-<meta property="og:url" content="http://yoursite.com/tags/arm/index.html">
+  <meta name="description" content="Read File into []byte in Package:ioutil
+func ReadFileIntoByte(filename string) []byte {
+        var FileBuf []byte = nil
+        fin, err := os.Open(ConfigPath)
+        if err != nil {
+            pan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang File IO Operations">
+<meta property="og:url" content="http://yoursite.com/2015/11/18/go/Golang-File-IO-Operations/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description">
+<meta property="og:description" content="Read File into []byte in Package:ioutil
+func ReadFileIntoByte(filename string) []byte {
+        var FileBuf []byte = nil
+        fin, err := os.Open(ConfigPath)
+        if err != nil {
+            pan">
+<meta property="og:updated_time" content="2015-11-18T08:15:39.348Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KaiQ.Gu Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Golang File IO Operations">
+<meta name="twitter:description" content="Read File into []byte in Package:ioutil
+func ReadFileIntoByte(filename string) []byte {
+        var FileBuf []byte = nil
+        fin, err := os.Open(ConfigPath)
+        if err != nil {
+            pan">
   
   
     <link rel="icon" href="/favicon.png">
@@ -163,92 +179,123 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-go/Golang-File-IO-Operations" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/09/22/linux/Writing-The-Disk-Image/" class="archive-article-date">
-  	<time datetime="2015-09-22T09:07:41.000Z" itemprop="datePublished">9月 22</time>
+    <div class="article-meta">
+      <a href="/2015/11/18/go/Golang-File-IO-Operations/" class="article-date">
+  	<time datetime="2015-11-18T08:07:54.000Z" itemprop="datePublished">2015-11-18</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/22/linux/Writing-The-Disk-Image/">Writing The Disk Image Into Raspberry Pi 2</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Golang File IO Operations
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openelec/">openelec</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raspberry/">raspberry</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
 	</div>
 
-          
+        
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
+	<a class="article-category-link" href="/categories/Go/">Go</a>
 	</div>
 
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>Read File into []byte in Package:ioutil</h1>
+<pre><code>func ReadFileIntoByte(filename string) []byte {
+        var FileBuf []byte = nil
+        fin, err := os.Open(ConfigPath)
+        if err != nil {
+            panic(err)
+        } else {
+                    FileBuf, err = ioutil.ReadAll(fin)
+                    if err != nil {
+                        panic(err)
+                    }
+        }
+        fin.Close()
+        
+        return FileBuf
+}
+</code></pre>
+
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/02/translations/Chinese-Translation-of-Principled-Design-of-the-ModernWeb-Architecture/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">翻译:Principled Design of the Modern Web Architecture</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" class="archive-article-date">
-  	<time datetime="2015-09-16T09:26:37.000Z" itemprop="datePublished">9月 16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/">arm-linux-gdb调试嵌入式arm程序</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/">gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="go/Golang-File-IO-Operations" data-title="Golang File IO Operations" data-url="http://yoursite.com/2015/11/18/go/Golang-File-IO-Operations/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"kerwinkoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -274,9 +321,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
