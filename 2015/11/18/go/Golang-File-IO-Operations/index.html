@@ -6,33 +6,39 @@
   <title>Golang File IO Operations | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Read File into []byte in Package:ioutil
-func ReadFileIntoByte(filename string) []byte {
-    var FileBuf []byte = nil
-    fin, err := os.Open(ConfigPath)
+func readFileIntoByte(filename string) []byte {
+    var fmwConfigJsonBuf []byte
+
+    fin, err := os.Open(filename)
+
     if err != nil {
         panic(err)
-    } el">
+    }">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang File IO Operations">
 <meta property="og:url" content="http://yoursite.com/2015/11/18/go/Golang-File-IO-Operations/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="Read File into []byte in Package:ioutil
-func ReadFileIntoByte(filename string) []byte {
-    var FileBuf []byte = nil
-    fin, err := os.Open(ConfigPath)
+func readFileIntoByte(filename string) []byte {
+    var fmwConfigJsonBuf []byte
+
+    fin, err := os.Open(filename)
+
     if err != nil {
         panic(err)
-    } el">
-<meta property="og:updated_time" content="2015-11-18T08:18:27.292Z">
+    }">
+<meta property="og:updated_time" content="2015-11-18T08:20:30.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang File IO Operations">
 <meta name="twitter:description" content="Read File into []byte in Package:ioutil
-func ReadFileIntoByte(filename string) []byte {
-    var FileBuf []byte = nil
-    fin, err := os.Open(ConfigPath)
+func readFileIntoByte(filename string) []byte {
+    var fmwConfigJsonBuf []byte
+
+    fin, err := os.Open(filename)
+
     if err != nil {
         panic(err)
-    } el">
+    }">
   
   
     <link rel="icon" href="/favicon.png">
@@ -224,20 +230,21 @@ func ReadFileIntoByte(filename string) []byte {
     <div class="article-entry" itemprop="articleBody">
       
         <h1>Read File into []byte in Package:ioutil</h1>
-<pre><code>func ReadFileIntoByte(filename string) []byte {
-    var FileBuf []byte = nil
-    fin, err := os.Open(ConfigPath)
+<pre><code>func readFileIntoByte(filename string) []byte {
+    var fmwConfigJsonBuf []byte
+
+    fin, err := os.Open(filename)
+
     if err != nil {
         panic(err)
     } else {
-        FileBuf, err = ioutil.ReadAll(fin)
+        fmwConfigJsonBuf, err = ioutil.ReadAll(fin)
         if err != nil {
             panic(err)
         }
     }
     fin.Close()
-    
-    return FileBuf
+    return fmwConfigJsonBuf
 }
 </code></pre>
 
