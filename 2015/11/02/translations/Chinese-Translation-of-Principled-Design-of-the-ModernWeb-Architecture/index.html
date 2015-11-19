@@ -5,25 +5,19 @@
   
   <title>翻译:Principled Design of the Modern Web Architecture | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC]
-
-前言：
-REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍">
+  <meta name="description" content="前言：
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta property="og:url" content="http://yoursite.com/2015/11/02/translations/Chinese-Translation-of-Principled-Design-of-the-ModernWeb-Architecture/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="[TOC]
-
-前言：
-REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍">
-<meta property="og:updated_time" content="2015-11-19T01:57:41.255Z">
+<meta property="og:description" content="前言：
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
+<meta property="og:updated_time" content="2015-11-19T01:58:27.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
-<meta name="twitter:description" content="[TOC]
-
-前言：
-REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍">
+<meta name="twitter:description" content="前言：
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
   
   
     <link rel="icon" href="/favicon.png">
@@ -214,8 +208,7 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<ul>
+        <ul>
 <li>前言：
 REST 表征状态传输（英文：Representational State Transfer，简称REST）是<code>Roy Fielding</code>博士于2000年在他的<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank" rel="external">博士论文</a>中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文<a href="https://www.ics.uci.edu/~taylor/documents/2002-REST-TOIT.pdf" target="_blank" rel="external">Principled Design of the Modern Web Architecture</a>，系统介绍了REST Web Architecture在现代Web架构环境下扮演的角色和作用，蕴含REST设计思想及原则。本人以有限的英文水平对此论文进行中文翻译。</li>
 </ul>
@@ -225,8 +218,8 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
 </ul>
 <h1>正文：</h1>
 <hr>
-<p>Title: <strong>Principled Design of the Modern Web Architecture</strong></p>
-<p>Author: <strong>Roy T. Fielding</strong> and <strong>Richard N. Taylor</strong></p>
+<h1>Title: <strong>Principled Design of the Modern Web Architecture</strong></h1>
+<h1>Author: <strong>Roy T. Fielding</strong> and <strong>Richard N. Taylor</strong></h1>
 <hr>
 <h1>摘要</h1>
 <p>万维网(The World Wide Web)的成功，在很大程度上是因为它的 软件体系架构<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 在设计上更加符合互联网规模（Internet-scale）的分布式超媒体系统。现代Web架构强调的是组件交互的可拓展性（scalability of component interactions），接口的通用性（generality of interfaces），组件之间的部署独立性（ndependent deployment of components）和中间化组件（intermediary components）来减少交互延迟，确保执行安全，并对 保留系统<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 进行封装。在本论文中，我们介绍了表征性状态传输的架构风格，作为一种Web架构的抽象模型，来指导我们对超文本传输协议和 统一资源标识符<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> 的设计和定义。我们描述了REST的软件工程学方面的指导原则和保留这些原则在交互上的限制，并与其他架构风格的约束做对照。然后我们会与当前部署的一些Web架构的的抽象模型做比对，来引出目前一些协议和他们所对应的应用程序之间的不协调。</p>
