@@ -7,26 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="golang 将struct内容生成Json
 引用json包
-1import “encoding/json”
-结构体定义
-123456789101112131415161718192021222324type Config struct &amp;#123;	Addr     string `json:&quot;address&quot;`	BaseURL  string `json:&quot;base_url&quot;`	BasePat">
+1import “encoding/json”">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang Json处理">
 <meta property="og:url" content="http://yoursite.com/2015/11/24/go/golang-json/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="golang 将struct内容生成Json
 引用json包
-1import “encoding/json”
-结构体定义
-123456789101112131415161718192021222324type Config struct &amp;#123;	Addr     string `json:&quot;address&quot;`	BaseURL  string `json:&quot;base_url&quot;`	BasePat">
-<meta property="og:updated_time" content="2015-11-24T09:21:58.810Z">
+1import “encoding/json”">
+<meta property="og:updated_time" content="2015-11-24T09:23:18.954Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang Json处理">
 <meta name="twitter:description" content="golang 将struct内容生成Json
 引用json包
-1import “encoding/json”
-结构体定义
-123456789101112131415161718192021222324type Config struct &amp;#123;	Addr     string `json:&quot;address&quot;`	BaseURL  string `json:&quot;base_url&quot;`	BasePat">
+1import “encoding/json”">
   
   
     <link rel="icon" href="/favicon.png">
@@ -220,6 +214,7 @@
         <h1>golang 将struct内容生成Json</h1>
 <p>引用json包</p>
 <figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> “encoding/json”</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>结构体定义</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">type</span> Config <span class="keyword">struct </span>&#123;</span><br><span class="line">	<span class="keyword">Addr </span>    <span class="keyword">string </span>`json:<span class="string">"address"</span>`</span><br><span class="line">	<span class="keyword">BaseURL </span> <span class="keyword">string </span>`json:<span class="string">"base_url"</span>`</span><br><span class="line">	<span class="keyword">BasePath </span><span class="keyword">string </span>`json:<span class="string">"base_path"</span>`</span><br><span class="line"></span><br><span class="line">	Username <span class="keyword">string </span>`json:<span class="string">"username"</span>`</span><br><span class="line">	Password <span class="keyword">string </span>`json:<span class="string">"password"</span>`</span><br><span class="line"></span><br><span class="line">	HomeArticles int    `json:<span class="string">"home_articles"</span>`</span><br><span class="line">	Title        <span class="keyword">string </span>`json:<span class="string">"title"</span>`</span><br><span class="line">	Footer       <span class="keyword">string </span>`json:<span class="string">"footer"</span>`</span><br><span class="line">	DocURLFormat <span class="keyword">string </span>`json:<span class="string">"doc_url_format"</span>`</span><br><span class="line"></span><br><span class="line">	ContentPath  <span class="keyword">string </span>`json:<span class="string">"content_path"</span>`</span><br><span class="line">	UploadPath   <span class="keyword">string </span>`json:<span class="string">"upload_path"</span>`</span><br><span class="line">	TemplatePath <span class="keyword">string </span>`json:<span class="string">"template_path"</span>`</span><br><span class="line"></span><br><span class="line">	PublicPath <span class="keyword">string </span>  `json:<span class="string">"public_path"</span>` // all parsed html/content etc...</span><br><span class="line">	Favicon    <span class="keyword">string </span>  `json:<span class="string">"favicon"</span>`</span><br><span class="line">	LinkFiles  []<span class="keyword">string </span>`json:<span class="string">"link_files"</span>`</span><br><span class="line"></span><br><span class="line">	TLSCertFile <span class="keyword">string </span>`json:<span class="string">"certfile"</span>`</span><br><span class="line">	TLSKeyFile  <span class="keyword">string </span>`json:<span class="string">"keyfile"</span>`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>结构体变量赋值</p>
