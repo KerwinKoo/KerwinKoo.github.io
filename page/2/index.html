@@ -103,7 +103,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 15px;">Go</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 15px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 15px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a>
+						<a href="/tags/Go/" style="font-size: 16.67px;">Go</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 13.33px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 13.33px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a>
 					</div>
 				</section>
 				
@@ -164,6 +164,77 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-go/Go-DB-Simple-for-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/23/go/Go-DB-Simple-for-mysql/" class="article-date">
+  	<time datetime="2015-08-23T03:20:37.000Z" itemprop="datePublished">2015-08-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/23/go/Go-DB-Simple-for-mysql/">Go Mysql Diver的简单使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。</p>
+<h2>包的引用</h2>
+<p>Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
+其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql">github.com/go-sql-driver/mysql</a></p>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> (</span></span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3>注意：</h3>
+<ul>
+<li>通过引入空白倒入Mysql包（<code>短横线-</code>），完成数据库驱动注册。</li>
+<li>出现问题：<code>failed to open database: sql: unknown driver &quot;mysql&quot; (forgotten import?)</code>说明数据库驱动引用有误（上次出现这个问题是没有空白导入Mysql数据库驱动）。</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/23/go/Go-DB-Simple-for-mysql/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-python/python-command-line-analysis" class="article article-type-post" itemscope itemprop="blogPost">
   
