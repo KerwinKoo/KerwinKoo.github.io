@@ -15,7 +15,7 @@
 <meta property="og:description" content="1 Read File into []byte in Package:ioutil
 
 12345678910111213141516func readFileIntoByte(filename string) []byte &amp;#123;	var fmwConfigJsonBuf []byte	fin, err := os.Open(filename)	if err != nil &amp;#123;		p">
-<meta property="og:updated_time" content="2015-11-25T02:28:18.701Z">
+<meta property="og:updated_time" content="2015-11-25T02:53:43.825Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang File IO Operations">
 <meta name="twitter:description" content="1 Read File into []byte in Package:ioutil
@@ -223,7 +223,8 @@
 <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//listFiles show the file list in directory</span></span><br><span class="line">func listFiles(<span class="keyword">dirname</span> <span class="keyword">string</span>) []<span class="keyword">string</span> &#123;</span><br><span class="line">	fileList := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">	files, _ := ioutil.ReadDir(<span class="keyword">dirname</span>)</span><br><span class="line">	<span class="keyword">for</span> _, <span class="keyword">fileInfo</span> := range files &#123;</span><br><span class="line">		<span class="keyword">if</span> !<span class="keyword">fileInfo</span>.IsDir() &#123;</span><br><span class="line">			fileList = append(fileList, <span class="keyword">fileInfo</span>.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fileList</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1>4 Check path existing or not</h1>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> _, err := os.Stat(DefaultContent); !os.IsNotExist(err) &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"Already has default config:%s"</span>, DefaultContent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h1>5 Remove directory and its' contents</h1>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err := os.RemoveAll(filePath); err != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
