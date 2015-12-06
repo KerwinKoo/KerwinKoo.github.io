@@ -13,7 +13,7 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="前言：
 REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
-<meta property="og:updated_time" content="2015-12-06T09:53:53.805Z">
+<meta property="og:updated_time" content="2015-12-06T10:38:16.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta name="twitter:description" content="前言：
@@ -255,7 +255,7 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
 <h2>数据元素</h2>
 <p>不会像分布式对象<sup class="footnote-ref"><a href="#fn15" id="fnref15">[15]</a></sup>风格那样把所有的数据都封装并且通过程序组件进行隐藏，架构的数据元素的性质和状态是REST的一个关键点。这种设计原则在分布式超媒体性质中也有体现。</p>
 <p>当一个链接被选中时，信息需要从存储它的地方，移动到使用它的地方，通常情况下，后者是用户浏览器。这跟绝大多数的分布式处理范式有明显反差，因为传递处理方法要比传递数据效率更高<sup class="footnote-ref"><a href="#fn16" id="fnref16">[16]</a></sup>。分布式超媒体架构的数据操作共分三种：1）对数据进行原地渲染，并将处理后的结果镜像发送给接收者；2）将数据与渲染引擎一起封装，再发给接受者；3）将原始数据及描述该数据类型的元数据共同发送给接收者，让接受者自行选择渲染引擎。</p>
-<p>三种数据操作方式各有利弊。第一种操作，传统的Client/Server架构<sup class="footnote-ref"><a href="#fn17" id="fnref17">[17]</a></sup>风格，可以将原始数据完好地封装在发送者内部，防止原始数据被修改，使客户端更容易实现；然而它也严重制约了客户端的功能，增大了发送方的负载，导致拓展性问题。第二种操作，移动终端的处理风格[^mobile object style]，</p>
+<p>三种数据操作方式各有利弊。第一种操作，传统的Client/Server架构<sup class="footnote-ref"><a href="#fn17" id="fnref17">[17]</a></sup>风格，可以将原始数据完好地封装在发送者内部，防止原始数据被修改，使客户端更容易实现；然而它也严重制约了客户端的功能，增大了发送方的负载，导致拓展性问题。第二种操作，移动终端的处理风格[^mobile object style]，通过其对应的渲染引擎对数据进行专门处理，同时也保证了数据的隐蔽性；但这种方式同样将客户端的功能限制在渲染引擎之内，并在一定成都上增加了数据的传输负载。</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
