@@ -13,8 +13,7 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="前言：
 REST 表征状态传输（英文：Representational State Transfer，简称REST）是Roy Fielding博士于2000年在他的博士论文中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文Principled Design of the Modern Web Architecture，系统介绍了REST W">
-<meta property="og:image" content="http://7xl7m7.com1.z0.glb.clouddn.com/pic/table1_rest_data_elements.bmp?attname=&e=1449819473&token=HGWDW7MDV3-h-nYvzu0tGDuR60-OsgvCDQIlia0F:E2mg9ZDaGo6-DmJIK9K-bMMNOKU">
-<meta property="og:updated_time" content="2015-12-10T08:25:32.237Z">
+<meta property="og:updated_time" content="2015-12-10T08:38:29.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译:Principled Design of the Modern Web Architecture">
 <meta name="twitter:description" content="前言：
@@ -258,30 +257,38 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
 <p>当一个链接被选中时，信息需要从存储它的地方，移动到使用它的地方，通常情况下，后者是用户浏览器。这跟绝大多数的分布式处理范式有明显反差，因为传递处理方法要比传递数据效率更高<sup class="footnote-ref"><a href="#fn16" id="fnref16">[16]</a></sup>。分布式超媒体架构的数据操作共分三种：1）对数据进行原地渲染，并将处理后的结果镜像发送给接收者；2）将数据与渲染引擎一起封装，再发给接受者；3）将原始数据及描述该数据类型的元数据共同发送给接收者，让接受者自行选择渲染引擎。</p>
 <p>三种数据操作方式各有利弊。第一种方案，传统的Client/Server架构<sup class="footnote-ref"><a href="#fn17" id="fnref17">[17]</a></sup>风格，可以将原始数据完好地封装在发送者内部，防止原始数据被修改，使客户端更容易实现；然而它也严重制约了客户端的功能，增大了发送方的负载，导致拓展性问题。第二种方案，移动终端的处理风格[^mobile object style]，通过其对应的渲染引擎对数据进行专门处理，同时也保证了数据的隐蔽性；但这种方式同样将客户端的功能限制在渲染引擎之内，并在一定成都上增加了数据的传输负载。第三种方案使发送方变得简单和可拓展，同时最大限度减少传送的字节数；但它失去了信息隐藏的优势，并要求发送方和接收方可以解析相同的数据类型。</p>
 <p>REST在数据传输方面对以上三种方案进行了混合，将元数据的数据类型共享，通过限制标准接口对外暴露的作用域来实现（数据传输）。REST将数据匹配入可以不断拓展的表征状态集中，接收者根据自身功能或请求，动态地选择该数据的某种表现形式来进行传输。无论数据的该标准是原数据格式相同，还是由原数据衍生而出，都会隐藏在接口下。对于移动终端来说，类似于通过传输适用于该解析引擎（e.g. Java）的标准格式的数据表征。而对于C/S架构类型，REST即实现组件分离，又解决了服务端的拓展性问题，并将信息隐藏在接口下，可以对服务进行更好的封装和迭代，通过可更新功能引擎（downloadable feature-engines）来提供动态功能集。</p>
-<p><img src="http://7xl7m7.com1.z0.glb.clouddn.com/pic/table1_rest_data_elements.bmp?attname=&amp;e=1449819473&amp;token=HGWDW7MDV3-h-nYvzu0tGDuR60-OsgvCDQIlia0F:E2mg9ZDaGo6-DmJIK9K-bMMNOKU" alt=""></p>
+<p><em>表1：REST数据元素及解释举例</em></p>
 <table>
 <thead>
 <tr>
-<th>Tables</th>
-<th style="text-align:center">Are</th>
-<th style="text-align:right">Cool</th>
+<th>数据元素</th>
+<th style="text-align:center">Web应用举例</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>col 3 is</td>
-<td style="text-align:center">right-aligned</td>
-<td style="text-align:right">$1600</td>
+<td>资源</td>
+<td style="text-align:center">超文本所指向的既存目标</td>
 </tr>
 <tr>
-<td>col 2 is</td>
-<td style="text-align:center">centered</td>
-<td style="text-align:right">$12</td>
+<td>资源描述符</td>
+<td style="text-align:center">URL,URN</td>
 </tr>
 <tr>
-<td>zebra stripes</td>
-<td style="text-align:center">are neat</td>
-<td style="text-align:right">$1</td>
+<td>表征</td>
+<td style="text-align:center">HTML文件、图片资源</td>
+</tr>
+<tr>
+<td>表征元数据</td>
+<td style="text-align:center">媒质类型，最后一次修改时间</td>
+</tr>
+<tr>
+<td>资源元数据</td>
+<td style="text-align:center">资源链接，交替，变化</td>
+</tr>
+<tr>
+<td>控制数据</td>
+<td style="text-align:center">修改权限，缓冲控制</td>
 </tr>
 </tbody>
 </table>
