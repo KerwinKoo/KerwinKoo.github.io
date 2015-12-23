@@ -103,7 +103,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 13.33px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/exec/" style="font-size: 13.33px;">exec</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 13.33px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 13.33px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 13.33px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a>
 					</div>
 				</section>
 				
@@ -164,71 +164,6 @@
 	</div>
 </nav>
       <div class="body-wrap">
-  
-    <article id="post-go/golang-exec-commandtest" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/25/go/golang-exec-commandtest/" class="article-date">
-  	<time datetime="2015-11-25T01:58:24.000Z" itemprop="datePublished">2015-11-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/25/go/golang-exec-commandtest/">Golang Exec TEST</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>用法e.g.</p>
-<pre><code>import &quot;&quot;os/exec&quot;&quot;
-</code></pre>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> FetchDefaultTemplate() &#123;</span><br><span class="line">	cmd := exec.Command(<span class="string">"git"</span>, <span class="string">"clone"</span>, <span class="string">"--depth=1"</span>, <span class="string">"https://github.com/mengzhuo/bla_default_template.git"</span>)</span><br><span class="line">	<span class="keyword">if</span> err := cmd.Start(); err != <span class="constant">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	cmd.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exec/">exec</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/11/25/go/golang-exec-commandtest/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
   
     <article id="post-go/golang-exec-command" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -781,6 +716,71 @@ sudo service docker start</p>
       
         <p class="article-more-link">
           <a  href="/2015/09/22/linux/Writing-The-Disk-Image/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-linux/arm-linux-gdb调试嵌入式arm程序" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" class="article-date">
+  	<time datetime="2015-09-16T09:26:37.000Z" itemprop="datePublished">2015-09-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/">arm-linux-gdb调试嵌入式arm程序</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前已经到了非GDB调试不可的地步.....</p>
+<h2>0.下载安装:</h2>
+<p>从 <a href="http://ftp.gnu.org/gnu/gdb/">GNU GDB库</a> 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).</p>
+<p>解压缩.</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/">gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
