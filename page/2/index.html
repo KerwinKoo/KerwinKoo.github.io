@@ -165,74 +165,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-linux/Writing-The-Disk-Image" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/22/linux/Writing-The-Disk-Image/" class="article-date">
-  	<time datetime="2015-09-22T09:07:41.000Z" itemprop="datePublished">2015-09-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/22/linux/Writing-The-Disk-Image/">Writing The Disk Image Into Raspberry Pi 2</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>OpenELEC</code> 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 <code>KODI</code> 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。</p>
-<h2>0.硬件准备:</h2>
-<ul>
-<li>硬件平台:Raspberry Pi 2</li>
-<li>显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)</li>
-<li>存储设备:C10 8G TF card(TF Card 读取速度直接影响播放流畅性). TF card读卡器.</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openelec/">openelec</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raspberry/">raspberry</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/22/linux/Writing-The-Disk-Image/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-linux/arm-linux-gdb调试嵌入式arm程序" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -417,6 +349,79 @@
       
         <p class="article-more-link">
           <a  href="/2015/08/23/go/Go-DB-Simple-for-mysql/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-go/go-get-tools" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/23/go/go-get-tools/" class="article-date">
+  	<time datetime="2015-08-23T03:20:37.000Z" itemprop="datePublished">2015-08-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/23/go/go-get-tools/">GoGetTools 问题解决</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在编译HUGO时遇到的问题。</p>
+<p>报错信息：</p>
+<blockquote>
+<p>hugolib/site.go:33:2: cannot find package &quot;bitbucket.org/pkg/inflect&quot; in any of:{GOPATH}</p>
+</blockquote>
+<p>意思是当前的工程缺少import包文件。但我是通过go get直接在github中获取到本地的，原则上不会缺少包丢失的情况，因此问题定位在go get过程包获取不完整。</p>
+<p>重新go get发现报错信息：</p>
+<blockquote>
+<p>go: missing Mercurial command. See https://golang.org/s/gogetcmd
+package bitbucket.org/pkg/inflect: exec: &quot;hg&quot;: executable file not found in $PATH</p>
+</blockquote>
+<p>说的很明白，无法执行命令<code>hg</code>，是因为缺少<code>Mercurial command</code>。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/23/go/go-get-tools/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
