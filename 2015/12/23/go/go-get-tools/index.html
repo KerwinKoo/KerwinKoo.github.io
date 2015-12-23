@@ -21,7 +21,7 @@ hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&am
 hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&amp;quot; in any of:{GOPATH}
 
 意思是当前的工程缺少import包文件。但我是通过go get直接在github中获取到本地的，原则上不会缺少包丢失的情况，因此问题定位在go get过程包">
-<meta property="og:updated_time" content="2015-12-23T04:28:47.581Z">
+<meta property="og:updated_time" content="2015-12-23T04:30:19.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GoGetTools 问题解决">
 <meta name="twitter:description" content="在编译HUGO时遇到的问题。
@@ -227,10 +227,9 @@ hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&am
 </blockquote>
 <p>意思是当前的工程缺少import包文件。但我是通过go get直接在github中获取到本地的，原则上不会缺少包丢失的情况，因此问题定位在go get过程包获取不完整。</p>
 <p>重新go get发现报错信息：</p>
-<blockquote>
-<p>go: missing Mercurial command. See https://golang.org/s/gogetcmd
-package bitbucket.org/pkg/inflect: exec: &quot;hg&quot;: executable file not found in $PATH</p>
-</blockquote>
+<pre><code>go: missing Mercurial command. See https://golang.org/s/gogetcmd
+package bitbucket.org/pkg/inflect: exec: &quot;hg&quot;: executable file not found in $PATH
+</code></pre>
 <p>说的很明白，无法执行命令<code>hg</code>，是因为缺少<code>Mercurial command</code>。</p>
 <a id="more"></a>
 <p>解决方案，安装Mercurial：</p>
