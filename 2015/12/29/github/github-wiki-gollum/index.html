@@ -5,16 +5,28 @@
   
   <title>开源wiki系统:gollum | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334# gollum目前被我用于知识管理的wiki系统。## 简介简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。具体介绍可看[github官网](https://github.com/gollum/gollum)## 安装及设置按照github官网中的方">
+  <meta name="description" content="gollum
+目前被我用于知识管理的wiki系统。
+简介
+简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。
+具体介绍可看github官网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开源wiki系统:gollum">
 <meta property="og:url" content="http://yoursite.com/2015/12/29/github/github-wiki-gollum/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334# gollum目前被我用于知识管理的wiki系统。## 简介简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。具体介绍可看[github官网](https://github.com/gollum/gollum)## 安装及设置按照github官网中的方">
-<meta property="og:updated_time" content="2015-12-29T08:26:31.560Z">
+<meta property="og:description" content="gollum
+目前被我用于知识管理的wiki系统。
+简介
+简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。
+具体介绍可看github官网">
+<meta property="og:updated_time" content="2015-12-29T08:27:33.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源wiki系统:gollum">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334# gollum目前被我用于知识管理的wiki系统。## 简介简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。具体介绍可看[github官网](https://github.com/gollum/gollum)## 安装及设置按照github官网中的方">
+<meta name="twitter:description" content="gollum
+目前被我用于知识管理的wiki系统。
+简介
+简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。
+具体介绍可看github官网">
   
   
     <link rel="icon" href="/favicon.png">
@@ -201,7 +213,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="header"># gollum</span></span><br><span class="line"></span><br><span class="line">目前被我用于知识管理的wiki系统。</span><br><span class="line"></span><br><span class="line"><span class="header">## 简介</span></span><br><span class="line"></span><br><span class="line">简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。</span><br><span class="line">具体介绍可看[<span class="link_label">github官网</span>](<span class="link_url">https://github.com/gollum/gollum</span>)</span><br><span class="line"></span><br><span class="line"><span class="header">## 安装及设置</span></span><br><span class="line"></span><br><span class="line">按照github官网中的方法安装即可，安装过程中的个人经验做下总结。</span><br><span class="line"></span><br><span class="line"><span class="header">### 注意问题</span></span><br><span class="line"></span><br><span class="line">在安装之后，如果将现有markdown文件放入wiki目录下，再启动gollum是不会显示新文件的，因为该文件没有加入git。</span><br><span class="line"></span><br><span class="line">官网的解释原文是：</span><br><span class="line"></span><br><span class="line"><span class="code">    Navigate to your git repository (wiki) via the command line.</span></span><br><span class="line"></span><br><span class="line">即必须有git。</span><br><span class="line"></span><br><span class="line"><span class="header">### 格式优化</span></span><br><span class="line"></span><br><span class="line">单启动gollum只会启动wiki的最基本服务，通过以下办法可以增加新的插件。</span><br><span class="line"></span><br><span class="line"><span class="header">#### 侧边栏显示该文件的目录</span></span><br><span class="line"></span><br><span class="line">在wiki的git主目录下新建文件 <span class="code">`_Sidebar.md`</span>，将目录显示宏写入文件内保存：</span><br><span class="line"></span><br><span class="line"><span class="code">```</span>shell</span><br><span class="line"><span class="code">    &#123;[_TOC_]] #将第一个&#123;改为[</span></span><br></pre></td></tr></table></figure>
+        <h1>gollum</h1>
+<p>目前被我用于知识管理的wiki系统。</p>
+<h2>简介</h2>
+<p>简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。
+具体介绍可看<a href="https://github.com/gollum/gollum" target="_blank" rel="external">github官网</a></p>
+<a id="more"></a>
+<h2>安装及设置</h2>
+<p>按照github官网中的方法安装即可，安装过程中的个人经验做下总结。</p>
+<h3>注意问题</h3>
+<p>在安装之后，如果将现有markdown文件放入wiki目录下，再启动gollum是不会显示新文件的，因为该文件没有加入git。</p>
+<p>官网的解释原文是：</p>
+<pre><code>Navigate to your git repository (wiki) via the command line.
+</code></pre>
+<p>即必须有git。</p>
+<h3>格式优化</h3>
+<p>单启动gollum只会启动wiki的最基本服务，通过以下办法可以增加新的插件。</p>
+<h4>侧边栏显示该文件的目录</h4>
+<p>在wiki的git主目录下新建文件 <code>_Sidebar.md</code>，将目录显示宏写入文件内保存：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;[_TOC_]] #&#23558;&#31532;&#19968;&#20010;&#123;&#25913;&#20026;[</span><br></pre></td></tr></table></figure>
 <p>由于此文章本身是在wiki中编写，因此不能写入此宏代码，需要将左边第一个&quot;{&quot;符号改为&quot;<code>[</code>&quot;。</p>
 <p>重启gollum即可</p>
 <h4>增加主页全文件目录</h4>

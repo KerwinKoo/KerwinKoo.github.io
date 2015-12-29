@@ -195,29 +195,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="header"># gollum</span></span><br><span class="line"></span><br><span class="line">目前被我用于知识管理的wiki系统。</span><br><span class="line"></span><br><span class="line"><span class="header">## 简介</span></span><br><span class="line"></span><br><span class="line">简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。</span><br><span class="line">具体介绍可看[<span class="link_label">github官网</span>](<span class="link_url">https://github.com/gollum/gollum</span>)</span><br><span class="line"></span><br><span class="line"><span class="header">## 安装及设置</span></span><br><span class="line"></span><br><span class="line">按照github官网中的方法安装即可，安装过程中的个人经验做下总结。</span><br><span class="line"></span><br><span class="line"><span class="header">### 注意问题</span></span><br><span class="line"></span><br><span class="line">在安装之后，如果将现有markdown文件放入wiki目录下，再启动gollum是不会显示新文件的，因为该文件没有加入git。</span><br><span class="line"></span><br><span class="line">官网的解释原文是：</span><br><span class="line"></span><br><span class="line"><span class="code">    Navigate to your git repository (wiki) via the command line.</span></span><br><span class="line"></span><br><span class="line">即必须有git。</span><br><span class="line"></span><br><span class="line"><span class="header">### 格式优化</span></span><br><span class="line"></span><br><span class="line">单启动gollum只会启动wiki的最基本服务，通过以下办法可以增加新的插件。</span><br><span class="line"></span><br><span class="line"><span class="header">#### 侧边栏显示该文件的目录</span></span><br><span class="line"></span><br><span class="line">在wiki的git主目录下新建文件 <span class="code">`_Sidebar.md`</span>，将目录显示宏写入文件内保存：</span><br><span class="line"></span><br><span class="line"><span class="code">```</span>shell</span><br><span class="line"><span class="code">    &#123;[_TOC_]] #将第一个&#123;改为[</span></span><br></pre></td></tr></table></figure>
-<p>由于此文章本身是在wiki中编写，因此不能写入此宏代码，需要将左边第一个&quot;{&quot;符号改为&quot;<code>[</code>&quot;。</p>
-<p>重启gollum即可</p>
-<h4>增加主页全文件目录</h4>
-<p>新建Home.md后，在此文件中写入以下：</p>
-<pre><code class="language-shell">    {&lt;GlobalTOC()&gt;&gt; #将左边第一个{改为&lt;
-
-同理，需要将左边第一个{改为`&lt;`
-
-#### 创建文件目录
-
-在点击`new`创建新文件后，在文件名中增加`/`来创建新的目录。如创建目录`tec`下的文件`test.md`，则在文件名中输入：
-
-    tec/test
-
-之后会自动创建tec下的文件test.md
-
-## 已知BUG
-
-1. 目前不支持标签系统，不支持关键字排行系统；
-2. 搜索功能无法做到空格来控制多关键字搜索；
-3. 不支持中文文件名。创建文件名时，会自动将汉子转为拼音，将符号转为对应的英文，如`&amp;`转为`and`。</code></pre>
-
+        <h1>gollum</h1>
+<p>目前被我用于知识管理的wiki系统。</p>
+<h2>简介</h2>
+<p>简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。
+具体介绍可看<a href="https://github.com/gollum/gollum">github官网</a></p>
       
     </div>
     
@@ -226,6 +208,10 @@
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/12/29/github/github-wiki-gollum/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
