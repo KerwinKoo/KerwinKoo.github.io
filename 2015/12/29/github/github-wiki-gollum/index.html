@@ -19,7 +19,7 @@
 简介
 简单而强悍的wiki系统，本wiki既是建立于gollum-wiki系统之上。
 具体介绍可看github官网">
-<meta property="og:updated_time" content="2015-12-29T08:31:03.697Z">
+<meta property="og:updated_time" content="2015-12-29T08:38:46.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源wiki系统:gollum">
 <meta name="twitter:description" content="gollum
@@ -247,6 +247,12 @@
 <pre><code>tec/test
 </code></pre>
 <p>之后会自动创建tec下的文件test.md</p>
+<h4>更新和发布</h4>
+<p>将wiki中的资源更新到github中可以保存文件。
+首先找一个用于存储wiki的github项目，我是存在kerwinkoo blog项目中，即私人博客。</p>
+<p>发布过程：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .&#10;git commit -m &#34;update record&#34;&#10;git push</span><br></pre></td></tr></table></figure>
+<p>到第二步完成，再启动本地的gollum后就已经可以看到更新后的结果了，第三步是为了将文件上传到github中。</p>
 <h2>已知BUG</h2>
 <ol>
 <li>目前不支持标签系统，不支持关键字排行系统；</li>
