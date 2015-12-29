@@ -3,33 +3,60 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Writing The Disk Image Into Raspberry Pi 2 | KaiQ.Gu Blog</title>
+  <title>图片云存储功能比较 | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 KODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
-0.硬件准备:
+  <meta name="description" content="阿里云
+阿里云OSS
+图片服务
+直接上结论
+结论是：阿里云支持基本的图片服务
+具体包括图片缩放、图片裁剪、图片旋转、图片效果、图片水印、格式转换、获取图片信息
+举例
+图片指定宽高缩略
+原图片http地址+@+w宽度+h高度+缩略参照边+缩略后生成的格式
 
-硬件平台:Raspberry Pi 2
-显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
-存储设备:C1">
+e.g.:
+假如原图片地址为：
+http://img.oss-demo.com/example.jpg
+
+原图片的大小为w=200, h=400">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Writing The Disk Image Into Raspberry Pi 2">
-<meta property="og:url" content="http://yoursite.com/2015/09/22/linux/Writing-The-Disk-Image/index.html">
+<meta property="og:title" content="图片云存储功能比较">
+<meta property="og:url" content="http://yoursite.com/2015/12/29/other/comparison-of-image-storage-servers/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 KODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
-0.硬件准备:
+<meta property="og:description" content="阿里云
+阿里云OSS
+图片服务
+直接上结论
+结论是：阿里云支持基本的图片服务
+具体包括图片缩放、图片裁剪、图片旋转、图片效果、图片水印、格式转换、获取图片信息
+举例
+图片指定宽高缩略
+原图片http地址+@+w宽度+h高度+缩略参照边+缩略后生成的格式
 
-硬件平台:Raspberry Pi 2
-显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
-存储设备:C1">
-<meta property="og:updated_time" content="2015-09-24T05:54:50.890Z">
+e.g.:
+假如原图片地址为：
+http://img.oss-demo.com/example.jpg
+
+原图片的大小为w=200, h=400">
+<meta property="og:updated_time" content="2015-12-29T14:23:18.853Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Writing The Disk Image Into Raspberry Pi 2">
-<meta name="twitter:description" content="OpenELEC 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 KODI 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。
-0.硬件准备:
+<meta name="twitter:title" content="图片云存储功能比较">
+<meta name="twitter:description" content="阿里云
+阿里云OSS
+图片服务
+直接上结论
+结论是：阿里云支持基本的图片服务
+具体包括图片缩放、图片裁剪、图片旋转、图片效果、图片水印、格式转换、获取图片信息
+举例
+图片指定宽高缩略
+原图片http地址+@+w宽度+h高度+缩略参照边+缩略后生成的格式
 
-硬件平台:Raspberry Pi 2
-显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)
-存储设备:C1">
+e.g.:
+假如原图片地址为：
+http://img.oss-demo.com/example.jpg
+
+原图片的大小为w=200, h=400">
   
   
     <link rel="icon" href="/favicon.png">
@@ -183,11 +210,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-linux/Writing-The-Disk-Image" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-other/comparison-of-image-storage-servers" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/22/linux/Writing-The-Disk-Image/" class="article-date">
-  	<time datetime="2015-09-22T09:07:41.000Z" itemprop="datePublished">2015-09-22</time>
+      <a href="/2015/12/29/other/comparison-of-image-storage-servers/" class="article-date">
+  	<time datetime="2015-12-29T14:20:57.000Z" itemprop="datePublished">2015-12-29</time>
 </a>
     </div>
   
@@ -200,7 +227,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Writing The Disk Image Into Raspberry Pi 2
+      图片云存储功能比较
     </h1>
   
 
@@ -209,12 +236,12 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openelec/">openelec</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raspberry/">raspberry</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aliyun/">aliyun</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
+	<a class="article-category-link" href="/categories/other/">other</a>
 	</div>
 
 
@@ -224,45 +251,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>OpenELEC</code> 系统实现了一个很小的Linux内核中(包含少许必要的包,python2.7 SSH等...)内嵌 <code>KODI</code> 视频播放终端。本日志记录在Arm开发板，Raspberry Pi 2 中实现OpenELEC的基础镜像安装。</p>
-<h2>0.硬件准备:</h2>
-<ul>
-<li>硬件平台:Raspberry Pi 2</li>
-<li>显示设备:支持HDMI显示器.(如果不支持HDMI,需要使用HDMI TO VGA转接头)</li>
-<li>存储设备:C10 8G TF card(TF Card 读取速度直接影响播放流畅性). TF card读卡器.</li>
-</ul>
-<a id="more"></a>
-<h2>1.镜像下载:</h2>
-<p><a href="http://openelec.tv/get-openelec" target="_blank" rel="external">openelec官网</a> 下载镜像,要注意选择是<a href="http://releases.openelec.tv/OpenELEC-RPi2.arm-5.0.8.img.gz" target="_blank" rel="external">树莓派2 B版 镜像下载</a>.</p>
-<p>由于目前没有对 <code>Openelec</code> 或 <code>KODI</code> 做任何定制化开发,因此还没有开始使用 OpenElEC的源码做交叉编译.关于定制化开发,日后研究.</p>
-<h2>2.镜像写入.</h2>
-<p>进入镜像下载后存放的目录,解压,或通过命令解压:</p>
-<blockquote>
-<p>gunzip -d OpenELEC-RPi2.arm-5.0.8.img</p>
-</blockquote>
-<p>插入USB存储设备(TF card读卡器),查看该设备的DEV名称:</p>
-<blockquote>
-<p>parted -l</p>
-</blockquote>
-<ul>
-<li>我们这里假设找到的设备名为/dev/sdb</li>
-</ul>
-<p>找到该设备后,现解挂载:</p>
-<blockquote>
-<p>umount /dev/sdb1</p>
-</blockquote>
-<p>开始通过dd命令拷贝镜像:</p>
-<blockquote>
-<p>sudo dd if=OpenELEC-RPi2.arm-5.0.8.img of=/dev/sdb bs=4M</p>
-</blockquote>
-<p>完成后将内存信息写回存储设备:</p>
-<blockquote>
-<p>sync</p>
-</blockquote>
-<p>安全退出USB设备.完成.</p>
-<ul>
-<li><a href="http://wiki.openelec.tv/index.php/HOW-TO:Installing_OpenELEC/Writing_The_Disk_Image#tab=Linux" target="_blank" rel="external">官网安装介绍</a></li>
-</ul>
+        <h1>阿里云</h1>
+<h2>阿里云OSS</h2>
+<h3>图片服务</h3>
+<h4>直接上结论</h4>
+<p>结论是：<strong>阿里云支持基本的图片服务</strong></p>
+<p>具体包括<code>图片缩放、图片裁剪、图片旋转、图片效果、图片水印、格式转换、获取图片信息</code></p>
+<h4>举例</h4>
+<h5>图片指定宽高缩略</h5>
+<pre><code>原图片http地址+@+w宽度+h高度+缩略参照边+缩略后生成的格式
+</code></pre>
+<h5>e.g.:</h5>
+<p>假如原图片地址为：</p>
+<pre><code>http://img.oss-demo.com/example.jpg
+</code></pre>
+<p>原图片的大小为w=200, h=400，即一个长边为400（h高）短边为200（w宽）的jpg图片，需要缩放为100×100的图片，如果选择长边优先，则缩放的结果为<code>50×100</code>，即长边（h高）由400缩成需要的100， 而宽度则根据原图片1:2的比例，缩成了50。其缩略结果获取地址为：</p>
+<pre><code>http://img.oss-demo.com/example.jpg@100h_100w_0e
+</code></pre>
+<p>其中，<code>@</code>后为参数设置，参数<code>e</code>来代表缩略方式，<code>0e</code>是指定长边为缩略参照边，如果需要短边参照，则改为<code>1e</code>即可，而<code>2e</code>则代表强制宽高缩略。</p>
+<h5>补充功能</h5>
+<p>上面的例子可以通过增加其他参数，来同时获取修改结果。如下面地址:</p>
+<pre><code>http://img.oss-demo.com/example.jpg@100w_100h_1e_90q_180r.png
+</code></pre>
+<p>其作用是，对原图片以短边为缩略参照边，进行100×100缩略（结果是100×200，使用参数：<code>1e</code>），保留原图片90%的质量（使用参数：<code>90q</code>），再旋转180°（使用参数：<code>180r</code>），并将结果生成png格式的图片（使用参数：<code>.png</code>）。</p>
+<p>更多图片服务参考：<a href="https://help.aliyun.com/document_detail/oss/oss-img-guide/intruduction.html?spm=5176.docoss/oss-img-guide/resize/resize-w-or-h.6.372.gsZd40" target="_blank" rel="external">阿里云图片服务API文档</a></p>
+<h3>阿里云的图片存储方式</h3>
+<p>首先，阿里云对图片、视频等非结构化数据的存储服务为<code>阿里云OSS服务</code>；购买OSS服务后，再创建bucket存储单元（全局唯一，可创建10个）；通过秘钥（Access id &amp; Access key）访问api进行私有内容访问。而图片就以object的身份存储在OSS的bucket中。</p>
+<p>另外，与七牛云有个共同点是，阿里云也可以对开放资源进行时间有效性控制。</p>
 
       
     </div>
@@ -272,18 +287,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/09/22/docker/Cross_compiling_BT_download_tool_aria2_for_Raspberry_Pi_2_modelB/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          为RaspberryPi2做BT下载工具aria2的交叉编译
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">arm-linux-gdb调试嵌入式arm程序</div>
+    <a href="/2015/12/29/github/github-wiki-gollum/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">开源wiki系统:gollum</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -312,7 +318,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="linux/Writing-The-Disk-Image" data-title="Writing The Disk Image Into Raspberry Pi 2" data-url="http://yoursite.com/2015/09/22/linux/Writing-The-Disk-Image/"></div>
+	<div class="ds-thread" data-thread-key="other/comparison-of-image-storage-servers" data-title="图片云存储功能比较" data-url="http://yoursite.com/2015/12/29/other/comparison-of-image-storage-servers/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
