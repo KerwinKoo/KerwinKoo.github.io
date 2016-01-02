@@ -169,6 +169,102 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-go/the-parameters-of-the-call-passed-by-value-or-point" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/02/go/the-parameters-of-the-call-passed-by-value-or-point/" class="article-date">
+  	<time datetime="2016-01-02T14:54:15.000Z" itemprop="datePublished">2016-01-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/02/go/the-parameters-of-the-call-passed-by-value-or-point/">golang传参方式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>golang 参数传值</h1>
+<p>首先，golang官方表示golang的函数调用参数均为值传递，不是指针传递或引用传递。经测试引申出来，当参数变量为指针或隐式指针类型，参数传递方式也是传值（指针本身的copy）。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">“</span><br><span class="line"><span class="keyword">after</span> they are evaluated, <span class="operator">the</span> parameters <span class="operator">of</span> <span class="operator">the</span> call are passed <span class="keyword">by</span> <span class="built_in">value</span> <span class="built_in">to</span> <span class="operator">the</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">and</span> <span class="title">the</span> <span class="title">called</span> <span class="title">function</span> <span class="title">begins</span> <span class="title">execution</span>.</span></span><br><span class="line">”</span><br></pre></td></tr></table></figure>
+<h2>解释</h2>
+<p>关于最有争议的slice传参是传值还是传引用（或指针）的问题，做一个剖析。</p>
+<p>首先，认为slice传参是引用传递的大都是根据以下代码情况得出的结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main()&#123;</span><br><span class="line">    slice := <span class="built_in">make</span>([]<span class="typename">int</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">    fmt.Println(<span class="string">"before:"</span>, slice)</span><br><span class="line">    changeSliceMember(slice)</span><br><span class="line">    fmt.Println(<span class="string">"after:"</span>, slice)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> changeSliceMember(slice []<span class="typename">int</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(slice) &gt; <span class="number">1</span> &#123;</span><br><span class="line">	slice[<span class="number">0</span>] = <span class="number">9</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数执行结果为：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">befor:<span class="comment">[0 0 0]</span></span><br><span class="line">after:<span class="comment">[9 0 0]</span></span><br></pre></td></tr></table></figure>
+<p>很显然，slice[0]值在函数内操作过之后确实在main中将结果保留了下来。但这不足以表明参数传递方式，参数slice无论值还是引用，不影响slice[0]地址的值。换句话说，只要参数是地址数据，都可以改变其指向的值的内容。</p>
+<p><code>slice</code>是结构体和指针的混合体，它的每项值，是以指针为内容存储存于values中，因此可以改变其值；slice属性values、count 和 capacity等均是值传递。但values的值（指针）所指向的堆栈，是存储单元，因此可以保留更改。</p>
+<p>因此，以指针和结构体的角度看，都是值传递。</p>
+<h3>证明slice传参过程为值传递的例子</h3>
+<p>如下代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	slice := <span class="built_in">make</span>([]<span class="typename">int</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"main-befor send:"</span>, slice)</span><br><span class="line">	sliceValueAppend(slice)</span><br><span class="line">	fmt.Println(<span class="string">"main-after send:"</span>, slice)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> sliceValueAppend(slice []<span class="typename">int</span>) &#123;</span><br><span class="line">	slice = <span class="built_in">append</span>(slice, <span class="number">4</span>)</span><br><span class="line">	fmt.Println(<span class="string">"fun-after append:"</span>, slice)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">main-befor send:[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">fun-after append:[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">4</span>]</span><br><span class="line">main-after send:[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>因此看出传输方式为值传递。</p>
+<h3>使用指针变量的例子</h3>
+<p>使用指针变量作为参数更清晰:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	value := <span class="built_in">new</span>(<span class="typename">int</span>)</span><br><span class="line">	modifyFunc(value)</span><br><span class="line">	<span class="built_in">println</span>(<span class="string">"main:"</span>, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> modifyFunc(value *<span class="typename">int</span>) &#123;</span><br><span class="line">	value = <span class="constant">nil</span></span><br><span class="line">	<span class="built_in">println</span>(<span class="string">"modifyFunc:"</span>, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">modifyFunc</span>: <span class="string">0x0</span></span><br><span class="line"><span class="attribute">main</span>: <span class="string">0xc820049f30</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，即使传值为指针，仍未改变变量value在main中的值。</p>
+<h2>golang中的引用</h2>
+<h3>golang引用的存在</h3>
+<p>golang在函数传参过程中均为值传递，但不代表golang没有传引用的地方。</p>
+<p><strong>golang闭包访问其外部环境变量时，是通过引用访问的。</strong></p>
+<h3>闭包举例</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	value := <span class="built_in">new</span>(<span class="typename">int</span>)</span><br><span class="line">	fmt.Println(<span class="string">"before:"</span>, value)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">func</span> () &#123;</span><br><span class="line">		value = <span class="constant">nil</span></span><br><span class="line">	&#125;()</span><br><span class="line">	fmt.Println(<span class="string">"after:"</span>, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">before: 0xc82000a360</span><br><span class="line">after: &lt;nil&gt;</span><br></pre></td></tr></table></figure>
+<p>其实闭包的引用传递，相当于全局变量的使用，只是对该值的处理过程进行闭包处理，没什么不好理解的。</p>
+<h1>总结</h1>
+<ul>
+<li>在golang中，基础类型和自定义类型均以<code>传值</code>的方式进行参数传递，包括但不限于<code>slice、map、chan</code>。</li>
+<li>golang对闭包传值方式是引用传值。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-other/comparison-of-image-storage-servers" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -739,74 +835,6 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
 
 
   
-    <article id="post-docker/Docker-Problems-solutions" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/23/docker/Docker-Problems-solutions/" class="article-date">
-  	<time datetime="2015-09-22T16:08:19.000Z" itemprop="datePublished">2015-09-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/23/docker/Docker-Problems-solutions/">Docker问题及解决方案汇总</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2>0.无论执行docker的什么命令均报错:</h2>
-<blockquote>
-<p>Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;memory=0&amp;memswap=0&amp;rm=1&amp;t=: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</p>
-</blockquote>
-<p>解决方案:
-检查docker的服务启动状态,root权限重启docker服务.
-sudo service docker start</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/23/docker/Docker-Problems-solutions/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -817,7 +845,7 @@ sudo service docker start</p>
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 KaiQ.Gu
+    		&copy; 2016 KaiQ.Gu
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
