@@ -7,20 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="golang 参数传值
 首先，golang官方表示golang的函数调用参数均为值传递，不是指针传递或引用传递。经测试引申出来，当参数变量为指针或隐式指针类型，参数传递方式也是传值（指针本身的copy）。
-1234“after they are evaluated, the parameters of the call are passed by value to thefunction and">
+after they are evaluated, the parameters of the call are passed by value to the
+function and the">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang传参方式">
 <meta property="og:url" content="http://yoursite.com/2016/01/02/go/the-parameters-of-the-call-passed-by-value-or-point/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
 <meta property="og:description" content="golang 参数传值
 首先，golang官方表示golang的函数调用参数均为值传递，不是指针传递或引用传递。经测试引申出来，当参数变量为指针或隐式指针类型，参数传递方式也是传值（指针本身的copy）。
-1234“after they are evaluated, the parameters of the call are passed by value to thefunction and">
-<meta property="og:updated_time" content="2016-01-02T14:56:00.123Z">
+after they are evaluated, the parameters of the call are passed by value to the
+function and the">
+<meta property="og:updated_time" content="2016-01-02T15:00:40.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang传参方式">
 <meta name="twitter:description" content="golang 参数传值
 首先，golang官方表示golang的函数调用参数均为值传递，不是指针传递或引用传递。经测试引申出来，当参数变量为指针或隐式指针类型，参数传递方式也是传值（指针本身的copy）。
-1234“after they are evaluated, the parameters of the call are passed by value to thefunction and">
+after they are evaluated, the parameters of the call are passed by value to the
+function and the">
   
   
     <link rel="icon" href="/favicon.png">
@@ -217,7 +220,10 @@
       
         <h1>golang 参数传值</h1>
 <p>首先，golang官方表示golang的函数调用参数均为值传递，不是指针传递或引用传递。经测试引申出来，当参数变量为指针或隐式指针类型，参数传递方式也是传值（指针本身的copy）。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">“</span><br><span class="line"><span class="keyword">after</span> they are evaluated, <span class="operator">the</span> parameters <span class="operator">of</span> <span class="operator">the</span> call are passed <span class="keyword">by</span> <span class="built_in">value</span> <span class="built_in">to</span> <span class="operator">the</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">and</span> <span class="title">the</span> <span class="title">called</span> <span class="title">function</span> <span class="title">begins</span> <span class="title">execution</span>.</span></span><br><span class="line">”</span><br></pre></td></tr></table></figure>
+<pre><code>after they are evaluated, the parameters of the call are passed by value to the
+function and the called function begins execution.
+</code></pre>
+<a id="more"></a>
 <h2>解释</h2>
 <p>关于最有争议的slice传参是传值还是传引用（或指针）的问题，做一个剖析。</p>
 <p>首先，认为slice传参是引用传递的大都是根据以下代码情况得出的结果：</p>
