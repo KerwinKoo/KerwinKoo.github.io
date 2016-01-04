@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 13.33px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 13.33px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 13.33px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 13.33px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,75 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-go/golang-try" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/04/go/golang-try/" class="article-date">
+  	<time datetime="2016-01-04T03:59:15.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/04/go/golang-try/">golang Try重试机制解读</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>golang-try</h1>
+<p>golang官方没有<code>try</code>关键字做代码尝试执行，但<a href="https://github.com/matryer/try">github</a>中有人为其做了个try功能的语法糖。</p>
+<h2>try用法举例</h2>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"errors"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/matryer/try"</span></span><br><span class="line">	<span class="string">"math/rand"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	<span class="keyword">var</span> value <span class="typename">string</span></span><br><span class="line"></span><br><span class="line">	err := try.Do(<span class="keyword">func</span>(attempt <span class="typename">int</span>) (<span class="typename">bool</span>, error) &#123;</span><br><span class="line">		<span class="keyword">var</span> err error</span><br><span class="line">		value, err = randomFunc()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"run error:"</span>, err)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"run ok:"</span>, value)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> attempt &lt; <span class="number">5</span>, err <span class="comment">//设置尝试次数，即尝试5次</span></span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ERROR:"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> randomFunc() (<span class="typename">string</span>, error) &#123;</span><br><span class="line">	rand_seed := rand.New(rand.NewSource(time.Now().UnixNano()))</span><br><span class="line">	<span class="keyword">if</span> rand_seed.Intn(<span class="number">100</span>) &lt; <span class="number">50</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"test ok"</span>, <span class="constant">nil</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">""</span>, errors.New(<span class="string">"test error"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码解释：</p>
+<ul>
+<li>try退出条件：1、达到尝试次数：5次（默认+最高尝试次数是10次）\；或者2、执行函数的返回值中error变量值为nil。</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/try/">try</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/04/go/golang-try/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-go/the-parameters-of-the-call-passed-by-value-or-point" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -723,56 +792,6 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
   
     <h1 itemprop="name">
       <a class="article-title" href="/2015/10/27/linux/github-forking-projects/">github_forking_projects</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Ubuntu-install-Postgresql" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/19/Ubuntu-install-Postgresql/" class="article-date">
-  	<time datetime="2015-10-19T01:36:02.000Z" itemprop="datePublished">2015-10-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/19/Ubuntu-install-Postgresql/">Ubuntu_install_Postgresql</a>
     </h1>
   
 
