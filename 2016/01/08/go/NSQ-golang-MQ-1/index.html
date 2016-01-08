@@ -3,24 +3,48 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Docker问题及解决方案汇总 | KaiQ.Gu Blog</title>
+  <title>NSQ-golang-MQ-1 | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0.无论执行docker的什么命令均报错:
+  <meta name="description" content="关于本文
+本文建立在通过解读NSQ源码来提升golang的编写能力。
+对于阅读某个项目的源码，本人通常按以下流程开展：
 
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;">
+充分理解项目的使用场景和功能；
+对比其在同类项目中的优缺点；
+大体构思实现该项目需要什么模块；
+阅读源码。
+
+当然过程不是一成不变的，对项目的理解起初往往是从外界获取，在阅读源码的过程中会有一些自己的理解融汇进去；同时源码也不是一遍就可以看明白的，这个过程需要反复折回。
+在本文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker问题及解决方案汇总">
-<meta property="og:url" content="http://yoursite.com/2015/09/23/docker/Docker-Problems-solutions/index.html">
+<meta property="og:title" content="NSQ-golang-MQ-1">
+<meta property="og:url" content="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-1/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="0.无论执行docker的什么命令均报错:
+<meta property="og:description" content="关于本文
+本文建立在通过解读NSQ源码来提升golang的编写能力。
+对于阅读某个项目的源码，本人通常按以下流程开展：
 
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;">
-<meta property="og:updated_time" content="2015-09-23T02:54:32.874Z">
+充分理解项目的使用场景和功能；
+对比其在同类项目中的优缺点；
+大体构思实现该项目需要什么模块；
+阅读源码。
+
+当然过程不是一成不变的，对项目的理解起初往往是从外界获取，在阅读源码的过程中会有一些自己的理解融汇进去；同时源码也不是一遍就可以看明白的，这个过程需要反复折回。
+在本文">
+<meta property="og:updated_time" content="2016-01-08T11:20:56.093Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker问题及解决方案汇总">
-<meta name="twitter:description" content="0.无论执行docker的什么命令均报错:
+<meta name="twitter:title" content="NSQ-golang-MQ-1">
+<meta name="twitter:description" content="关于本文
+本文建立在通过解读NSQ源码来提升golang的编写能力。
+对于阅读某个项目的源码，本人通常按以下流程开展：
 
-Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&amp;amp;cpuquota=0&amp;amp;cpusetcpus=&amp;amp;cpusetmems=&amp;amp;cpushares=0&amp;amp;dockerfile=Dockerfile&amp;amp;memory=0&amp;">
+充分理解项目的使用场景和功能；
+对比其在同类项目中的优缺点；
+大体构思实现该项目需要什么模块；
+阅读源码。
+
+当然过程不是一成不变的，对项目的理解起初往往是从外界获取，在阅读源码的过程中会有一些自己的理解融汇进去；同时源码也不是一遍就可以看明白的，这个过程需要反复折回。
+在本文">
   
   
     <link rel="icon" href="/favicon.png">
@@ -174,11 +198,11 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-docker/Docker-Problems-solutions" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-go/NSQ-golang-MQ-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/23/docker/Docker-Problems-solutions/" class="article-date">
-  	<time datetime="2015-09-22T16:08:19.000Z" itemprop="datePublished">2015-09-23</time>
+      <a href="/2016/01/08/go/NSQ-golang-MQ-1/" class="article-date">
+  	<time datetime="2016-01-08T11:19:45.000Z" itemprop="datePublished">2016-01-08</time>
 </a>
     </div>
   
@@ -191,7 +215,7 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
         
   
     <h1 class="article-title" itemprop="name">
-      Docker问题及解决方案汇总
+      NSQ-golang-MQ-1
     </h1>
   
 
@@ -200,12 +224,12 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nsq/">nsq</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
+	<a class="article-category-link" href="/categories/Go/">Go</a>
 	</div>
 
 
@@ -215,25 +239,52 @@ Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;amp;cpuperiod=0&a
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2>0.无论执行docker的什么命令均报错:</h2>
-<blockquote>
-<p>Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;memory=0&amp;memswap=0&amp;rm=1&amp;t=: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</p>
-</blockquote>
-<p>解决方案:
-检查docker的服务启动状态,root权限重启docker服务.
-sudo service docker start</p>
-<a id="more"></a>
-<h2>1.保存某个container在使用的image,或将该image更名:</h2>
-<p>image创建或build时不注意时会造成image的 <code>REPOSITORY</code> 和 <code>TAG</code> 都为 <code>&lt;none&gt;</code>,更名方案:
-docker ps -a | grep 镜像 ID # 拿这个镜像的 ID 得到正确的 container 的 id
-docker commit -a 'message aaaa' CONTAINER_ID NEW_IMAGE_NAME # 把该容器保存为一个新镜像。</p>
-<p>此方案是将该image进行保存,同时给予保存信息和镜像名.</p>
-<h2>2.在Docker Container中互传文件(数据):</h2>
+        <h1>关于本文</h1>
+<p>本文建立在通过解读<a href="https://github.com/nsqio/nsq" target="_blank" rel="external">NSQ源码</a>来提升golang的编写能力。</p>
+<p>对于阅读某个项目的源码，本人通常按以下流程开展：</p>
 <ul>
-<li>从container中拷贝文件到主机上:
-docker ps -a | grep 镜像 ID
-docker cp <containerid>:/file/path/within/container /host/path/target</containerid></li>
+<li>充分理解项目的使用场景和功能；</li>
+<li>对比其在同类项目中的优缺点；</li>
+<li>大体构思实现该项目需要什么模块；</li>
+<li>阅读源码。</li>
 </ul>
+<p>当然过程不是一成不变的，对项目的理解起初往往是从外界获取，在阅读源码的过程中会有一些自己的理解融汇进去；同时源码也不是一遍就可以看明白的，这个过程需要反复折回。</p>
+<p>在本文中，分析对象是以golang为主编程语言而开发的Message Queue：NSQ，通过上面提到的过程来进行剖析。网上已有不少NSQ的说明及代码解释文档，我会对其进行参考，也会将参考源地址做好引用。</p>
+<a id="more"></a>
+<h1>what’s MQ</h1>
+<p>关于MQ的解释google就可以找出很多，根据使用场景和经历不同，对MQ的理解不同。我之前项目中使用MQ场景比较简单，就是接收日志，并且没有用到多节点拓扑功能。简单理解一下，应该是有一个http的writer的端，一个内部的reader端。客户端将日志上传到writer之后无需等待服务器处理，直接收到一个成功反馈，服务端在空闲时读取reader端，将队列中的日志进行处理的一种生产者-消费者模型。</p>
+<p>对我来说，MQ的主要作用是提供一个存放消息的area，降低各组件间的耦合度。</p>
+<p>但是完整的MQ需要<code>有多节点拓扑</code>、<code>内部+外部的api+http端口</code>、<code>实时及延迟消费机制</code>和<code>高通量读写稳定</code>等功能，另外消息的有序无需等特点则需要根据使用场景而定。</p>
+<h1>What‘s NSQ</h1>
+<h2>NSQ简介</h2>
+<p><a href="http://nsq.io/overview/design.html" target="_blank" rel="external">NSQ官方文档</a>中介绍NSQ的设计理念及NSQ特点。<a href="http://wiki.jikexueyuan.com/project/nsq-guide/intro.html" target="_blank" rel="external">极客学院的wiki</a>中提供了中文文档。</p>
+<p>NSQ 是实时的分布式消息处理平台，其设计的目的是用来大规模地处理每天数以十亿计级别的消息。</p>
+<p>NSQ 具有分布式和去中心化拓扑结构，该结构具有无单点故障、故障容错、高可用性以及能够保证消息的可靠传递的特征。</p>
+<p>NSQ工具分为三大组件：</p>
+<h3>nsqd</h3>
+<p>nsqd是一个守护进程，负责接收，排队，投递消息给客户端。它在 2 个 TCP 端口监听，一个给客户端，另一个是 HTTP API。同时，它也能在第三个端口监听 HTTPS。</p>
+<h3>nsqlookupd</h3>
+<p>nsqlookupd 是守护进程负责管理拓扑信息。客户端通过查询 nsqlookupd 来发现指定话题（topic）的生产者、 nsqd 节点广播的话题（topic）和通道（channel）信息。</p>
+<p>有两个接口：nsqd 用来广播的TCP 接口和客户端及web监控界面的HTTP 接口。</p>
+<h3>nsqadmin</h3>
+<p>nsqadmin 是一套 WEB UI，用来汇集并监控显示集群的实时统计，对topic执行部分管理任务。</p>
+<h3>utilities</h3>
+<p>nsq的周边工具，对nsq的流量管理、安全和功能的一些补充管理。
+官方工具包括：<code>nsq_stat</code>、<code>nsq_tail</code>、<code>nsq_to_file</code>、<code>nsq_to_http</code>、<code>nsq_to_nsq</code>和<code>to_nsq</code>等。</p>
+<h2>NSQ关键字解析</h2>
+<h3>Topic &amp; channel</h3>
+<p>topic，话题，是一个独特的数据流，通道（channel） 是消费者订阅了某个话题的逻辑分组。</p>
+<p>单个 nsqd 可以有很多的话题，每个话题可以有多通道。一个通道接收到一个话题中所有消息的副本，启用组播方式的传输，使消息同时在每个通道的所有订阅用户间分发，从而实现负载均衡。</p>
+<h3>SPOF（单点故障）</h3>
+<p>NSQ中的SPOF指的是消息从生产者中接收到交付给消费者的这个流程中，任何一个单一环节出现故障。</p>
+<p>NSQ设计理念是<code>分布式</code>和<code>去中心化</code>的拓扑结构，保证信息将至少交付一次。根本原理是：</p>
+<ul>
+<li>客户（消息接收体）表示他们已经准备好接收消息；</li>
+<li>NSQ 发送一条消息，并暂时将数据存储在本地做备份；</li>
+<li>客户端回复 FIN（结束）或 REQ（重新排队）分别指示成功或失败。如果客户端没有回复, NSQ 会在设定的时间超时，自动重新排队该消息。</li>
+</ul>
+<p>即交付消息的三种结果中，不会出现消息无缘丢失的事件。而丢失消息的情况只能是nsqd端出现问题（如非正常结束，且消息并未备份至磁盘）。因此，针对这个问题，增加nsqd的节点可以做一定程度的预防。</p>
+<p>关于某个功能模块的特性，在模块分析部分再做详细剖析。</p>
 
       
     </div>
@@ -243,18 +294,9 @@ docker cp <containerid>:/file/path/within/container /host/path/target</container
     
 <nav id="article-nav">
   
-    <a href="/2015/10/19/Ubuntu-install-Postgresql/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Ubuntu_install_Postgresql
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/22/docker/Cross_compiling_BT_download_tool_aria2_for_Raspberry_Pi_2_modelB/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">为RaspberryPi2做BT下载工具aria2的交叉编译</div>
+    <a href="/2016/01/04/go/golang-try/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">golang Try重试机制解读</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -283,7 +325,7 @@ docker cp <containerid>:/file/path/within/container /host/path/target</container
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="docker/Docker-Problems-solutions" data-title="Docker问题及解决方案汇总" data-url="http://yoursite.com/2015/09/23/docker/Docker-Problems-solutions/"></div>
+	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-1" data-title="NSQ-golang-MQ-1" data-url="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-1/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
