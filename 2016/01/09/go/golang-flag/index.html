@@ -3,51 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>NSQ:golang实现的MQ源码阅读 2-NSQ功能测试 | KaiQ.Gu Blog</title>
+  <title>golang命令行参数解析：flag | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NSQ使用体验
-installing
-NSQ的官方安装指南,建议使用go get命令，将NSQ项目源码和依赖库都下到本地方便阅读。
-配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。
-执行测试
-服务端测试搭建
-1.执行NSQ拓扑监控守护进程：nsqlookupd
-
-nsqlookupd
-
-默认情况下，执行如下命令行参数：
-12-http-address=&quot;0.0">
+  <meta name="description" content="golang flag
+flag是标准库中实现的命令行工具，可支持命令行参数格式如下：
+1234-flag xxx （使用空格，一个 - 符号）--flag xxx （使用空格，两个 - 符号）-flag=xxx （使用等号，一个 - 符号）--flag=xxx （使用等号，两个 - 符号）
+其中，布尔类型的参数防止解析时的二义性，应该使用等号的方式指定。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSQ:golang实现的MQ源码阅读 2-NSQ功能测试">
-<meta property="og:url" content="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-2/index.html">
+<meta property="og:title" content="golang命令行参数解析：flag">
+<meta property="og:url" content="http://yoursite.com/2016/01/09/go/golang-flag/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="NSQ使用体验
-installing
-NSQ的官方安装指南,建议使用go get命令，将NSQ项目源码和依赖库都下到本地方便阅读。
-配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。
-执行测试
-服务端测试搭建
-1.执行NSQ拓扑监控守护进程：nsqlookupd
-
-nsqlookupd
-
-默认情况下，执行如下命令行参数：
-12-http-address=&quot;0.0">
-<meta property="og:updated_time" content="2016-01-08T14:26:01.629Z">
+<meta property="og:description" content="golang flag
+flag是标准库中实现的命令行工具，可支持命令行参数格式如下：
+1234-flag xxx （使用空格，一个 - 符号）--flag xxx （使用空格，两个 - 符号）-flag=xxx （使用等号，一个 - 符号）--flag=xxx （使用等号，两个 - 符号）
+其中，布尔类型的参数防止解析时的二义性，应该使用等号的方式指定。">
+<meta property="og:updated_time" content="2016-01-09T06:30:39.802Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSQ:golang实现的MQ源码阅读 2-NSQ功能测试">
-<meta name="twitter:description" content="NSQ使用体验
-installing
-NSQ的官方安装指南,建议使用go get命令，将NSQ项目源码和依赖库都下到本地方便阅读。
-配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。
-执行测试
-服务端测试搭建
-1.执行NSQ拓扑监控守护进程：nsqlookupd
-
-nsqlookupd
-
-默认情况下，执行如下命令行参数：
-12-http-address=&quot;0.0">
+<meta name="twitter:title" content="golang命令行参数解析：flag">
+<meta name="twitter:description" content="golang flag
+flag是标准库中实现的命令行工具，可支持命令行参数格式如下：
+1234-flag xxx （使用空格，一个 - 符号）--flag xxx （使用空格，两个 - 符号）-flag=xxx （使用等号，一个 - 符号）--flag=xxx （使用等号，两个 - 符号）
+其中，布尔类型的参数防止解析时的二义性，应该使用等号的方式指定。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -201,11 +177,11 @@ nsqlookupd
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-go/NSQ-golang-MQ-2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-go/golang-flag" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/08/go/NSQ-golang-MQ-2/" class="article-date">
-  	<time datetime="2016-01-08T14:22:10.000Z" itemprop="datePublished">2016-01-08</time>
+      <a href="/2016/01/09/go/golang-flag/" class="article-date">
+  	<time datetime="2016-01-09T06:29:49.000Z" itemprop="datePublished">2016-01-09</time>
 </a>
     </div>
   
@@ -218,7 +194,7 @@ nsqlookupd
         
   
     <h1 class="article-title" itemprop="name">
-      NSQ:golang实现的MQ源码阅读 2-NSQ功能测试
+      golang命令行参数解析：flag
     </h1>
   
 
@@ -227,7 +203,7 @@ nsqlookupd
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nsq/">nsq</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flag/">flag</a></li></ul>
 	</div>
 
         
@@ -242,47 +218,39 @@ nsqlookupd
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>NSQ使用体验</h1>
-<h2>installing</h2>
-<p>NSQ的<a href="http://nsq.io/deployment/installing.html" target="_blank" rel="external">官方安装指南</a>,建议使用<code>go get</code>命令，将NSQ项目源码和依赖库都下到本地方便阅读。</p>
-<p>配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。</p>
-<h2>执行测试</h2>
-<h3>服务端测试搭建</h3>
-<p>1.执行NSQ拓扑监控守护进程：<code>nsqlookupd</code></p>
-<blockquote>
-<p>nsqlookupd</p>
-</blockquote>
-<p>默认情况下，执行如下命令行参数：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-http-address=<span class="string">"0.0.0.0:4161"</span><span class="symbol">:</span> &lt;addr&gt;<span class="symbol">:&lt;port&gt;`</span>监听 <span class="constant">HTTP </span>客户端</span><br><span class="line">-tcp-address=<span class="string">"0.0.0.0:4160"</span><span class="symbol">:</span> <span class="constant">TCP </span>客户端监听的 &lt;addr&gt;<span class="symbol">:&lt;port&gt;</span></span><br></pre></td></tr></table></figure>
-<p>其中，TCP端用于监听nsqd挂载。</p>
+        <h1>golang flag</h1>
+<p><code>flag</code>是标准库中实现的命令行工具，可支持命令行参数格式如下：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">flag xxx （使用空格，一个 - 符号）</span><br><span class="line"></span>-<span class="ruby">-flag xxx （使用空格，两个 - 符号）</span><br><span class="line"></span>-<span class="ruby">flag=xxx （使用等号，一个 - 符号）</span><br><span class="line"></span>-<span class="ruby">-flag=xxx （使用等号，两个 - 符号）</span></span><br></pre></td></tr></table></figure>
+<p>其中，布尔类型的参数防止解析时的二义性，应该使用等号的方式指定。</p>
 <a id="more"></a>
-<p>2.另起终端，执行nsqd，并将其挂载到启动后的nsqlookupd监控端口上。</p>
-<blockquote>
-<p>nsqd --lookupd-tcp-address=127.0.0.1:4160</p>
-</blockquote>
-<p>注：nsqd没有对nsqlookupd的HTTP端口挂载。</p>
-<p>默认情况下，端口<code>4151</code>为HTTP监听端口，<code>4150</code>为TCP监听端口，向这两个端口发送消息，则会进入NSQD消息队列。</p>
-<p>3.开第三个终端，启动NSQ状态监控的WEB UI</p>
-<blockquote>
-<p>nsqadmin --lookupd-http-address=127.0.0.1:4161</p>
-</blockquote>
-<p>此时web 监控UI：nsqadmin挂载的是nsqlookupd的HTTP端口地址。显示地址为<code>http://127.0.0.1:4171/</code></p>
-<p>4.开第四个终端，通过<code>curl</code>命令执行信息发布。</p>
-<blockquote>
-<p>curl -d &quot;hello world 1&quot; &quot;http://127.0.0.1:4151/put?topic=test&quot;</p>
-</blockquote>
-<p>注：NSQ的topic命名，是以该话题的第一个<code>PUB</code>或<code>SUB</code>来确定的，并将其创建在nsqd中。同时话题的元数据将会传播给 nsqlookupd 的配置。其他的reader将会通过周期性的查询 nsqlookupd 来发现这个话题。在该命令执行后，会在第二步中执行的nsqd中创建一个名为<code>test</code>的topic。</p>
-<p><code>curl -d</code> 是将信息以<code>POST</code>的形式，发送到4151端口。</p>
-<h3>客户端（消费者）获取消息测试</h3>
-<p>简单的服务端架构已经搭建完成，此时打开监控界面可以看到刚刚发布的消息，一条名为“test”的topic，点开后，<code>message</code>和<code>channel</code>均为1。</p>
-<p>创建一个消费者来执行消息读取测试：</p>
-<blockquote>
-<p>nsq_to_file --topic=test --output-dir=tmp --lookupd-http-address=127.0.0.1:4161</p>
-</blockquote>
-<p>此时<code>nsq_to_file</code>便充当了消费者，将消息读取后，存放于目录<code>tmp</code>中的时间戳文件，打开文件会看到我们之前发送的消息体：<code>hello world 1</code>。</p>
-<p>web UI中也会显示消费者客户端<code>nsq_to_file</code>和对应的接收的信息数及连接状态。</p>
-<p>如果同时开启多个<code>nsq_to_file</code>，则只有一个<code>nsq_to_file</code>会接收到新的消息，因为消息一旦交付成功后将会失效，无法被其他消费者接收。</p>
-<p>nsq_to_file只是一个简单的消费者客户端，消息的订阅可以使用官方开发的go lib客户端：<a href="https://github.com/nsqio/go-nsq" target="_blank" rel="external">go-ndq</a>的read和write功能。</p>
+<h1>用法</h1>
+<h2>命令行设置</h2>
+<p>1.flag.Xxx()，其中Xxx可以是Int、String等；返回一个相应类型的指针，如：</p>
+<pre><code>var ip = flag.Int(&quot;age&quot;, 1234, &quot;help message for age&quot;)
+</code></pre>
+<p>或者：flag.XxxVar()，将flag绑定到一个变量上，如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flagvar <span class="typename">int</span></span><br><span class="line">flag.IntVar(&amp;amp;flagvar, <span class="string">"flagname"</span>, <span class="number">1234</span>, <span class="string">"help message for flagname"</span>)</span><br></pre></td></tr></table></figure>
+<p>上面两种方法通用。</p>
+<p>其中，int类型可以是十进制、十六进制、八进制甚至是负数；bool类型可以是1, 0, t, f, true, false, TRUE, FALSE, True, False。Duration可以接受任何time.ParseDuration能解析的类型</p>
+<p>2.创建自定义flag：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag.<span class="function"><span class="title">Var</span><span class="params">(&amp;amp;flagVal, <span class="string">"name"</span>, <span class="string">"help message for flagname"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>但是这种没有提供默认值，所以默认值就是golang规定的类型零值。</strong></p>
+<h2>解析</h2>
+<p>在所有的flag定义完成之后，可以通过调用<code>flag.Parse()</code>进行解析。</p>
+<h1>flag其他函数</h1>
+<h2>获取非flag参数</h2>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println<span class="params">(<span class="string">"------ Args start ------"</span>)</span></span><br><span class="line"><span class="keyword">for</span> i, v := range flag.Args<span class="params">()</span> &#123;</span><br><span class="line">	fmt.Printf<span class="params">(<span class="string">"arg[%d] = (%s).\n"</span>, i, v)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2>visit只包含已经设置了的flag</h2>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="string">"------ visit flag start ------"</span>)</span><br><span class="line">flag.Visit(<span class="keyword">func</span>(f *flag.Flag) &#123;</span><br><span class="line">	fmt.Println(f.Name, f.Value, f.Usage, f.DefValue)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2>visitAll只包含所有的flag(包括未设置的)</h2>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println<span class="params">(<span class="string">"------ visitAll flag start ------"</span>)</span></span><br><span class="line">flag.VisitAll<span class="params">(func<span class="params">(f *flag.Flag)</span> &#123;</span><br><span class="line">	fmt.Println<span class="params">(f.Name, f.Value, f.Usage, f.DefValue)</span></span><br><span class="line"></span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
+<h2>flag参数默认值</h2>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fmt.<span class="function"><span class="title">Println</span><span class="params">(<span class="string">"------ PrintDefaults start ------"</span>)</span></span></span><br><span class="line">flag.<span class="function"><span class="title">PrintDefaults</span><span class="params">()</span></span></span><br><span class="line">fmt.<span class="function"><span class="title">Println</span><span class="params">(<span class="string">"------ PrintDefaults end ------"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<h2>是否已经解析</h2>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.<span class="function"><span class="title">Println</span><span class="params">(<span class="string">"parsed? = "</span>, flag.Parsed()</span></span>)</span><br></pre></td></tr></table></figure>
+<h1>参考</h1>
+<p><a href="http://qefee.com/2014/02/02/go%E8%AF%AD%E8%A8%80%E7%9A%84flag%E5%8C%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" target="_blank" rel="external">http://qefee.com</a></p>
+<p><a href="http://blog.studygolang.com/2013/02/%E6%A0%87%E5%87%86%E5%BA%93-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90flag/" target="_blank" rel="external">http://blog.studygolang.com</a></p>
 
       
     </div>
@@ -292,18 +260,9 @@ nsqlookupd
     
 <nav id="article-nav">
   
-    <a href="/2016/01/09/go/golang-flag/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          golang命令行参数解析：flag
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/08/go/NSQ-golang-MQ-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">NSQ:golang实现的MQ源码阅读 1-NSQ基本信息</div>
+    <a href="/2016/01/08/go/NSQ-golang-MQ-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NSQ:golang实现的MQ源码阅读 2-NSQ功能测试</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -332,7 +291,7 @@ nsqlookupd
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-2" data-title="NSQ:golang实现的MQ源码阅读 2-NSQ功能测试" data-url="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-2/"></div>
+	<div class="ds-thread" data-thread-key="go/golang-flag" data-title="golang命令行参数解析：flag" data-url="http://yoursite.com/2016/01/09/go/golang-flag/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
