@@ -3,27 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>arm-linux-gdb调试嵌入式arm程序 | KaiQ.Gu Blog</title>
+  <title>Category: Go | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="arm-linux-gdb调试嵌入式arm程序">
-<meta property="og:url" content="http://yoursite.com/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KaiQ.Gu Blog">
+<meta property="og:url" content="http://yoursite.com/categories/Go/page/2/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
-<meta property="og:updated_time" content="2015-09-17T03:49:55.803Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="arm-linux-gdb调试嵌入式arm程序">
-<meta name="twitter:description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
+<meta name="twitter:title" content="KaiQ.Gu Blog">
+<meta name="twitter:description">
   
   
     <link rel="icon" href="/favicon.png">
@@ -177,151 +167,61 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-linux/arm-linux-gdb调试嵌入式arm程序" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" class="article-date">
-  	<time datetime="2015-09-16T09:26:37.000Z" itemprop="datePublished">2015-09-16</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/08/23/go/Go-DB-Simple-for-mysql/" class="archive-article-date">
+  	<time datetime="2015-08-23T03:20:37.000Z" itemprop="datePublished">8月 23</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      arm-linux-gdb调试嵌入式arm程序
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/08/23/go/Go-DB-Simple-for-mysql/">Go Mysql Diver的简单使用</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/">gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
 	</div>
 
-        
+          
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
+	<a class="article-category-link" href="/categories/Go/">Go</a>
 	</div>
 
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目前已经到了非GDB调试不可的地步.....</p>
-<h2>0.下载安装:</h2>
-<p>从 <a href="http://ftp.gnu.org/gnu/gdb/" target="_blank" rel="external">GNU GDB库</a> 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).</p>
-<p>解压缩.</p>
-<a id="more"></a>
-<blockquote>
-<p>cd 进入解压缩后的文件目录.</p>
-</blockquote>
-<p>开始编译安装:</p>
-<pre><code>./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
-make
-make install
-</code></pre>
-<p>这一步通过之后,如果没有出错就基本完成一半,看看arm-linux-gdb是否已经加入到PATH中.</p>
-<h2>1.编译gdbserver</h2>
-<p>首先进入gdbserver所在目录</p>
-<blockquote>
-<p>cd gdb/gdbserver</p>
-</blockquote>
-<p>编译安装</p>
-<pre><code>./configure --target=arm-linux --host=arm-linux
-CC=/home/gkq/opt/toolschain/4.5.1/bin/arm-linux-gcc
-make 
-</code></pre>
-<p>注</p>
-<ul>
-<li>
-<p>1.<code>CC=</code>是指定arm-linux编译器至CC变量,实际使用中,具体地址需要通过命令 <code>which arm-linux-gcc</code> 来查找,我们这里默认已经将 <code>arm-linux-*</code> 编译环境配置完成.</p>
-</li>
-<li>
-<p>2.报错: <code>/bin/bash: line 9: makeinfo: command not found</code> 缺少makeinfo命令,安装即可.<a href="http://stackoverflow.com/questions/338317/what-is-makeinfo-and-how-do-i-get-it" target="_blank" rel="external">解决方案</a>: <code>sudo apt-get install texinfo</code></p>
-</li>
-<li>
-<p>3.在网上寻找解决方案时,发现有人遇到这样的问题: <a href="http://blog.sina.com.cn/s/blog_591eaae601016auu.html" target="_blank" rel="external">hostio.c  PATH_MAX宏找不到</a> 解决方案是在hostio.c中增加值为4095的PATH_MAX宏.</p>
-</li>
-</ul>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/09/22/linux/Writing-The-Disk-Image/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Writing The Disk Image Into Raspberry Pi 2
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/09/02/linux/C-Daemon-Simple-eg/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">linux Daemon的C语言应用</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="linux/arm-linux-gdb调试嵌入式arm程序" data-title="arm-linux-gdb调试嵌入式arm程序" data-url="http://yoursite.com/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"kerwinkoo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/Go/">&laquo; Prev</a><a class="page-number" href="/categories/Go/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 </div>
       <footer id="footer">
@@ -347,10 +247,10 @@ make
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false
 	}
 </script>

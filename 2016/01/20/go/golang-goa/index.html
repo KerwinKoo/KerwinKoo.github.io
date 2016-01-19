@@ -3,27 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>arm-linux-gdb调试嵌入式arm程序 | KaiQ.Gu Blog</title>
+  <title>golang微服务框架设计工具：Goa | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
+  <meta name="description" content="Goa
+RESTful go web 快速开发框架，Goa与其他go web开发框架有本质的不同，它是以框架设计为主，是 Design-based HTTP微服务框架。
+Install
+首先安装goa代码生成工具goagen.
+go get github.com/raphael/goa/goagen
+goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goag">
 <meta property="og:type" content="article">
-<meta property="og:title" content="arm-linux-gdb调试嵌入式arm程序">
-<meta property="og:url" content="http://yoursite.com/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/index.html">
+<meta property="og:title" content="golang微服务框架设计工具：Goa">
+<meta property="og:url" content="http://yoursite.com/2016/01/20/go/golang-goa/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
-<meta property="og:updated_time" content="2015-09-17T03:49:55.803Z">
+<meta property="og:description" content="Goa
+RESTful go web 快速开发框架，Goa与其他go web开发框架有本质的不同，它是以框架设计为主，是 Design-based HTTP微服务框架。
+Install
+首先安装goa代码生成工具goagen.
+go get github.com/raphael/goa/goagen
+goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goag">
+<meta property="og:updated_time" content="2016-01-19T16:34:25.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="arm-linux-gdb调试嵌入式arm程序">
-<meta name="twitter:description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
+<meta name="twitter:title" content="golang微服务框架设计工具：Goa">
+<meta name="twitter:description" content="Goa
+RESTful go web 快速开发框架，Goa与其他go web开发框架有本质的不同，它是以框架设计为主，是 Design-based HTTP微服务框架。
+Install
+首先安装goa代码生成工具goagen.
+go get github.com/raphael/goa/goagen
+goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goag">
   
   
     <link rel="icon" href="/favicon.png">
@@ -177,11 +183,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-linux/arm-linux-gdb调试嵌入式arm程序" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-go/golang-goa" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" class="article-date">
-  	<time datetime="2015-09-16T09:26:37.000Z" itemprop="datePublished">2015-09-16</time>
+      <a href="/2016/01/20/go/golang-goa/" class="article-date">
+  	<time datetime="2016-01-19T16:33:07.000Z" itemprop="datePublished">2016-01-20</time>
 </a>
     </div>
   
@@ -194,7 +200,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      arm-linux-gdb调试嵌入式arm程序
+      golang微服务框架设计工具：Goa
     </h1>
   
 
@@ -203,12 +209,12 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/">gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/goa/">goa</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
+	<a class="article-category-link" href="/categories/Go/">Go</a>
 	</div>
 
 
@@ -218,42 +224,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>目前已经到了非GDB调试不可的地步.....</p>
-<h2>0.下载安装:</h2>
-<p>从 <a href="http://ftp.gnu.org/gnu/gdb/" target="_blank" rel="external">GNU GDB库</a> 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).</p>
-<p>解压缩.</p>
+        <h1>Goa</h1>
+<p>RESTful go web 快速开发框架，<a href="https://github.com/raphael/goa" target="_blank" rel="external">Goa</a>与其他go web开发框架有本质的不同，它是以框架设计为主，是 <code>Design-based</code> HTTP微服务框架。</p>
+<h2>Install</h2>
+<p>首先安装goa代码生成工具<code>goagen</code>.
+go get github.com/raphael/goa/goagen</p>
+<p>goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goagen，基本不需要goa的源码，当然也可以将整体go get下来。</p>
+<p>安装代码依赖自动import工具：</p>
+<pre><code>go get golang.org/x/tools/cmd/goimports
+</code></pre>
 <a id="more"></a>
-<blockquote>
-<p>cd 进入解压缩后的文件目录.</p>
-</blockquote>
-<p>开始编译安装:</p>
-<pre><code>./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
-make
-make install
+<h2>注意问题</h2>
+<p>测试代码按照Github上进行就可，提一下官网没说的几个坑：</p>
+<p>1.HTTP Request IDs</p>
+<p>这个其实不算坑，是goa的功能之一，但在测试过程中如果没有具体设置验证中间件，便伊始会报错。测试过程中可以对此做屏蔽：</p>
+<p>在测试项目<code>main.go</code>文件中：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	service.Use(middleware.RequestID())</span></span><br><span class="line"><span class="comment">//	service.Use(middleware.LogRequest())</span></span><br><span class="line"><span class="comment">//	service.Use(middleware.Recover())</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>update:0119</p>
+<p>goa官方提供<code>middleware</code>的简单实现，提供日志管理，包括请求、回复、ID、故障记录等功能。需要在GOPATH中get包：</p>
+<pre><code>go get github.com/raphael/goa-middleware
 </code></pre>
-<p>这一步通过之后,如果没有出错就基本完成一半,看看arm-linux-gdb是否已经加入到PATH中.</p>
-<h2>1.编译gdbserver</h2>
-<p>首先进入gdbserver所在目录</p>
-<blockquote>
-<p>cd gdb/gdbserver</p>
-</blockquote>
-<p>编译安装</p>
-<pre><code>./configure --target=arm-linux --host=arm-linux
-CC=/home/gkq/opt/toolschain/4.5.1/bin/arm-linux-gcc
-make 
+<p>由于该包是以中间件形式与goa合用，因此不会直接被build。这样上段代码可以不用屏蔽，在API通信时会记录请求、测试和回复的日志信息。</p>
+<hr>
+<p>2.未import package</p>
+<p>按官方解释，是说goa生成次代框架代码（代码生成的代码）后，代码的import功能交给了工具<code>goimport</code>，但是这个工具有它的局限性，每个人设置的GOPATH数量不一，goimport只检索其当前所在的GOPATH，所以像<code>fmt</code>、<code>strconv</code>这些常用但属于<code>go build in</code>的package往往引用不到，需要收到添加，或者将所有GOPATH整合为一，再将当前项目放入其src目录中。</p>
+<p>3.<code>go build</code>过程中找不到package</p>
+<p>这是最坑爹的，在goa官方没有解决方案，当然坑也不是goa挖的，还是那个goimport工具自个挖的。</p>
+<p>原因是goimport需要兼容很多golang的版本，而golang版本变更过程中发生过易址事件，当初在<code>google.golang</code>下的包全部转移到Github中，名字也由<code>cloud</code>更为<code>gcloud-golang</code>, 因此后期的import都是从Github中获取的。但goimport遇到关于<code>metadata</code>等次代代码仍然吹从老地址引用，因此会在编译时报错。</p>
+<p>解决方案：</p>
+<p>从Github中获取新包：</p>
+<pre><code>go get github.com/GoogleCloudPlatform/gcloud-golang
 </code></pre>
-<p>注</p>
-<ul>
-<li>
-<p>1.<code>CC=</code>是指定arm-linux编译器至CC变量,实际使用中,具体地址需要通过命令 <code>which arm-linux-gcc</code> 来查找,我们这里默认已经将 <code>arm-linux-*</code> 编译环境配置完成.</p>
-</li>
-<li>
-<p>2.报错: <code>/bin/bash: line 9: makeinfo: command not found</code> 缺少makeinfo命令,安装即可.<a href="http://stackoverflow.com/questions/338317/what-is-makeinfo-and-how-do-i-get-it" target="_blank" rel="external">解决方案</a>: <code>sudo apt-get install texinfo</code></p>
-</li>
-<li>
-<p>3.在网上寻找解决方案时,发现有人遇到这样的问题: <a href="http://blog.sina.com.cn/s/blog_591eaae601016auu.html" target="_blank" rel="external">hostio.c  PATH_MAX宏找不到</a> 解决方案是在hostio.c中增加值为4095的PATH_MAX宏.</p>
-</li>
-</ul>
+<p>软链到本地GOPATH老地址：</p>
+<pre><code>ln -s /$GOPATH/src/github.com/GoogleCloudPlatform/gcloud-golang /$GOPATH/src/cloud
+</code></pre>
 
       
     </div>
@@ -263,18 +268,9 @@ make
     
 <nav id="article-nav">
   
-    <a href="/2015/09/22/linux/Writing-The-Disk-Image/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Writing The Disk Image Into Raspberry Pi 2
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/02/linux/C-Daemon-Simple-eg/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">linux Daemon的C语言应用</div>
+    <a href="/2016/01/09/go/golang-flag/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">golang命令行参数解析-flag</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -303,7 +299,7 @@ make
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="linux/arm-linux-gdb调试嵌入式arm程序" data-title="arm-linux-gdb调试嵌入式arm程序" data-url="http://yoursite.com/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/"></div>
+	<div class="ds-thread" data-thread-key="go/golang-goa" data-title="golang微服务框架设计工具：Goa" data-url="http://yoursite.com/2016/01/20/go/golang-goa/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
