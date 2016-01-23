@@ -196,7 +196,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><a href="http://goa.design/index.html">goa</a> Runtime 在goa package中做了实现，包括<code>HTTP request state</code>和<code>response</code>行为管理、基本数据结构和算法的实现、日志记录、错误处理和支持版本控制等功能。</p>
-<h1>Goa 行为管理（action context）</h1>
+<h1>Goa 行为上下文管理（action context）</h1>
 <p>Goa 通过实现一个数据结构，并存在于所有的Goa controller实现（以第一个参数传参的方式），来实现行为的上下文管理。该方法是参考google实现的接口间信息传递的方法，同时根据Goa自身情况做了修改。</p>
 <p>与其他Go实现的web框架类似，Goa的REST 资源（行为上下文）会开放接口供外部访问。像路径参数、查询结果这样的API可以直接通过<code>GET</code>方法来获取返回值。在此基础上Goa更进一步，用户通过<code>goagen</code>工具生成的代码中，根据design中指定的参数<code>type</code>进行强制准入检验。比如，我们在design时定义一个类型为<code>Integer</code>的<code>ID</code>，则goagen生成的<code>ID</code>字段中也会定义为<code>int</code>，并对该资源的访问进行健壮性检验（比如对ID赋值<code>string</code>时会返回错误），防止在server内部将收到的值赋值给结构体时发生错误。</p>
 <p>同样，在<code>writing response</code>阶段，Goa根据设计时的media type需求，对返回值进行写入操作。</p>
@@ -253,7 +253,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/21/go/goa2-RESTful-microservices/">goa_RESTful_microservices</a>
+      <a class="article-title" href="/2016/01/21/go/goa2-RESTful-microservices/">goa2-简单实现RESTful 微服务</a>
     </h1>
   
 
