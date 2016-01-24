@@ -9,8 +9,8 @@
 RESTful go web 快速开发框架，Goa与其他go web开发框架有本质的不同，它是以框架设计为主，是 Design-based HTTP微服务框架。
 Install
 首先安装goa代码生成工具goagen.
-go get github.com/raphael/goa/goagen
-goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goag">
+go get github.com/goadesign/goa/goagen
+goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改go">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang微服务框架设计工具：Goa">
 <meta property="og:url" content="http://yoursite.com/2016/01/20/go/Goa1-golang-goa/index.html">
@@ -19,17 +19,17 @@ goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一�
 RESTful go web 快速开发框架，Goa与其他go web开发框架有本质的不同，它是以框架设计为主，是 Design-based HTTP微服务框架。
 Install
 首先安装goa代码生成工具goagen.
-go get github.com/raphael/goa/goagen
-goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goag">
-<meta property="og:updated_time" content="2016-01-19T16:36:22.144Z">
+go get github.com/goadesign/goa/goagen
+goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改go">
+<meta property="og:updated_time" content="2016-01-24T16:36:23.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang微服务框架设计工具：Goa">
 <meta name="twitter:description" content="Goa
 RESTful go web 快速开发框架，Goa与其他go web开发框架有本质的不同，它是以框架设计为主，是 Design-based HTTP微服务框架。
 Install
 首先安装goa代码生成工具goagen.
-go get github.com/raphael/goa/goagen
-goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goag">
+go get github.com/goadesign/goa/goagen
+goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改go">
   
   
     <link rel="icon" href="/favicon.png">
@@ -228,8 +228,12 @@ goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一�
 <p>RESTful go web 快速开发框架，<a href="https://github.com/raphael/goa" target="_blank" rel="external">Goa</a>与其他go web开发框架有本质的不同，它是以框架设计为主，是 <code>Design-based</code> HTTP微服务框架。</p>
 <h2>Install</h2>
 <p>首先安装goa代码生成工具<code>goagen</code>.
-go get github.com/raphael/goa/goagen</p>
+go get github.com/goadesign/goa/goagen</p>
 <p>goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goagen，基本不需要goa的源码，当然也可以将整体go get下来。</p>
+<hr>
+<p><strong>update 2016-01-25</strong></p>
+<p><strong>注意(这里有坑)</strong>：这里一定是从<code>goadesign/goa/goagen</code>中执行<code>go get</code>，不可以直接<code>go get github.com/goadesign/goa</code>，因为这样会get到一个名为<code>raphael</code>的包，与<code>goa package</code>会产生冲突，可能与<code>Goa</code>版本变更较频繁有关。如果发生版本冲突，移步<a href="https://github.com/goadesign/goa/issues/216" target="_blank" rel="external">#216</a></p>
+<hr>
 <p>安装代码依赖自动import工具：</p>
 <pre><code>go get golang.org/x/tools/cmd/goimports
 </code></pre>
@@ -241,7 +245,7 @@ go get github.com/raphael/goa/goagen</p>
 <p>在测试项目<code>main.go</code>文件中：</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	service.Use(middleware.RequestID())</span></span><br><span class="line"><span class="comment">//	service.Use(middleware.LogRequest())</span></span><br><span class="line"><span class="comment">//	service.Use(middleware.Recover())</span></span><br></pre></td></tr></table></figure>
 <hr>
-<p><strong>update:0119</strong></p>
+<p><strong>update:2016-01-19</strong></p>
 <p>goa官方提供<code>middleware</code>的简单实现，提供日志管理，包括请求、回复、ID、故障记录等功能。需要在GOPATH中get包：</p>
 <pre><code>go get github.com/raphael/goa-middleware
 </code></pre>

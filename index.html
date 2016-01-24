@@ -397,8 +397,12 @@
 <p>RESTful go web 快速开发框架，<a href="https://github.com/raphael/goa">Goa</a>与其他go web开发框架有本质的不同，它是以框架设计为主，是 <code>Design-based</code> HTTP微服务框架。</p>
 <h2>Install</h2>
 <p>首先安装goa代码生成工具<code>goagen</code>.
-go get github.com/raphael/goa/goagen</p>
+go get github.com/goadesign/goa/goagen</p>
 <p>goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goagen，基本不需要goa的源码，当然也可以将整体go get下来。</p>
+<hr>
+<p><strong>update 2016-01-25</strong></p>
+<p><strong>注意(这里有坑)</strong>：这里一定是从<code>goadesign/goa/goagen</code>中执行<code>go get</code>，不可以直接<code>go get github.com/goadesign/goa</code>，因为这样会get到一个名为<code>raphael</code>的包，与<code>goa package</code>会产生冲突，可能与<code>Goa</code>版本变更较频繁有关。如果发生版本冲突，移步<a href="https://github.com/goadesign/goa/issues/216">#216</a></p>
+<hr>
 <p>安装代码依赖自动import工具：</p>
 <pre><code>go get golang.org/x/tools/cmd/goimports
 </code></pre>
