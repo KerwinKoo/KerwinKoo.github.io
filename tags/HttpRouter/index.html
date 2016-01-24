@@ -3,27 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Go Mysql Diver的简单使用 | KaiQ.Gu Blog</title>
+  <title>Tag: HttpRouter | KaiQ.Gu Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。
-包的引用
-Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
-其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：github.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Go Mysql Diver的简单使用">
-<meta property="og:url" content="http://yoursite.com/2015/08/23/go/Go-DB-Simple-for-mysql/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KaiQ.Gu Blog">
+<meta property="og:url" content="http://yoursite.com/tags/HttpRouter/index.html">
 <meta property="og:site_name" content="KaiQ.Gu Blog">
-<meta property="og:description" content="因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。
-包的引用
-Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
-其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：github.">
-<meta property="og:updated_time" content="2015-09-02T02:07:58.685Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go Mysql Diver的简单使用">
-<meta name="twitter:description" content="因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。
-包的引用
-Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
-其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：github.">
+<meta name="twitter:title" content="KaiQ.Gu Blog">
+<meta name="twitter:description">
   
   
     <link rel="icon" href="/favicon.png">
@@ -177,145 +167,57 @@ Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-go/Go-DB-Simple-for-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2015/08/23/go/Go-DB-Simple-for-mysql/" class="article-date">
-  	<time datetime="2015-08-23T03:20:37.000Z" itemprop="datePublished">2015-08-23</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/01/24/go/golang-httprouter-usage/" class="archive-article-date">
+  	<time datetime="2016-01-24T10:55:24.000Z" itemprop="datePublished">1月 24</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Go Mysql Diver的简单使用
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/01/24/go/golang-httprouter-usage/">golang HttpRouter</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HttpRouter/">HttpRouter</a></li></ul>
 	</div>
 
-        
+          
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/Go/">Go</a>
 	</div>
 
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。</p>
-<h2>包的引用</h2>
-<p>Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
-其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql" target="_blank" rel="external">github.com/go-sql-driver/mysql</a></p>
-<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> (</span></span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h3>注意：</h3>
-<ul>
-<li>通过引入空白倒入Mysql包（<code>短横线-</code>），完成数据库驱动注册。</li>
-<li>出现问题：<code>failed to open database: sql: unknown driver &quot;mysql&quot; (forgotten import?)</code>说明数据库驱动引用有误（上次出现这个问题是没有空白导入Mysql数据库驱动）。</li>
-</ul>
-<a id="more"></a>
-<h2>Go连接Mysql</h2>
-<p>指定数据库 DSN<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>：</p>
-<blockquote>
-<p>username:password@protocol(address)/dbname?param=value</p>
-</blockquote>
-<ul>
-<li></li>
-</ul>
-<h3>脚注：</h3>
-<blockquote>
-<p>目前没有找到Markdown脚注语法在Hexo中无法解析的解决方案，已在Github中提交<a href="https://github.com/hexojs/hexo/issues/1467" target="_blank" rel="external">Issues</a></p>
-</blockquote>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>Data Source Name, 数据源名称。 <a href="#fnref1" class="footnote-backref">↩</a></p>
-</li>
-</ol>
-</section>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/09/02/linux/C-Daemon-Simple-eg/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          linux Daemon的C语言应用
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/08/20/python/python-command-line-analysis/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">python 实现命令行参数</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="go/Go-DB-Simple-for-mysql" data-title="Go Mysql Diver的简单使用" data-url="http://yoursite.com/2015/08/23/go/Go-DB-Simple-for-mysql/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"kerwinkoo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -341,9 +243,9 @@ Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false
 	}
