@@ -35,7 +35,7 @@ INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot
 
 其中日志内容是以key=value的形式存在。
 Logger接口的实现">
-<meta property="og:updated_time" content="2016-01-25T04:05:56.601Z">
+<meta property="og:updated_time" content="2016-01-25T13:10:57.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="goa4 使用积累">
 <meta name="twitter:description" content="Goa日志
@@ -267,6 +267,45 @@ Logger接口的实现">
 <ul>
 <li>Goa不支持日志存储，因为对日志存储的需求因人而异。为不影响访问速度，建议自省实现异步的日志存储，可以使用MQ。</li>
 </ul>
+<h1>Goa Media</h1>
+<p>使用Goa的<code>Media</code>之前，首先得明白其存在的意义。</p>
+<p>当终端访问我们的HTTP API时，应有一个双方约定好的信息格式载体，我们以常用的<code>JSON</code>为例。<code>Response</code> body信息为JSON，同时server端反馈的信息也应该是JSON。在<code>Go</code>代码里，JSON的本质是一个type为string的key-value的map，代码表述为：</p>
+<pre><code>map[string]interface{}
+</code></pre>
+<p>其中<code>interface</code>接受各种类型。</p>
+<p>当我们需要实现这么一个map时，最规范也是最常用的办法，就是将此段JSON的模板结构体直接赋值转换为map。</p>
+<p>因此，go生成API-JSON返回信息的基本流程为：</p>
+<ul>
+<li>1.定义结构体&amp;定义该结构体对应的JSON模板</li>
+<li>2.为结构体变量赋值</li>
+<li>3.将结构体变量映射到JSON模板中，生成JSON型map</li>
+<li>4.将此map（已成为JSON）返回给终端</li>
+</ul>
+<p>除了<strong>第2步</strong>需要认为代码赋值外，Goa的<code>MediaType</code>均可以在<code>Design</code>过程中指定关键字来实现。</p>
+<p>基于官方的<code>Test code</code>举个栗子：</p>
+<p><code>design.go</code>中关于API resource：<code>bottle</code>的testcode解读：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _ = Resource(<span class="string">"bottle"</span>, <span class="keyword">func</span>() &#123; <span class="comment">//定义资源，资源名为bottle</span></span><br><span class="line">	BasePath(<span class="string">"/bottles"</span>)</span><br><span class="line">	DefaultMedia(BottleMedia) <span class="comment">//指定generated code中默认使用的Media</span></span><br><span class="line">	Action(<span class="string">"show"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">		Description(<span class="string">"Retrieve bottle with given id"</span>)</span><br><span class="line">		Routing(GET(<span class="string">"/:bottleID"</span>))</span><br><span class="line">		Params(<span class="keyword">func</span>() &#123;</span><br><span class="line">			Param(<span class="string">"bottleID"</span>, Integer, <span class="string">"Bottle ID"</span>)</span><br><span class="line">		&#125;)</span><br><span class="line">		Response(OK)</span><br><span class="line">		Response(NotFound)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> BottleMedia = MediaType(<span class="string">"application/vnd.goa.example.bottle+json"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">	Description(<span class="string">"A bottle of wine"</span>)</span><br><span class="line">	TypeName(<span class="string">"BottleMedia"</span>) <span class="comment">//给Media重命名</span></span><br><span class="line">	Attributes(<span class="keyword">func</span>() &#123;</span><br><span class="line">		Attribute(<span class="string">"id"</span>, Integer, <span class="string">"Unique bottle ID"</span>) <span class="comment">//参数分别为JSON-key，type，描述</span></span><br><span class="line">		Attribute(<span class="string">"href"</span>, String, <span class="string">"API href for making requests on the bottle"</span>)</span><br><span class="line">		Attribute(<span class="string">"name"</span>, String, <span class="string">"Name of wine"</span>)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	View(<span class="string">"default"</span>, <span class="keyword">func</span>() &#123; <span class="comment">//定义好Media后，必须要指定一个default的View</span></span><br><span class="line">		Attribute(<span class="string">"id"</span>) <span class="comment">//在这个View中暴露出的属性</span></span><br><span class="line">		Attribute(<span class="string">"href"</span>)</span><br><span class="line">		Attribute(<span class="string">"name"</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>代码说明：</p>
+<ul>
+<li>
+<p><code>DefaultMedia(BottleMedia)</code>中的变量不一定非得是在<code>View</code>中指定为“default”的Media，而是说要使用哪个Media（Test code里只定义了一个名为default的media）。如果没有这句代码，默认生成的<code>Show</code> method里没有media的框架（可以手动添加）。</p>
+</li>
+<li>
+<p><code>TypeName(&quot;BottleMedia&quot;)</code>该行代码的作用是将Media重命名。如果没有这一行，Goa会根据<code>MediaType</code>函数的第一个参数生成Media名（即结构体名字），上面的例子中，如果去掉该行，生成的Media名为<code>GoaExampleBottle</code>。</p>
+</li>
+<li>
+<p><code>View</code>可以定义多个，在生成的代码中，决定使用哪个JSON模板做Media的载体。但View中必须要有一个名为<code>default</code>的定义，当没有指定view时，系统默认暴露default。只要有media，就要有个default的view。</p>
+</li>
+<li>
+<p>关于<code>Media</code>和<code>View</code>的关系。View是Media的子集，REST API中一个资源可以有很多属性，但并不是每个该资源的HTTP请求都应反馈整个属性list，而是根据不同的请求地址，返回不同需求的资源信息，这种方式可以在Design过程中通过View实现。</p>
+</li>
+</ul>
+<p>上面的design代码生成的次代代码(media_types.go)如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A bottle of wine</span></span><br><span class="line"><span class="comment">// Identifier: application/vnd.goa.example.bottle+json</span></span><br><span class="line"><span class="keyword">type</span> BottleMedia <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// API href for making requests on the bottle</span></span><br><span class="line">	Href *<span class="typename">string</span> <span class="string">`json:"href,omitempty"`</span></span><br><span class="line">	<span class="comment">// Unique bottle ID</span></span><br><span class="line">	ID *<span class="typename">int</span> <span class="string">`json:"id,omitempty"`</span></span><br><span class="line">	<span class="comment">// Name of wine</span></span><br><span class="line">	Name *<span class="typename">string</span> <span class="string">`json:"name,omitempty"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Dump produces raw data from an instance of BottleMedia running all the</span></span><br><span class="line"><span class="comment">// validations. See LoadBottleMedia for the definition of raw data.</span></span><br><span class="line"><span class="keyword">func</span> (mt *BottleMedia) Dump() (res <span class="keyword">map</span>[<span class="typename">string</span>]<span class="keyword">interface</span>&#123;&#125;, err error) &#123;</span><br><span class="line">	res, err = MarshalBottleMedia(mt, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MarshalBottleMedia validates and renders an instance of BottleMedia into a interface&#123;&#125;</span></span><br><span class="line"><span class="comment">// using view "default".</span></span><br><span class="line"><span class="keyword">func</span> MarshalBottleMedia(source *BottleMedia, inErr error) (target <span class="keyword">map</span>[<span class="typename">string</span>]<span class="keyword">interface</span>&#123;&#125;, err error) &#123;</span><br><span class="line">	err = inErr</span><br><span class="line">	tmp23 := <span class="keyword">map</span>[<span class="typename">string</span>]<span class="keyword">interface</span>&#123;&#125;&#123;</span><br><span class="line">		<span class="string">"href"</span>: source.Href,</span><br><span class="line">		<span class="string">"id"</span>:   source.ID,</span><br><span class="line">		<span class="string">"name"</span>: source.Name,</span><br><span class="line">	&#125;</span><br><span class="line">	target = tmp23</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从代码中可以看出，当我们需要给该Media赋值时，需要将资源（BottleMedia型的结构体指针）传值给<code>MarshalBottleMedia</code>。该资源在对应的<code>contexts.go</code>中进行定义。</p>
+<p>生成的<code>Action Func</code>代码（bottle.go）如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Show runs the show action.</span></span><br><span class="line"><span class="keyword">func</span> (c *BottleController) Show(ctx *app.ShowBottleContext) error &#123;</span><br><span class="line">	res := &amp;app.BottleMedia&#123;&#125;</span><br><span class="line">	<span class="keyword">return</span> ctx.OK(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到定义的<code>res</code>变量即为我们要的<code>BottleMedia</code>型的结构体指针，而函数<code>MarshalBottleMedia</code>进行多重封装后在<code>return ctx.OK(res)</code>这一句中被调用，因此上面讲的第二步，即是我们需要做的修改，根据业务，将信息写入变量<code>res</code>，然后发出。</p>
 
       
     </div>
