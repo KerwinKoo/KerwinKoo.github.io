@@ -3,27 +3,54 @@
 <head>
   <meta charset="utf-8">
   
-  <title>arm-linux-gdb调试嵌入式arm程序 | KaiQ.Gu|KerwinKoo Blog</title>
+  <title>goa4 使用积累 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
+  <meta name="description" content="Goa日志
+Goa的日志格式固定，如测试代码的mount日志：
+INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;GET /add/:left/:right&amp;quot;
+
+依次为：
+
+日志类型
+日志时间
+行为名称
+日志内容
+
+其中日志内容是以key=value的形式存在。
+Logger接口的实现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="arm-linux-gdb调试嵌入式arm程序">
-<meta property="og:url" content="http://yoursite.com/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/index.html">
+<meta property="og:title" content="goa4 使用积累">
+<meta property="og:url" content="http://yoursite.com/2016/01/25/go/goa4-usage-nhote/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
-<meta property="og:updated_time" content="2015-09-17T03:49:55.803Z">
+<meta property="og:description" content="Goa日志
+Goa的日志格式固定，如测试代码的mount日志：
+INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;GET /add/:left/:right&amp;quot;
+
+依次为：
+
+日志类型
+日志时间
+行为名称
+日志内容
+
+其中日志内容是以key=value的形式存在。
+Logger接口的实现">
+<meta property="og:updated_time" content="2016-01-25T04:05:56.601Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="arm-linux-gdb调试嵌入式arm程序">
-<meta name="twitter:description" content="目前已经到了非GDB调试不可的地步.....
-0.下载安装:
-从 GNU GDB库 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).
-解压缩.">
+<meta name="twitter:title" content="goa4 使用积累">
+<meta name="twitter:description" content="Goa日志
+Goa的日志格式固定，如测试代码的mount日志：
+INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;GET /add/:left/:right&amp;quot;
+
+依次为：
+
+日志类型
+日志时间
+行为名称
+日志内容
+
+其中日志内容是以key=value的形式存在。
+Logger接口的实现">
   
   
     <link rel="icon" href="/favicon.png">
@@ -177,11 +204,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-linux/arm-linux-gdb调试嵌入式arm程序" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-go/goa4-usage-nhote" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/" class="article-date">
-  	<time datetime="2015-09-16T09:26:37.000Z" itemprop="datePublished">2015-09-16</time>
+      <a href="/2016/01/25/go/goa4-usage-nhote/" class="article-date">
+  	<time datetime="2016-01-25T04:04:21.000Z" itemprop="datePublished">2016-01-25</time>
 </a>
     </div>
   
@@ -194,7 +221,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      arm-linux-gdb调试嵌入式arm程序
+      goa4 使用积累
     </h1>
   
 
@@ -203,12 +230,12 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm/">arm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdb/">gdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/goa/">goa</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
+	<a class="article-category-link" href="/categories/Go/">Go</a>
 	</div>
 
 
@@ -218,41 +245,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>目前已经到了非GDB调试不可的地步.....</p>
-<h2>0.下载安装:</h2>
-<p>从 <a href="http://ftp.gnu.org/gnu/gdb/" target="_blank" rel="external">GNU GDB库</a> 进行下载,本次编译使用的是7.9版本(非最新,但与X86 gdb版本相同).</p>
-<p>解压缩.</p>
-<a id="more"></a>
-<blockquote>
-<p>cd 进入解压缩后的文件目录.</p>
-</blockquote>
-<p>开始编译安装:</p>
-<pre><code>./configure --target=arm-linux --prefix=/usr/local/arm-gdb -v
-make
-make install
+        <h1>Goa日志</h1>
+<p><code>Goa</code>的日志格式固定，如测试代码的<code>mount</code>日志：</p>
+<pre><code>INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&quot;GET /add/:left/:right&quot;
 </code></pre>
-<p>这一步通过之后,如果没有出错就基本完成一半,看看arm-linux-gdb是否已经加入到PATH中.</p>
-<h2>1.编译gdbserver</h2>
-<p>首先进入gdbserver所在目录</p>
-<blockquote>
-<p>cd gdb/gdbserver</p>
-</blockquote>
-<p>编译安装</p>
-<pre><code>./configure --target=arm-linux --host=arm-linux
-CC=/home/gkq/opt/toolschain/4.5.1/bin/arm-linux-gcc
-make 
-</code></pre>
-<p>注</p>
+<p>依次为：</p>
 <ul>
-<li>
-<p>1.<code>CC=</code>是指定arm-linux编译器至CC变量,实际使用中,具体地址需要通过命令 <code>which arm-linux-gcc</code> 来查找,我们这里默认已经将 <code>arm-linux-*</code> 编译环境配置完成.</p>
-</li>
-<li>
-<p>2.报错: <code>/bin/bash: line 9: makeinfo: command not found</code> 缺少makeinfo命令,安装即可.<a href="http://stackoverflow.com/questions/338317/what-is-makeinfo-and-how-do-i-get-it" target="_blank" rel="external">解决方案</a>: <code>sudo apt-get install texinfo</code></p>
-</li>
-<li>
-<p>3.在网上寻找解决方案时,发现有人遇到这样的问题: <a href="http://blog.sina.com.cn/s/blog_591eaae601016auu.html" target="_blank" rel="external">hostio.c  PATH_MAX宏找不到</a> 解决方案是在hostio.c中增加值为4095的PATH_MAX宏.</p>
-</li>
+<li>日志类型</li>
+<li>日志时间</li>
+<li>行为名称</li>
+<li>日志内容</li>
+</ul>
+<p>其中<code>日志内容</code>是以<code>key=value</code>的形式存在。</p>
+<p><code>Logger</code>接口的实现写在包<code>gopkg.in/inconshreveable/log15.v2</code>，Goa将其重命名为log：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A Logger writes key/value pairs to a Handler</span></span><br><span class="line"><span class="keyword">type</span> Logger <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// New returns a new Logger that has this logger's context plus the given context</span></span><br><span class="line">	New(ctx ...<span class="keyword">interface</span>&#123;&#125;) Logger</span><br><span class="line"></span><br><span class="line">	<span class="comment">// SetHandler updates the logger to write records to the specified handler.</span></span><br><span class="line">	SetHandler(h Handler)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Log a message at the given level with context key/value pairs</span></span><br><span class="line">	Debug(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Info(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Warn(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Error(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Crit(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>具体调用方法为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.Info(<span class="string">"mount"</span>, <span class="string">"ctrl"</span>, <span class="string">"Operands"</span>, <span class="string">"action"</span>, <span class="string">"Add"</span>, <span class="string">"route"</span>, <span class="string">"GET /add/:left/:right"</span>)</span><br></pre></td></tr></table></figure>
+<p>第一个是日志的名字，其他必须是成对出现，每对为对应的key=value。</p>
+<p><strong>注意</strong></p>
+<ul>
+<li>Goa不支持日志存储，因为对日志存储的需求因人而异。为不影响访问速度，建议自省实现异步的日志存储，可以使用MQ。</li>
 </ul>
 
       
@@ -263,18 +276,9 @@ make
     
 <nav id="article-nav">
   
-    <a href="/2015/09/22/linux/Writing-The-Disk-Image/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Writing The Disk Image Into Raspberry Pi 2
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/02/linux/C-Daemon-Simple-eg/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">linux Daemon的C语言应用</div>
+    <a href="/2016/01/24/go/golang-httprouter-usage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">golang HttpRouter</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -303,7 +307,7 @@ make
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="linux/arm-linux-gdb调试嵌入式arm程序" data-title="arm-linux-gdb调试嵌入式arm程序" data-url="http://yoursite.com/2015/09/16/linux/arm-linux-gdb调试嵌入式arm程序/"></div>
+	<div class="ds-thread" data-thread-key="go/goa4-usage-nhote" data-title="goa4 使用积累" data-url="http://yoursite.com/2016/01/25/go/goa4-usage-nhote/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

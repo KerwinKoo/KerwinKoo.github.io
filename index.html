@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 15px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/nsq/" style="font-size: 12.5px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 13.33px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 16.67px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/nsq/" style="font-size: 13.33px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 13.33px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,81 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-go/goa4-usage-nhote" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/25/go/goa4-usage-nhote/" class="article-date">
+  	<time datetime="2016-01-25T04:04:21.000Z" itemprop="datePublished">2016-01-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/25/go/goa4-usage-nhote/">goa4 使用积累</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>Goa日志</h1>
+<p><code>Goa</code>的日志格式固定，如测试代码的<code>mount</code>日志：</p>
+<pre><code>INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&quot;GET /add/:left/:right&quot;
+</code></pre>
+<p>依次为：</p>
+<ul>
+<li>日志类型</li>
+<li>日志时间</li>
+<li>行为名称</li>
+<li>日志内容</li>
+</ul>
+<p>其中<code>日志内容</code>是以<code>key=value</code>的形式存在。</p>
+<p><code>Logger</code>接口的实现写在包<code>gopkg.in/inconshreveable/log15.v2</code>，Goa将其重命名为log：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A Logger writes key/value pairs to a Handler</span></span><br><span class="line"><span class="keyword">type</span> Logger <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// New returns a new Logger that has this logger's context plus the given context</span></span><br><span class="line">	New(ctx ...<span class="keyword">interface</span>&#123;&#125;) Logger</span><br><span class="line"></span><br><span class="line">	<span class="comment">// SetHandler updates the logger to write records to the specified handler.</span></span><br><span class="line">	SetHandler(h Handler)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Log a message at the given level with context key/value pairs</span></span><br><span class="line">	Debug(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Info(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Warn(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Error(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	Crit(msg <span class="typename">string</span>, ctx ...<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/goa/">goa</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/25/go/goa4-usage-nhote/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-go/golang-httprouter-usage" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -771,73 +846,6 @@ function and the called function begins execution.
       
         <p class="article-more-link">
           <a  href="/2016/01/02/go/the-parameters-of-the-call-passed-by-value-or-point/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-other/comparison-of-image-storage-servers" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/29/other/comparison-of-image-storage-servers/" class="article-date">
-  	<time datetime="2015-12-29T14:20:57.000Z" itemprop="datePublished">2015-12-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/29/other/comparison-of-image-storage-servers/">图片云存储功能比较</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>阿里云</h1>
-<h2>阿里云OSS</h2>
-<h3>图片服务</h3>
-<h4>直接上结论</h4>
-<p>结论是：<strong>阿里云支持基本的图片服务</strong></p>
-<p>具体包括<code>图片缩放、图片裁剪、图片旋转、图片效果、图片水印、格式转换、获取图片信息</code></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aliyun/">aliyun</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/other/">other</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/29/other/comparison-of-image-storage-servers/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
