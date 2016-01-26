@@ -196,7 +196,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1>Goa日志</h1>
-<p><code>Goa</code>的日志格式固定，如测试代码的<code>mount</code>日志：</p>
+<h2>Goa默认日志</h2>
+<p>Goa默认日志是基于[log15 package]（https://godoc.org/gopkg.in/inconshreveable/log15.v2）。</p>
+<p><code>Goa</code>默认的日志格式固定，如测试代码的<code>mount</code>日志：</p>
 <pre><code>INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&quot;GET /add/:left/:right&quot;
 </code></pre>
 <p>依次为：</p>

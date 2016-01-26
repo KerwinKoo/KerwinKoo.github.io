@@ -6,51 +6,27 @@
   <title>goa4 使用积累 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Goa日志
-Goa的日志格式固定，如测试代码的mount日志：
-INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;GET /add/:left/:right&amp;quot;
-
-依次为：
-
-日志类型
-日志时间
-行为名称
-日志内容
-
-其中日志内容是以key=value的形式存在。
-Logger接口的实现">
+Goa默认日志
+Goa默认日志是基于[log15 package]（https://godoc.org/gopkg.in/inconshreveable/log15.v2）。
+Goa默认的日志格式固定，如测试代码的mount日志：
+INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;G">
 <meta property="og:type" content="article">
 <meta property="og:title" content="goa4 使用积累">
 <meta property="og:url" content="http://yoursite.com/2016/01/25/go/goa4-usage-nhote/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
 <meta property="og:description" content="Goa日志
-Goa的日志格式固定，如测试代码的mount日志：
-INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;GET /add/:left/:right&amp;quot;
-
-依次为：
-
-日志类型
-日志时间
-行为名称
-日志内容
-
-其中日志内容是以key=value的形式存在。
-Logger接口的实现">
-<meta property="og:updated_time" content="2016-01-25T13:12:42.636Z">
+Goa默认日志
+Goa默认日志是基于[log15 package]（https://godoc.org/gopkg.in/inconshreveable/log15.v2）。
+Goa默认的日志格式固定，如测试代码的mount日志：
+INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;G">
+<meta property="og:updated_time" content="2016-01-26T18:01:12.742Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="goa4 使用积累">
 <meta name="twitter:description" content="Goa日志
-Goa的日志格式固定，如测试代码的mount日志：
-INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;GET /add/:left/:right&amp;quot;
-
-依次为：
-
-日志类型
-日志时间
-行为名称
-日志内容
-
-其中日志内容是以key=value的形式存在。
-Logger接口的实现">
+Goa默认日志
+Goa默认日志是基于[log15 package]（https://godoc.org/gopkg.in/inconshreveable/log15.v2）。
+Goa默认的日志格式固定，如测试代码的mount日志：
+INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;G">
   
   
     <link rel="icon" href="/favicon.png">
@@ -246,7 +222,9 @@ Logger接口的实现">
     <div class="article-entry" itemprop="articleBody">
       
         <h1>Goa日志</h1>
-<p><code>Goa</code>的日志格式固定，如测试代码的<code>mount</code>日志：</p>
+<h2>Goa默认日志</h2>
+<p>Goa默认日志是基于[log15 package]（https://godoc.org/gopkg.in/inconshreveable/log15.v2）。</p>
+<p><code>Goa</code>默认的日志格式固定，如测试代码的<code>mount</code>日志：</p>
 <pre><code>INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&quot;GET /add/:left/:right&quot;
 </code></pre>
 <p>依次为：</p>
@@ -265,7 +243,7 @@ Logger接口的实现">
 <p>第一个是日志的名字，其他必须是成对出现，每对为对应的key=value。</p>
 <p><strong>注意</strong></p>
 <ul>
-<li>Goa不支持日志存储，因为对日志存储的需求因人而异。为不影响访问速度，建议自省实现异步的日志存储，可以使用MQ。</li>
+<li>Goa不支持日志存储，目前输出对象只有<code>Stdout</code>，因为对日志存储的需求因人而异。为不影响访问速度，建议自省实现异步的日志存储。</li>
 </ul>
 <h1>Goa Media</h1>
 <p>使用Goa的<code>Media</code>之前，首先得明白其存在的意义。</p>
