@@ -10,7 +10,8 @@
 首先目录文件一定要创建在$GOPATH/src下，假设做一个cellar服务，首先创建目录$GOPATH/src/cellar， 然后在此目录下创建子文件夹design和文件design/design.go。
 示例代码
 source code list
-在文件design/design.go中写入代码：">
+在文件design/design.go中写入代码：
+123456789101112131415161718192021">
 <meta property="og:type" content="article">
 <meta property="og:title" content="goa2-简单实现RESTful 微服务">
 <meta property="og:url" content="http://yoursite.com/2016/01/21/go/goa2-RESTful-microservices/index.html">
@@ -20,8 +21,9 @@ source code list
 首先目录文件一定要创建在$GOPATH/src下，假设做一个cellar服务，首先创建目录$GOPATH/src/cellar， 然后在此目录下创建子文件夹design和文件design/design.go。
 示例代码
 source code list
-在文件design/design.go中写入代码：">
-<meta property="og:updated_time" content="2016-01-23T15:48:58.447Z">
+在文件design/design.go中写入代码：
+123456789101112131415161718192021">
+<meta property="og:updated_time" content="2016-01-26T17:36:06.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="goa2-简单实现RESTful 微服务">
 <meta name="twitter:description" content="使用Goa
@@ -29,7 +31,8 @@ source code list
 首先目录文件一定要创建在$GOPATH/src下，假设做一个cellar服务，首先创建目录$GOPATH/src/cellar， 然后在此目录下创建子文件夹design和文件design/design.go。
 示例代码
 source code list
-在文件design/design.go中写入代码：">
+在文件design/design.go中写入代码：
+123456789101112131415161718192021">
   
   
     <link rel="icon" href="/favicon.png">
@@ -230,8 +233,8 @@ source code list
 <h2>示例代码</h2>
 <h3>source code list</h3>
 <p>在文件<code>design/design.go</code>中写入代码：</p>
-<a id="more"></a>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> design</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">        . <span class="string">"github.com/raphael/goa/design"</span></span><br><span class="line">        . <span class="string">"github.com/raphael/goa/design/dsl"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _ = API(<span class="string">"cellar"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">        Title(<span class="string">"The virtual wine cellar"</span>)</span><br><span class="line">        Description(<span class="string">"A basic example of an API implemented with goa"</span>)</span><br><span class="line">        Scheme(<span class="string">"http"</span>)</span><br><span class="line">        Host(<span class="string">"localhost:8080"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _ = Resource(<span class="string">"bottle"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">        BasePath(<span class="string">"/bottles"</span>)</span><br><span class="line">        DefaultMedia(BottleMedia)</span><br><span class="line">        Action(<span class="string">"show"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">                Description(<span class="string">"Retrieve bottle with given id"</span>)</span><br><span class="line">                Routing(GET(<span class="string">"/:bottleID"</span>))</span><br><span class="line">                Params(<span class="keyword">func</span>() &#123;</span><br><span class="line">                        Param(<span class="string">"bottleID"</span>, Integer, <span class="string">"Bottle ID"</span>)</span><br><span class="line">                &#125;)</span><br><span class="line">                Response(OK)</span><br><span class="line">                Response(NotFound)</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> BottleMedia = MediaType(<span class="string">"application/vnd.goa.example.bottle+json"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">        Description(<span class="string">"A bottle of wine"</span>)</span><br><span class="line">        Attributes(<span class="keyword">func</span>() &#123;</span><br><span class="line">                Attribute(<span class="string">"id"</span>, Integer, <span class="string">"Unique bottle ID"</span>)</span><br><span class="line">                Attribute(<span class="string">"href"</span>, String, <span class="string">"API href for making requests on the bottle"</span>)</span><br><span class="line">                Attribute(<span class="string">"name"</span>, String, <span class="string">"Name of wine"</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        View(<span class="string">"default"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">                Attribute(<span class="string">"id"</span>)</span><br><span class="line">                Attribute(<span class="string">"href"</span>)</span><br><span class="line">                Attribute(<span class="string">"name"</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3>代码解读</h3>
 <ul>
 <li>
@@ -264,7 +267,7 @@ source code list
 <h3>目录功能说明</h3>
 <ul>
 <li>
-<p><code>app</code>目录中的代码实现HTTP底层功能，包括信息接收管理，信息反馈模板，底层路由分发，以及goa定义的媒介结构体。</p>
+<p><code>app</code>目录中的代码是API的胶水代码（脚手架代码），用于实现HTTP底层功能，包括信息接收管理，信息反馈模板，底层路由分发，以及goa定义的媒介结构体。如果没有特殊要求，这个目录下的代码文件系自动生成，不需要认为修改。</p>
 </li>
 <li>
 <p><code>client</code>包含一个客户端的简单实现，支持命令行参数，可以进行简单的<code>server request</code>测试。</p>
