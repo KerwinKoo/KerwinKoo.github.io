@@ -19,7 +19,7 @@ Goa默认日志
 Goa默认日志是基于[log15 package]（https://godoc.org/gopkg.in/inconshreveable/log15.v2）。
 Goa默认的日志格式固定，如测试代码的mount日志：
 INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot;G">
-<meta property="og:updated_time" content="2016-01-26T18:01:12.742Z">
+<meta property="og:updated_time" content="2016-01-27T03:53:15.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="goa4 使用积累">
 <meta name="twitter:description" content="Goa日志
@@ -284,6 +284,39 @@ INFO[01-25|09:56:34] mount      app=API ctrl=Operands action=Add route=&amp;quot
 <p>生成的<code>Action Func</code>代码（bottle.go）如下：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Show runs the show action.</span></span><br><span class="line"><span class="keyword">func</span> (c *BottleController) Show(ctx *app.ShowBottleContext) error &#123;</span><br><span class="line">	res := &amp;app.BottleMedia&#123;&#125;</span><br><span class="line">	<span class="keyword">return</span> ctx.OK(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以看到定义的<code>res</code>变量即为我们要的<code>BottleMedia</code>型的结构体指针，而函数<code>MarshalBottleMedia</code>进行多重封装后在<code>return ctx.OK(res)</code>这一句中被调用，因此上面讲的第二步，即是我们需要做的修改，根据业务，将信息写入变量<code>res</code>，然后发出。</p>
+<h1>Middleware</h1>
+<h2>官方Middleware</h2>
+<p>Goa官方目前支持的<code>Middleware</code>有：</p>
+<ul>
+<li><code>LogRequest</code>，用于记录Http request 和 response。</li>
+<li><code>Recover</code>，用于恢复及记录server内部错误。</li>
+<li><code>Timeout</code>，超时后回复<code>cancelation signal</code>。</li>
+<li><code>RequireHeader</code>， 验证require的handler和参数是否一致。</li>
+<li><code>CORS</code>，提供一个简单的<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">CORS</a>的API描述。</li>
+</ul>
+<p>Goa所有的中间件可以加载在Service中，作用于全局；也可以只加载在某些或某个<code>Controller</code>中，只对针对的业务有效。加载方法均为<code>Use</code>函数。</p>
+<p>全局使用middleware，在生成的代码（main.go）中有所体现:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.Use(middleware.RequestID())</span><br></pre></td></tr></table></figure>
+<p>Controller限定使用middleware，可以在<code>new</code>ctrl后调用<code>Use</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c3 := NewOperandsController(service)</span><br><span class="line">c3.Use(middlewareTest)</span><br><span class="line">app.MountOperandsController(service, c3)</span><br></pre></td></tr></table></figure>
+<p>其中<code>middlewareTest</code>是一个测试middleware，只用于<code>OperandsController</code>使用。</p>
+<h2>自定义Middleware</h2>
+<p>自定义Middleware有两种方法，一个是自行实现代码编写，另一个是调用<code>goa.NewMiddleware</code>生成Middleware。</p>
+<h3>方法一，代码实现：</h3>
+<p>首先看一个官方middleware <code>RequestID</code>的实现：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RequestID is a middleware that injects a request ID into the context of each request.</span></span><br><span class="line"><span class="comment">// Retrieve it using ctx.Value(ReqIDKey). If the incoming request has a RequestIDHeader header then</span></span><br><span class="line"><span class="comment">// that value is used else a random value is generated.</span></span><br><span class="line"><span class="keyword">func</span> RequestID() goa.Middleware &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">func</span>(h goa.Handler) goa.Handler &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">func</span>(ctx *goa.Context) error &#123;</span><br><span class="line">			id := ctx.Request().Header.Get(RequestIDHeader)</span><br><span class="line">			<span class="keyword">if</span> id == <span class="string">""</span> &#123;</span><br><span class="line">				id = fmt.Sprintf(<span class="string">"%s-%d"</span>, reqPrefix, atomic.AddInt64(&amp;reqID, <span class="number">1</span>))</span><br><span class="line">			&#125;</span><br><span class="line">			ctx.SetValue(ReqIDKey, id)</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> h(ctx)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>官方其他的middleware代码格式与<code>RequestID</code>相同。上段代码中最重要的就是最内层匿名函数的实现。</p>
+<p>首先定义的<code>*goa.Context</code>参数用于获取HTTP访问的行为内容，然后进行逻辑处理，最后将该参数返回给上层传入的<code>goa.Handler</code>参数。</p>
+<p>比如我们自己实现一个打印&quot;middleware test&quot;日志的测试middleware：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> ShowRequestLog() goa.Middleware &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">func</span>(h goa.Handler) goa.Handler &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">func</span>(ctx *goa.Context) error &#123;</span><br><span class="line">			ctx.Debug(<span class="string">"middleware test"</span>)</span><br><span class="line">			err := h(ctx)</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样所有启用该middleware的操作都会打印<code>ctx.Debug(&quot;middleware test&quot;)</code>产生的DEBUG信息。</p>
+<h3>方法二，通过Goa定义：</h3>
+<p>Goa提供了一个<a href="https://godoc.org/github.com/raphael/goa#NewMiddleware" target="_blank" rel="external">NewMiddleware</a>方法用于实现定义Middleware，我们只需要实现一个返回error的Handler，将逻辑实现写入Handler的匿名函数中，然后传参给<code>NewMiddleware</code>函数即可。</p>
+<p>Handler的定义：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Handler defines the controller handler signatures.</span></span><br><span class="line"><span class="comment">// Controller handlers accept a context and return an error.</span></span><br><span class="line"><span class="comment">// The context provides typed access to the request and response state. It implements</span></span><br><span class="line"><span class="comment">// the golang.org/x/net/context package Context interface so that handlers may define</span></span><br><span class="line"><span class="comment">// deadlines and cancelation signals - see the Timeout middleware as an example.</span></span><br><span class="line"><span class="comment">// If a controller handler returns an error then the application error handler is invoked</span></span><br><span class="line"><span class="comment">// with the request context and the error. The error handler is responsible for writing the</span></span><br><span class="line"><span class="comment">// HTTP response. See DefaultErrorHandler and TerseErrorHandler.</span></span><br><span class="line">Handler <span class="keyword">func</span>(*Context) error</span><br></pre></td></tr></table></figure>
+<p>因此之前测试middleware的实现也可以这样写：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">middlewareTest, _ := goa.NewMiddleware(<span class="keyword">func</span>(ctx *goa.Context) error &#123;</span><br><span class="line">	ctx.Debug(<span class="string">"middleware test"</span>)</span><br><span class="line">	<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>其中匿名函数<code>func(ctx *goa.Context) error</code>即为我们实现的Handler定义，<code>middlewareTest</code>即可以传参给之前讲到的<code>Use</code>的参数。</p>
 
       
     </div>
