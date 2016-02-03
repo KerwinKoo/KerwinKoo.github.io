@@ -3,18 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Ubuntu_install_Postgresql | KaiQ.Gu|KerwinKoo Blog</title>
+  <title>goa5-使用积累-版本变更 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="Goa使用经验
+今天更新了Goagen的最新commit。虽然版本还是0.0.1，但功能变化了很多，上一篇记录的内容甚至已经不能那样使用了。
+新版本（虽然还是0.0.1）全部使用Structure代替之前的marshaling code，避免每次HTTP method都进行一次结构体渲染的操作，提高了效率。
+下面是一些用到了的变更：
+自定义response状态
+之前版本的返回状态中需要提供指定Vi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu_install_Postgresql">
-<meta property="og:url" content="http://yoursite.com/2015/10/19/Ubuntu-install-Postgresql/index.html">
+<meta property="og:title" content="goa5-使用积累-版本变更">
+<meta property="og:url" content="http://yoursite.com/2016/02/03/go/goa5-usage-experience/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-19T01:36:02.273Z">
+<meta property="og:description" content="Goa使用经验
+今天更新了Goagen的最新commit。虽然版本还是0.0.1，但功能变化了很多，上一篇记录的内容甚至已经不能那样使用了。
+新版本（虽然还是0.0.1）全部使用Structure代替之前的marshaling code，避免每次HTTP method都进行一次结构体渲染的操作，提高了效率。
+下面是一些用到了的变更：
+自定义response状态
+之前版本的返回状态中需要提供指定Vi">
+<meta property="og:updated_time" content="2016-02-03T10:37:59.964Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu_install_Postgresql">
-<meta name="twitter:description">
+<meta name="twitter:title" content="goa5-使用积累-版本变更">
+<meta name="twitter:description" content="Goa使用经验
+今天更新了Goagen的最新commit。虽然版本还是0.0.1，但功能变化了很多，上一篇记录的内容甚至已经不能那样使用了。
+新版本（虽然还是0.0.1）全部使用Structure代替之前的marshaling code，避免每次HTTP method都进行一次结构体渲染的操作，提高了效率。
+下面是一些用到了的变更：
+自定义response状态
+之前版本的返回状态中需要提供指定Vi">
   
   
     <link rel="icon" href="/favicon.png">
@@ -168,11 +183,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Ubuntu-install-Postgresql" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-go/goa5-usage-experience" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/19/Ubuntu-install-Postgresql/" class="article-date">
-  	<time datetime="2015-10-19T01:36:02.000Z" itemprop="datePublished">2015-10-19</time>
+      <a href="/2016/02/03/go/goa5-usage-experience/" class="article-date">
+  	<time datetime="2016-02-03T10:36:53.000Z" itemprop="datePublished">2016-02-03</time>
 </a>
     </div>
   
@@ -185,7 +200,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Ubuntu_install_Postgresql
+      goa5-使用积累-版本变更
     </h1>
   
 
@@ -193,7 +208,15 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/goa/">goa</a></li></ul>
+	</div>
+
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
 
         <div class="clearfix"></div>
       </div>
@@ -201,7 +224,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1>Goa使用经验</h1>
+<p>今天更新了<code>Goagen</code>的最新<a href="https://github.com/goadesign/goa/pull/241" target="_blank" rel="external">commit</a>。虽然版本还是0.0.1，但功能变化了很多，上一篇记录的内容甚至已经不能那样使用了。</p>
+<p>新版本（虽然还是0.0.1）全部使用<code>Structure</code>代替之前的<code>marshaling code</code>，避免每次HTTP method都进行一次结构体渲染的操作，提高了效率。</p>
+<p>下面是一些用到了的变更：</p>
+<h2>自定义response状态</h2>
+<p>之前版本的返回状态中需要提供指定<code>View-name</code>的参数，比如有一个名为“tiny”的view，返回的代码是：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.OK(&amp;res, app.tiny)</span><br></pre></td></tr></table></figure>
+<p>现在的返回状态代码是：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.OKTiny(&amp;res)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>同时在定义返回状态时，也不限与在<code>API</code>实现函数内定义，可以在<code>Resource</code>的<code>Action-Response</code>中进行定义：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Response(<span class="string">"NotFound"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">	Status(<span class="number">404</span>)</span><br><span class="line">	Media(UserDataError)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2>Reference</h2>
+<p><code>Reference</code>对Payload进行健全性检查，通过自定义检查范围来对Http 访问参数进行约束。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Bottle = Type(<span class="string">"bottle"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">	Attribute(<span class="string">"name"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">		MinLength(<span class="number">3</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	Attribute(<span class="string">"vintage"</span>, Integer, <span class="keyword">func</span>() &#123;</span><br><span class="line">		Minimum(<span class="number">1970</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	Attribute(<span class="string">"somethingelse"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Declaring the following media <span class="keyword">type</span>:</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> BottleMedia = MediaType(<span class="string">"vnd.goa.bottle"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">	Reference(Bottle)</span><br><span class="line">	Attributes(<span class="keyword">func</span>() &#123;</span><br><span class="line">		Attribute(<span class="string">"id"</span>, Integer)</span><br><span class="line">		Attribute(<span class="string">"name"</span>)</span><br><span class="line">		Attribute(<span class="string">"vintage"</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>代码说明：</p>
+<ul>
+<li>Reference 可以指定既存类型（如String，Integer），也可以指定自定义的Media。</li>
+<li><code>Type</code>中定义的变量名即为<code>Reference</code>指定的类型名。存在Reference时，Attribute指定的成员可以不指定类型（Reference已有指定）。</li>
+</ul>
+
       
     </div>
     
@@ -210,18 +253,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/10/27/linux/github-forking-projects/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          github_forking_projects
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/23/docker/Docker-Problems-solutions/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Docker问题及解决方案汇总</div>
+    <a href="/2016/01/25/go/goa4-usage-nhote/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">goa4 使用积累</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -250,7 +284,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Ubuntu-install-Postgresql" data-title="Ubuntu_install_Postgresql" data-url="http://yoursite.com/2015/10/19/Ubuntu-install-Postgresql/"></div>
+	<div class="ds-thread" data-thread-key="go/goa5-usage-experience" data-title="goa5-使用积累-版本变更" data-url="http://yoursite.com/2016/02/03/go/goa5-usage-experience/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

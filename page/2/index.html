@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 13.33px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 16.67px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/nsq/" style="font-size: 13.33px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 13.33px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 12.5px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,72 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-go/the-parameters-of-the-call-passed-by-value-or-point" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/02/go/the-parameters-of-the-call-passed-by-value-or-point/" class="article-date">
+  	<time datetime="2016-01-02T14:54:15.000Z" itemprop="datePublished">2016-01-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/02/go/the-parameters-of-the-call-passed-by-value-or-point/">golang传参方式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>golang 参数传值</h1>
+<p>首先，golang官方表示golang的函数调用参数均为值传递，不是指针传递或引用传递。经测试引申出来，当参数变量为指针或隐式指针类型，参数传递方式也是传值（指针本身的copy）。</p>
+<pre><code>after they are evaluated, the parameters of the call are passed by value to the
+function and the called function begins execution.
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/02/go/the-parameters-of-the-call-passed-by-value-or-point/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-other/comparison-of-image-storage-servers" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -724,74 +790,6 @@ REST 表征状态传输（英文：Representational State Transfer，简称REST�
       
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-docker/Docker-Problems-solutions" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/23/docker/Docker-Problems-solutions/" class="article-date">
-  	<time datetime="2015-09-22T16:08:19.000Z" itemprop="datePublished">2015-09-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/23/docker/Docker-Problems-solutions/">Docker问题及解决方案汇总</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2>0.无论执行docker的什么命令均报错:</h2>
-<blockquote>
-<p>Post http:///var/run/docker.sock/v1.19/build?cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;memory=0&amp;memswap=0&amp;rm=1&amp;t=: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</p>
-</blockquote>
-<p>解决方案:
-检查docker的服务启动状态,root权限重启docker服务.
-sudo service docker start</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/23/docker/Docker-Problems-solutions/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
