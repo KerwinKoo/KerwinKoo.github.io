@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>golang-NSQ源码阅读 3-nsq_to_file源码解析-1 | KaiQ.Gu|KerwinKoo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="NSQ代码阅读
+NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重要。
+本人阅读源码习惯从功能少的、尽量闭环的程序着手。纵观上面三个模块，最提纲挈领，最有桥梁作用的应该是nsqlookupd，但nsqlookupd仍然有很多的功能开发，在没有搞清楚其功能之前，不适合直接阅读。因此，我把第一个阅读的源码定为nsq-to-file。
+nsq-to-file
+注意：本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang-NSQ源码阅读 3-nsq_to_file源码解析-1">
+<meta property="og:url" content="http://yoursite.com/2016/02/20/go/NSQ-golang-MQ-3-nsq-to-file-1/index.html">
+<meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
+<meta property="og:description" content="NSQ代码阅读
+NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重要。
+本人阅读源码习惯从功能少的、尽量闭环的程序着手。纵观上面三个模块，最提纲挈领，最有桥梁作用的应该是nsqlookupd，但nsqlookupd仍然有很多的功能开发，在没有搞清楚其功能之前，不适合直接阅读。因此，我把第一个阅读的源码定为nsq-to-file。
+nsq-to-file
+注意：本">
+<meta property="og:updated_time" content="2016-02-20T15:37:39.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="golang-NSQ源码阅读 3-nsq_to_file源码解析-1">
+<meta name="twitter:description" content="NSQ代码阅读
+NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重要。
+本人阅读源码习惯从功能少的、尽量闭环的程序着手。纵观上面三个模块，最提纲挈领，最有桥梁作用的应该是nsqlookupd，但nsqlookupd仍然有很多的功能开发，在没有搞清楚其功能之前，不适合直接阅读。因此，我把第一个阅读的源码定为nsq-to-file。
+nsq-to-file
+注意：本">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xl7m7.com1.z0.glb.clouddn.com/icon/portrait.jpg?e=1491809552&amp;token=HGWDW7MDV3-h-nYvzu0tGDuR60-OsgvCDQIlia0F:pb-3SWC6Q7zBMvZSJGMAcxbiMFw=" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KerwinKoo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一枚安静的瘦子</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="https://github.com/KerwinKoo/KerwinKoo.github.io/wiki">Wiki</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KerwinKoo" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 18px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16px;">linux</a> <a href="/tags/nsq/" style="font-size: 14px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">非科班Linux Developer, 擅长Linux嵌入式开发</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KerwinKoo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xl7m7.com1.z0.glb.clouddn.com/icon/portrait.jpg?e=1491809552&amp;token=HGWDW7MDV3-h-nYvzu0tGDuR60-OsgvCDQIlia0F:pb-3SWC6Q7zBMvZSJGMAcxbiMFw=" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KerwinKoo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一枚安静的瘦子</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="https://github.com/KerwinKoo/KerwinKoo.github.io/wiki">Wiki</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KerwinKoo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-go/NSQ-golang-MQ-3-nsq-to-file-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/20/go/NSQ-golang-MQ-3-nsq-to-file-1/" class="article-date">
+  	<time datetime="2016-02-20T15:35:33.000Z" itemprop="datePublished">2016-02-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      golang-NSQ源码阅读 3-nsq_to_file源码解析-1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nsq/">nsq</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>NSQ代码阅读</h1>
+<p>NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重要。</p>
+<p>本人阅读源码习惯从功能少的、尽量闭环的程序着手。纵观上面三个模块，最提纲挈领，最有桥梁作用的应该是<code>nsqlookupd</code>，但nsqlookupd仍然有很多的功能开发，在没有搞清楚其功能之前，不适合直接阅读。因此，我把第一个阅读的源码定为<code>nsq-to-file</code>。</p>
+<h2>nsq-to-file</h2>
+<p>注意：本地源码地址为:<code>github.com/nsqio/nsq/apps/nsq_to_file</code></p>
+<p><code>nsq-to-file</code>作为NSQ的一种客户端，其实是在<a href="https://github.com/nsqio/go-nsq" target="_blank" rel="external">go-nsq</a>的基础上做的功能开发。</p>
+<p><code>nsq-to-file</code>功能是<code>订阅</code>消费指定的话题(topic)/通道(channel),并写到文件中,对输出文件进行有选择的滚动和/或压缩文件。</p>
+<p>支持的命令行参数：</p>
+<a id="more"></a>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">channel=<span class="string">"nsq_to_file"</span><span class="symbol">:</span> nsq 通道(channel)</span><br><span class="line"></span>-<span class="ruby">consumer-opt=<span class="symbol">:</span> 传递给 nsq.<span class="constant">Consumer</span> 的参数 (可能会给多次, <span class="symbol">http:</span>/<span class="regexp">/godoc.org/github</span>.com/bitly/go-nsq<span class="comment">#Config)</span></span><br><span class="line"></span>-<span class="ruby">datetime-format=<span class="string">"%Y-%m-%d_%H"</span><span class="symbol">:</span> strftime,和 filename 里 &lt;<span class="constant">DATETIME</span>&gt; 格式兼容</span><br><span class="line"></span>-<span class="ruby">filename-format=<span class="string">"&lt;TOPIC&gt;.&lt;HOST&gt;&lt;GZIPREV&gt;.&lt;DATETIME&gt;.log"</span><span class="symbol">:</span> output 文件名格式 (&lt;<span class="constant">TOPIC</span>&gt;, &lt;<span class="constant">HOST</span>&gt;, &lt;<span class="constant">DATETIM</span></span><br><span class="line"></span>-<span class="ruby">gzip=<span class="symbol">false:</span> gzip 输出文件</span><br><span class="line"></span>-<span class="ruby">gzip-compression=<span class="number">3</span><span class="symbol">:</span> (已经抛弃) 使用 --gzip-level, gzip 压缩级别(<span class="number">1</span> = 速度最佳, <span class="number">2</span> = 最近压缩, <span class="number">3</span> = 默认压缩)</span><br><span class="line"></span>-<span class="ruby">gzip-level=<span class="number">6</span><span class="symbol">:</span> gzip 压缩级别 (<span class="number">1</span>-<span class="number">9</span>, <span class="number">1</span>=<span class="constant">BestSpeed</span>, <span class="number">9</span>=<span class="constant">BestCompression</span>)</span><br><span class="line"></span>-<span class="ruby">host-identifier=<span class="string">""</span><span class="symbol">:</span> 输出到 log 文件,提供主机名。 &lt;<span class="constant">SHORT_HOST</span>&gt; 和 &lt;<span class="constant">HOSTNAME</span>&gt; 是有效的替换者</span><br><span class="line"></span>-<span class="ruby">lookupd-http-address=<span class="symbol">:</span> lookupd <span class="constant">HTTP</span> 地址 (可能会给多次)</span><br><span class="line"></span>-<span class="ruby">max-<span class="keyword">in</span>-flight=<span class="number">200</span><span class="symbol">:</span> 最大的消息数 to allow <span class="keyword">in</span> flight</span><br><span class="line"></span>-<span class="ruby">nsqd-tcp-address=<span class="symbol">:</span> nsqd <span class="constant">TCP</span> 地址 (可能会给多次)</span><br><span class="line"></span>-<span class="ruby">output-dir=<span class="string">"/tmp"</span><span class="symbol">:</span> 输出文件所在的文件夹</span><br><span class="line"></span>-<span class="ruby">reader-opt=<span class="symbol">:</span> (已经抛弃) 使用 --consumer-opt</span><br><span class="line"></span>-<span class="ruby">skip-empty-files=<span class="symbol">false:</span> 忽略写空文件</span><br><span class="line"></span>-<span class="ruby">topic=<span class="symbol">:</span> nsq 话题(topic) (可能会给多次)</span><br><span class="line"></span>-<span class="ruby">topic-refresh=<span class="number">1</span><span class="symbol">m0s:</span> 话题(topic)列表刷新的频率是多少?</span><br><span class="line"></span>-<span class="ruby">version=<span class="symbol">false:</span> 打印版本信息</span></span><br></pre></td></tr></table></figure>
+<h2>nsq-to-file功能分析</h2>
+<p>首先理清<code>nsq-to-file</code>功能模块和逻辑思路，有助于提纲挈领，也会对比出，假如自己实现这程序时要面临的问题。</p>
+<h3>功能拆分</h3>
+<p>1.缓存管理、日志标识的控制、支持文件压缩及压缩级别控制、日期格式管理、输出文件名格式等nsq-to-file本身的功能控制;</p>
+<p>2.指定监听channel，指定监听的topic;</p>
+<p>3.挂载到lookupd，或直接监听至nsqd;</p>
+<p>4.话题列表刷新频率;</p>
+<p>5.其他。</p>
+<h3>逻辑分析</h3>
+<p>第1条基本是nsq-to-file自身功能的实现，2、3、4则是与nsq或go-nsq（nsq的golib）API的使用挂钩，归纳起来需要实现以下功能：</p>
+<ul>
+<li>挂载到lookupd或nsqd</li>
+<li>定义channel，并告知lookupd或nsqd</li>
+<li>获取topics</li>
+</ul>
+<p>代码文件可以围绕这些功能及逻辑进行拆分阅读。</p>
+<h2>代码文件</h2>
+<p>两个文件：<code>nsq_to_file.go</code> 和 <code>strftime.go</code>，均为<code>main</code> package。</p>
+<h2>nsq_to_file.go</h2>
+<p>先找到<code>main</code>函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	cfg := nsq.NewConfig()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> remove, deprecated</span></span><br><span class="line">	flag.Var(&amp;nsq.ConfigFlag&#123;cfg&#125;, <span class="string">"reader-opt"</span>, <span class="string">"(deprecated) use --consumer-opt"</span>)</span><br><span class="line">	flag.Var(&amp;nsq.ConfigFlag&#123;cfg&#125;, <span class="string">"consumer-opt"</span>, <span class="string">"option to passthrough to nsq.Consumer (may be given multiple times, http://godoc.org/github.com/nsqio/go-nsq#Config)"</span>)</span><br><span class="line"></span><br><span class="line">	flag.Parse()</span><br></pre></td></tr></table></figure>
+<p>第一个函数调用<code>flag.Parse()</code>是golang标准库中的命令行参数解析，可以追出允许使用什么命令行参数。</p>
+<h3>nsq_to_file flag参数功能解析</h3>
+<p>nsq_to_file <code>opt</code>参数设置：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	showVersion = flag.Bool(<span class="string">"version"</span>, <span class="constant">false</span>, <span class="string">"print version string"</span>)</span><br><span class="line"></span><br><span class="line">	channel     = flag.String(<span class="string">"channel"</span>, <span class="string">"nsq_to_file"</span>, <span class="string">"nsq channel"</span>)</span><br><span class="line">	maxInFlight = flag.Int(<span class="string">"max-in-flight"</span>, <span class="number">200</span>, <span class="string">"max number of messages to allow in flight"</span>)</span><br><span class="line"></span><br><span class="line">	outputDir      = flag.String(<span class="string">"output-dir"</span>, <span class="string">"/tmp"</span>, <span class="string">"directory to write output files to"</span>)</span><br><span class="line">	datetimeFormat = flag.String(<span class="string">"datetime-format"</span>, <span class="string">"%Y-%m-%d_%H"</span>, <span class="string">"strftime compatible format for &lt;DATETIME&gt; in filename format"</span>)</span><br><span class="line">	filenameFormat = flag.String(<span class="string">"filename-format"</span>, <span class="string">"&lt;TOPIC&gt;.&lt;HOST&gt;&lt;REV&gt;.&lt;DATETIME&gt;.log"</span>, <span class="string">"output filename format (&lt;TOPIC&gt;, &lt;HOST&gt;, &lt;PID&gt;, &lt;DATETIME&gt;, &lt;REV&gt; are replaced. &lt;REV&gt; is increased when file already exists)"</span>)</span><br><span class="line">	hostIdentifier = flag.String(<span class="string">"host-identifier"</span>, <span class="string">""</span>, <span class="string">"value to output in log filename in place of hostname. &lt;SHORT_HOST&gt; and &lt;HOSTNAME&gt; are valid replacement tokens"</span>)</span><br><span class="line">	gzipLevel      = flag.Int(<span class="string">"gzip-level"</span>, <span class="number">6</span>, <span class="string">"gzip compression level (1-9, 1=BestSpeed, 9=BestCompression)"</span>)</span><br><span class="line">	gzipEnabled    = flag.Bool(<span class="string">"gzip"</span>, <span class="constant">false</span>, <span class="string">"gzip output files."</span>)</span><br><span class="line">	skipEmptyFiles = flag.Bool(<span class="string">"skip-empty-files"</span>, <span class="constant">false</span>, <span class="string">"Skip writing empty files"</span>)</span><br><span class="line">	topicPollRate  = flag.Duration(<span class="string">"topic-refresh"</span>, time.Minute, <span class="string">"how frequently the topic list should be refreshed"</span>)</span><br><span class="line">	topicPattern   = flag.String(<span class="string">"topic-pattern"</span>, <span class="string">".*"</span>, <span class="string">"Only log topics matching the following pattern"</span>)</span><br><span class="line"></span><br><span class="line">	rotateSize     = flag.Int64(<span class="string">"rotate-size"</span>, <span class="number">0</span>, <span class="string">"rotate the file when it grows bigger than `rotate-size` bytes"</span>)</span><br><span class="line">	rotateInterval = flag.Duration(<span class="string">"rotate-interval"</span>, <span class="number">0</span>*time.Second, <span class="string">"rotate the file every duration"</span>)</span><br><span class="line"></span><br><span class="line">	nsqdTCPAddrs     = app.StringArray&#123;&#125;</span><br><span class="line">	lookupdHTTPAddrs = app.StringArray&#123;&#125;</span><br><span class="line">	topics           = app.StringArray&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> remove, deprecated</span></span><br><span class="line">	gzipCompression = flag.Int(<span class="string">"gzip-compression"</span>, <span class="number">3</span>, <span class="string">"(deprecated) use --gzip-level, gzip compression level (1 = BestSpeed, 2 = BestCompression, 3 = DefaultCompression)"</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4>consumer-opt</h4>
+<p>最近两个是<code>reader-opt</code>和<code>consumer-opt</code>，其实功能相同，建议使用consumer-opt。</p>
+<p>这个命令行功能是为go-nsq设置config参数，因为nsq_to_file是在其基础上开发出来的。而且参数说明中也说了，有可能已经被设置好了的。</p>
+<p>以下是<code>config</code>结构体的定义（文件：github.com/nsqio/go-nsq/config.go）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Config <span class="keyword">struct</span> &#123;</span><br><span class="line">	initialized <span class="typename">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// used to Initialize, Validate</span></span><br><span class="line">	configHandlers []configHandler</span><br><span class="line"></span><br><span class="line">	DialTimeout time.Duration <span class="string">`opt:"dial_timeout" default:"1s"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Deadlines for network reads and writes</span></span><br><span class="line">	ReadTimeout  time.Duration <span class="string">`opt:"read_timeout" min:"100ms" max:"5m" default:"60s"`</span></span><br><span class="line">	WriteTimeout time.Duration <span class="string">`opt:"write_timeout" min:"100ms" max:"5m" default:"1s"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// LocalAddr is the local address to use when dialing an nsqd.</span></span><br><span class="line">	<span class="comment">// If empty, a local address is automatically chosen.</span></span><br><span class="line">	LocalAddr net.Addr <span class="string">`opt:"local_addr"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Duration between polling lookupd for new producers, and fractional jitter to add to</span></span><br><span class="line">	<span class="comment">// the lookupd pool loop. this helps evenly distribute requests even if multiple consumers</span></span><br><span class="line">	<span class="comment">// restart at the same time</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="comment">// <span class="doctag">NOTE:</span> when not using nsqlookupd, LookupdPollInterval represents the duration of time between</span></span><br><span class="line">	<span class="comment">// reconnection attempts</span></span><br><span class="line">	LookupdPollInterval time.Duration <span class="string">`opt:"lookupd_poll_interval" min:"10ms" max:"5m" default:"60s"`</span></span><br><span class="line">	LookupdPollJitter   <span class="typename">float64</span>       <span class="string">`opt:"lookupd_poll_jitter" min:"0" max:"1" default:"0.3"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Maximum duration when REQueueing (for doubling of deferred requeue)</span></span><br><span class="line">	MaxRequeueDelay     time.Duration <span class="string">`opt:"max_requeue_delay" min:"0" max:"60m" default:"15m"`</span></span><br><span class="line">	DefaultRequeueDelay time.Duration <span class="string">`opt:"default_requeue_delay" min:"0" max:"60m" default:"90s"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Backoff strategy, defaults to exponential backoff. Overwrite this to define alternative backoff algrithms.</span></span><br><span class="line">	BackoffStrategy BackoffStrategy <span class="string">`opt:"backoff_strategy" default:"exponential"`</span></span><br><span class="line">	<span class="comment">// Maximum amount of time to backoff when processing fails 0 == no backoff</span></span><br><span class="line">	MaxBackoffDuration time.Duration <span class="string">`opt:"max_backoff_duration" min:"0" max:"60m" default:"2m"`</span></span><br><span class="line">	<span class="comment">// Unit of time for calculating consumer backoff</span></span><br><span class="line">	BackoffMultiplier time.Duration <span class="string">`opt:"backoff_multiplier" min:"0" max:"60m" default:"1s"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Maximum number of times this consumer will attempt to process a message before giving up</span></span><br><span class="line">	MaxAttempts <span class="typename">uint16</span> <span class="string">`opt:"max_attempts" min:"0" max:"65535" default:"5"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Duration to wait for a message from a producer when in a state where RDY</span></span><br><span class="line">	<span class="comment">// counts are re-distributed (ie. max_in_flight &lt; num_producers)</span></span><br><span class="line">	LowRdyIdleTimeout time.Duration <span class="string">`opt:"low_rdy_idle_timeout" min:"1s" max:"5m" default:"10s"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Duration between redistributing max-in-flight to connections</span></span><br><span class="line">	RDYRedistributeInterval time.Duration <span class="string">`opt:"rdy_redistribute_interval" min:"1ms" max:"5s" default:"5s"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Identifiers sent to nsqd representing this client</span></span><br><span class="line">	<span class="comment">// UserAgent is in the spirit of HTTP (default: "&lt;client_library_name&gt;/&lt;version&gt;")</span></span><br><span class="line">	ClientID  <span class="typename">string</span> <span class="string">`opt:"client_id"`</span> <span class="comment">// (defaults: short hostname)</span></span><br><span class="line">	Hostname  <span class="typename">string</span> <span class="string">`opt:"hostname"`</span></span><br><span class="line">	UserAgent <span class="typename">string</span> <span class="string">`opt:"user_agent"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Duration of time between heartbeats. This must be less than ReadTimeout</span></span><br><span class="line">	HeartbeatInterval time.Duration <span class="string">`opt:"heartbeat_interval" default:"30s"`</span></span><br><span class="line">	<span class="comment">// Integer percentage to sample the channel (requires nsqd 0.2.25+)</span></span><br><span class="line">	SampleRate <span class="typename">int32</span> <span class="string">`opt:"sample_rate" min:"0" max:"99"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// To set TLS config, use the following options:</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="comment">// tls_v1 - Bool enable TLS negotiation</span></span><br><span class="line">	<span class="comment">// tls_root_ca_file - String path to file containing root CA</span></span><br><span class="line">	<span class="comment">// tls_insecure_skip_verify - Bool indicates whether this client should verify server certificates</span></span><br><span class="line">	<span class="comment">// tls_cert - String path to file containing public key for certificate</span></span><br><span class="line">	<span class="comment">// tls_key - String path to file containing private key for certificate</span></span><br><span class="line">	<span class="comment">// tls_min_version - String indicating the minimum version of tls acceptable ('ssl3.0', 'tls1.0', 'tls1.1', 'tls1.2')</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	TlsV1     <span class="typename">bool</span>        <span class="string">`opt:"tls_v1"`</span></span><br><span class="line">	TlsConfig *tls.Config <span class="string">`opt:"tls_config"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Compression Settings</span></span><br><span class="line">	Deflate      <span class="typename">bool</span> <span class="string">`opt:"deflate"`</span></span><br><span class="line">	DeflateLevel <span class="typename">int</span>  <span class="string">`opt:"deflate_level" min:"1" max:"9" default:"6"`</span></span><br><span class="line">	Snappy       <span class="typename">bool</span> <span class="string">`opt:"snappy"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Size of the buffer (in bytes) used by nsqd for buffering writes to this connection</span></span><br><span class="line">	OutputBufferSize <span class="typename">int64</span> <span class="string">`opt:"output_buffer_size" default:"16384"`</span></span><br><span class="line">	<span class="comment">// Timeout used by nsqd before flushing buffered writes (set to 0 to disable).</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="comment">// WARNING: configuring clients with an extremely low</span></span><br><span class="line">	<span class="comment">// (&lt; 25ms) output_buffer_timeout has a significant effect</span></span><br><span class="line">	<span class="comment">// on nsqd CPU usage (particularly with &gt; 50 clients connected).</span></span><br><span class="line">	OutputBufferTimeout time.Duration <span class="string">`opt:"output_buffer_timeout" default:"250ms"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Maximum number of messages to allow in flight (concurrency knob)</span></span><br><span class="line">	MaxInFlight <span class="typename">int</span> <span class="string">`opt:"max_in_flight" min:"0" default:"1"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// The server-side message timeout for messages delivered to this client</span></span><br><span class="line">	MsgTimeout time.Duration <span class="string">`opt:"msg_timeout" min:"0"`</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// secret for nsqd authentication (requires nsqd 0.2.29+)</span></span><br><span class="line">	AuthSecret <span class="typename">string</span> <span class="string">`opt:"auth_secret"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从这里看出，使用golang默认标识的方式，已经设置好了参数的key（即<code>opt</code>后的值）和default值了。暂且不看各功能的含义（太多了），我们先看如何设置。</p>
+<p>原文解释：</p>
+<p>The only valid way to create a Config is via NewConfig, using a struct literal will panic. After Config is passed into a high-level type (like Consumer, Producer, etc.) the values are no longer mutable (they are copied).</p>
+<p>Use Set(option string, value interface{}) as an alternate way to set parameters.</p>
+<p>Set的代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set takes a comma separated value and follows the rules in Config.Set</span></span><br><span class="line"><span class="comment">// using the first field as the option key, and the second (if present) as the value</span></span><br><span class="line"><span class="keyword">func</span> (c *ConfigFlag) Set(opt <span class="typename">string</span>) (err error) &#123;</span><br><span class="line">	parts := strings.SplitN(opt, <span class="string">","</span>, <span class="number">2</span>)</span><br><span class="line">	key := parts[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> <span class="built_in">len</span>(parts) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		<span class="comment">// default options specified without a value to boolean true</span></span><br><span class="line">		err = c.Config.Set(key, <span class="constant">true</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">		err = c.Config.Set(key, parts[<span class="number">1</span>])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，对命令行的要求是“key,value”，即使用“，”分隔。</p>
+<p>如设置timeout的启动命令：</p>
+<pre><code>./nsq_to_file --lookupd-http-address=127.0.0.1:4161 --consumer-opt=&quot;read_timeout,100s&quot;
+</code></pre>
+<p>继续main函数代码阅读</p>
+<h4>channel</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> *showVersion &#123;	<span class="comment">//显示版本信息</span></span><br><span class="line">	fmt.Printf(<span class="string">"nsq_to_file v%s\n"</span>, version.Binary)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> *channel == <span class="string">""</span> &#123;	<span class="comment">//要求必须设置channel名称</span></span><br><span class="line">	log.Fatal(<span class="string">"--channel is required"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>showVersion</code>没什么好说的，关键是<code>channel</code>opt。</p>
+<p>通过之前的准备工作，了解到NSQ消息分发是无单点的分布式拓扑结构，其中Topic和channel是其重要的组成单元，一个Topic下的信息会同时发送给不同的channel中，而同一个channel下的多个消费者中，只有一个可以获得此channel下的消息。</p>
+<p>做一个测试：</p>
+<p>再开启一个消费者终端，与之前不同的是，此终端监听Channel为&quot;test-channel&quot;：</p>
+<pre><code>nsq_to_file --lookupd-http-address=127.0.0.1:4161 --channel=&quot;test-channel&quot; --output-dir=tmp
+</code></pre>
+<p>向NSQ-http端口发送消息：</p>
+<pre><code>curl -d &quot;hello world test5&quot; &quot;http://127.0.0.1:4151/put?topic=test&quot;
+</code></pre>
+<p>可以看到输出文件中，有两行<code>hello world test5</code>，这是因为channel <code>nsq_to_file</code>（默认channel）和<code>test-channel</code>中都会有此条消息，而虽然channel <code>nsq_to_file</code>中有三个消费者在等待接收，但只有一个消费者获取到，其余继续等待。<code>test-channel</code>中的消费者获取信息后，也会写到/tmp目录下的文件中，因此两条消息均会被记录。</p>
+<h3>其他OPT</h3>
+<p>明白channel的作用后，在继续阅读channel的使用代码之前，将main后面几个同类型opt判定也看完：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> topicsFromNSQLookupd <span class="typename">bool</span>	<span class="comment">//判断消息来源是否为NSQ-LOOKUPD</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(nsqdTCPAddrs) == <span class="number">0</span> &amp;&amp; <span class="built_in">len</span>(lookupdHTTPAddrs) == <span class="number">0</span> &#123;</span><br><span class="line">	log.Fatal(<span class="string">"--nsqd-tcp-address or --lookupd-http-address required."</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(nsqdTCPAddrs) != <span class="number">0</span> &amp;&amp; <span class="built_in">len</span>(lookupdHTTPAddrs) != <span class="number">0</span> &#123;</span><br><span class="line">	log.Fatal(<span class="string">"use --nsqd-tcp-address or --lookupd-http-address not both"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//要求必须从TCP端口与HTTP端口中必须且只能监听其中一个，不可同时监听，也不可都不监听</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> *gzipLevel &lt; <span class="number">1</span> || *gzipLevel &gt; <span class="number">9</span> &#123;</span><br><span class="line">	log.Fatalf(<span class="string">"invalid --gzip-level value (%d), should be 1-9"</span>, *gzipLevel)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> remove, deprecated</span></span><br><span class="line"><span class="keyword">if</span> hasArg(<span class="string">"gzip-compression"</span>) &#123; </span><br><span class="line">	log.Printf(<span class="string">"WARNING: --gzip-compression is deprecated in favor of --gzip-level"</span>)</span><br><span class="line">	<span class="keyword">switch</span> *gzipCompression &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		*gzipLevel = gzip.BestSpeed</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">		*gzipLevel = gzip.BestCompression</span><br><span class="line">	<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">		*gzipLevel = gzip.DefaultCompression</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		log.Fatalf(<span class="string">"invalid --gzip-compression value (%d), should be 1,2,3"</span>, *gzipCompression)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	<span class="comment">//根据之前设置的压缩等级进行压缩</span></span><br></pre></td></tr></table></figure>
+<h3>Config设置</h3>
+<p>继续看main函数下的代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cfg.UserAgent = fmt.Sprintf(<span class="string">"nsq_to_file/%s go-nsq/%s"</span>, version.Binary, nsq.VERSION)</span><br><span class="line">cfg.MaxInFlight = *maxInFlight	<span class="comment">//允许缓存的消息条数上限 默认200条</span></span><br><span class="line"></span><br><span class="line">discoverer := newTopicDiscoverer(cfg)	<span class="comment">//初始化discoverer</span></span><br></pre></td></tr></table></figure>
+<p>在读代码伊始，就看到<code>cfg := nsq.NewConfig()</code>定义，且官方特别注明只可以从函数<code>NewConfig</code>中获取config的结构体定义，上面的代码，是针对<code>nsq_to_file</code>做的config定制。</p>
+<p>通过<code>discover</code>的定义接着看<code>TopicDiscoverer</code>结构体及<code>newTopicDiscoverer</code>函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> TopicDiscoverer <span class="keyword">struct</span> &#123;</span><br><span class="line">	topics   <span class="keyword">map</span>[<span class="typename">string</span>]*ConsumerFileLogger</span><br><span class="line">	termChan <span class="keyword">chan</span> os.Signal</span><br><span class="line">	hupChan  <span class="keyword">chan</span> os.Signal</span><br><span class="line">	wg       sync.WaitGroup</span><br><span class="line">	cfg      *nsq.Config</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> newTopicDiscoverer(cfg *nsq.Config) *TopicDiscoverer &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;TopicDiscoverer&#123;</span><br><span class="line">		topics:   <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="typename">string</span>]*ConsumerFileLogger),</span><br><span class="line">		termChan: <span class="built_in">make</span>(<span class="keyword">chan</span> os.Signal),</span><br><span class="line">		hupChan:  <span class="built_in">make</span>(<span class="keyword">chan</span> os.Signal),</span><br><span class="line">		cfg:      cfg,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>newTopicDiscoverer</code>返回<code>TopicDiscoverer</code>的结构体初始化，重点则是<code>TopicDiscoverer</code>结构体的定义。</p>
+<p><code>TopicDiscoverer</code>结构体定义了两个channel，具体作用：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">signal.Notify(discoverer.hupChan, syscall.SIGHUP)	<span class="comment">//SIGHUP:终端控制进程结束(终端连接断开)</span></span><br><span class="line">signal.Notify(discoverer.termChan, syscall.SIGINT, syscall.SIGTERM)	<span class="comment">//SIGINT:(Ctrl+C)触发 SIGTERM:结束程序(可以被捕获、阻塞或忽略)</span></span><br></pre></td></tr></table></figure>
+<h3>Topics</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(topics) &lt; <span class="number">1</span> &#123; <span class="comment">//判断是否OPT指定topic，未指定则进行topics轮询</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(lookupdHTTPAddrs) &lt; <span class="number">1</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"use --topic to list at least one topic to subscribe to or specify at least one --lookupd-http-address to subscribe to all its topics"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	topicsFromNSQLookupd = <span class="constant">true</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line">	topics, err = clusterinfo.New(<span class="constant">nil</span>, http_api.NewClient(<span class="constant">nil</span>)).GetLookupdTopics(lookupdHTTPAddrs)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"ERROR: could not retrieve topic list: %s"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _, topic := <span class="keyword">range</span> topics &#123; <span class="comment">//获取topic列表</span></span><br><span class="line">	<span class="keyword">if</span> !discoverer.allowTopicName(*topicPattern, topic) &#123;</span><br><span class="line">		log.Println(<span class="string">"Skipping topic"</span>, topic, <span class="string">"as it didn't match required pattern:"</span>, *topicPattern)</span><br><span class="line">		<span class="keyword">continue</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	logger, err := newConsumerFileLogger(topic, cfg)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"ERROR: couldn't create logger for topic %s: %s"</span>, topic, err)</span><br><span class="line">	&#125;</span><br><span class="line">	discoverer.topics[topic] = logger</span><br><span class="line">	<span class="keyword">go</span> discoverer.startTopicRouter(logger)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">discoverer.watch(lookupdHTTPAddrs, topicsFromNSQLookupd, *topicPattern)  <span class="comment">//启动监听</span></span><br></pre></td></tr></table></figure>
+<h2>总结</h2>
+<p>至此<code>nsq to file</code>的<code>main</code>部分解析完毕, 可以看出main部分多以opt解析和config初始化为主，主要的功能实现均在各种的函数中。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/03/go/goa5-usage-experience/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">goa-5-使用积累-版本变更</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-3-nsq-to-file-1" data-title="golang-NSQ源码阅读 3-nsq_to_file源码解析-1" data-url="http://yoursite.com/2016/02/20/go/NSQ-golang-MQ-3-nsq-to-file-1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"kerwinkoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KerwinKoo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

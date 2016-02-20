@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>NSQ:golang实现的MQ源码阅读 1-NSQ基本信息 | KaiQ.Gu|KerwinKoo Blog</title>
+  <title>NSQ:golang-NSQ源码阅读 1-NSQ基本信息 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="关于本文
 本文建立在通过解读NSQ源码来提升golang的编写能力。
@@ -17,7 +17,7 @@
 当然过程不是一成不变的，对项目的理解起初往往是从外界获取，在阅读源码的过程中会有一些自己的理解融汇进去；同时源码也不是一遍就可以看明白的，这个过程需要反复折回。
 在本文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSQ:golang实现的MQ源码阅读 1-NSQ基本信息">
+<meta property="og:title" content="NSQ:golang-NSQ源码阅读 1-NSQ基本信息">
 <meta property="og:url" content="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-1/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
 <meta property="og:description" content="关于本文
@@ -31,9 +31,9 @@
 
 当然过程不是一成不变的，对项目的理解起初往往是从外界获取，在阅读源码的过程中会有一些自己的理解融汇进去；同时源码也不是一遍就可以看明白的，这个过程需要反复折回。
 在本文">
-<meta property="og:updated_time" content="2016-01-08T14:25:45.813Z">
+<meta property="og:updated_time" content="2016-02-20T15:36:45.175Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSQ:golang实现的MQ源码阅读 1-NSQ基本信息">
+<meta name="twitter:title" content="NSQ:golang-NSQ源码阅读 1-NSQ基本信息">
 <meta name="twitter:description" content="关于本文
 本文建立在通过解读NSQ源码来提升golang的编写能力。
 对于阅读某个项目的源码，本人通常按以下流程开展：
@@ -136,7 +136,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 12.5px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 18px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16px;">linux</a> <a href="/tags/nsq/" style="font-size: 14px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      NSQ:golang实现的MQ源码阅读 1-NSQ基本信息
+      NSQ:golang-NSQ源码阅读 1-NSQ基本信息
     </h1>
   
 
@@ -298,7 +298,7 @@
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          NSQ:golang实现的MQ源码阅读 2-NSQ功能测试
+          NSQ:golang-NSQ源码阅读 2-NSQ功能测试
         
       </div>
     </a>
@@ -334,7 +334,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-1" data-title="NSQ:golang实现的MQ源码阅读 1-NSQ基本信息" data-url="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-1/"></div>
+	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-1" data-title="NSQ:golang-NSQ源码阅读 1-NSQ基本信息" data-url="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-1/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
