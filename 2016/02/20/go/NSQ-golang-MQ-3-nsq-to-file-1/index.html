@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>golang-NSQ源码阅读 3-nsq_to_file源码解析-1 | KaiQ.Gu|KerwinKoo Blog</title>
+  <title>golang-NSQ源码阅读 3-nsq_to_file源码解析-1 引导 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="NSQ代码阅读
 NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重要。
@@ -11,7 +11,7 @@ NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重�
 nsq-to-file
 注意：本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="golang-NSQ源码阅读 3-nsq_to_file源码解析-1">
+<meta property="og:title" content="golang-NSQ源码阅读 3-nsq_to_file源码解析-1 引导">
 <meta property="og:url" content="http://yoursite.com/2016/02/20/go/NSQ-golang-MQ-3-nsq-to-file-1/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
 <meta property="og:description" content="NSQ代码阅读
@@ -19,9 +19,9 @@ NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重�
 本人阅读源码习惯从功能少的、尽量闭环的程序着手。纵观上面三个模块，最提纲挈领，最有桥梁作用的应该是nsqlookupd，但nsqlookupd仍然有很多的功能开发，在没有搞清楚其功能之前，不适合直接阅读。因此，我把第一个阅读的源码定为nsq-to-file。
 nsq-to-file
 注意：本">
-<meta property="og:updated_time" content="2016-02-20T15:37:39.527Z">
+<meta property="og:updated_time" content="2016-02-21T15:14:21.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="golang-NSQ源码阅读 3-nsq_to_file源码解析-1">
+<meta name="twitter:title" content="golang-NSQ源码阅读 3-nsq_to_file源码解析-1 引导">
 <meta name="twitter:description" content="NSQ代码阅读
 NSQ分三大模块：nsqd、nsqlookupd、nsqadmin，从哪个开始着手很重要。
 本人阅读源码习惯从功能少的、尽量闭环的程序着手。纵观上面三个模块，最提纲挈领，最有桥梁作用的应该是nsqlookupd，但nsqlookupd仍然有很多的功能开发，在没有搞清楚其功能之前，不适合直接阅读。因此，我把第一个阅读的源码定为nsq-to-file。
@@ -118,7 +118,7 @@ nsq-to-file
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 15px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 17.5px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -197,7 +197,7 @@ nsq-to-file
         
   
     <h1 class="article-title" itemprop="name">
-      golang-NSQ源码阅读 3-nsq_to_file源码解析-1
+      golang-NSQ源码阅读 3-nsq_to_file源码解析-1 引导
     </h1>
   
 
@@ -349,7 +349,7 @@ nsq-to-file
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-3-nsq-to-file-1" data-title="golang-NSQ源码阅读 3-nsq_to_file源码解析-1" data-url="http://yoursite.com/2016/02/20/go/NSQ-golang-MQ-3-nsq-to-file-1/"></div>
+	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-3-nsq-to-file-1" data-title="golang-NSQ源码阅读 3-nsq_to_file源码解析-1 引导" data-url="http://yoursite.com/2016/02/20/go/NSQ-golang-MQ-3-nsq-to-file-1/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
