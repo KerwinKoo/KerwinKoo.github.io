@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 18px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16px;">linux</a> <a href="/tags/nsq/" style="font-size: 14px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 15px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,136 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-go/NSQ-golang-MQ-4-nsq-to-file-2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/21/go/NSQ-golang-MQ-4-nsq-to-file-2/" class="article-date">
+  	<time datetime="2016-02-21T10:06:36.000Z" itemprop="datePublished">2016-02-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/21/go/NSQ-golang-MQ-4-nsq-to-file-2/">NSQ-golang-MQ-4-nsq-to-file-2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>继续之前的<code>main</code>函数分析，来具体分析nsq-to-file的与nsq有关的各个功能的实现</p>
+<h1>指定channel</h1>
+<p><code>nsq-to-file</code>的channel通过<code>-channel=&quot;nsq_to_file&quot;</code>OPT指定，指定之后，需要将新的channel注册至nsq或loopupd。</p>
+<h2>opt中获取及指定默认channel：</h2>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel     = flag.String(<span class="string">"channel"</span>, <span class="string">"nsq_to_file"</span>, <span class="string">"nsq channel"</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nsq/">nsq</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/02/21/go/NSQ-golang-MQ-4-nsq-to-file-2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-go/time-format-trans" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/21/go/time-format-trans/" class="article-date">
+  	<time datetime="2016-02-21T07:49:23.000Z" itemprop="datePublished">2016-02-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/21/go/time-format-trans/">time_format_trans</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>Linux-C时间格式转换为Golang时间格式</h1>
+<p>golang中时间格式以<code>Mon Jan 2 15:04:05 -0700 MST 2006</code>的形式来规范，而通用为<code>%Y-%m-%d %H:%M:%S</code>。</p>
+<p>二者之间转换的实现：</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/02/21/go/time-format-trans/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-go/NSQ-golang-MQ-3-nsq-to-file-1" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -723,155 +853,9 @@ go get github.com/goadesign/goa/goagen</p>
 
 
   
-    <article id="post-go/NSQ-golang-MQ-2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/08/go/NSQ-golang-MQ-2/" class="article-date">
-  	<time datetime="2016-01-08T14:22:10.000Z" itemprop="datePublished">2016-01-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/08/go/NSQ-golang-MQ-2/">NSQ:golang-NSQ源码阅读 2-NSQ功能测试</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>NSQ使用体验</h1>
-<h2>installing</h2>
-<p>NSQ的<a href="http://nsq.io/deployment/installing.html">官方安装指南</a>,建议使用<code>go get</code>命令，将NSQ项目源码和依赖库都下到本地方便阅读。</p>
-<p>配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。</p>
-<h2>执行测试</h2>
-<h3>服务端测试搭建</h3>
-<p>1.执行NSQ拓扑监控守护进程：<code>nsqlookupd</code></p>
-<blockquote>
-<p>nsqlookupd</p>
-</blockquote>
-<p>默认情况下，执行如下命令行参数：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-http-address=<span class="string">"0.0.0.0:4161"</span><span class="symbol">:</span> &lt;addr&gt;<span class="symbol">:&lt;port&gt;`</span>监听 <span class="constant">HTTP </span>客户端</span><br><span class="line">-tcp-address=<span class="string">"0.0.0.0:4160"</span><span class="symbol">:</span> <span class="constant">TCP </span>客户端监听的 &lt;addr&gt;<span class="symbol">:&lt;port&gt;</span></span><br></pre></td></tr></table></figure>
-<p>其中，TCP端用于监听nsqd挂载。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nsq/">nsq</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/08/go/NSQ-golang-MQ-2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-go/NSQ-golang-MQ-1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/08/go/NSQ-golang-MQ-1/" class="article-date">
-  	<time datetime="2016-01-08T11:19:45.000Z" itemprop="datePublished">2016-01-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/08/go/NSQ-golang-MQ-1/">NSQ:golang-NSQ源码阅读 1-NSQ基本信息</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>关于本文</h1>
-<p>本文建立在通过解读<a href="https://github.com/nsqio/nsq">NSQ源码</a>来提升golang的编写能力。</p>
-<p>对于阅读某个项目的源码，本人通常按以下流程开展：</p>
-<ul>
-<li>充分理解项目的使用场景和功能；</li>
-<li>对比其在同类项目中的优缺点；</li>
-<li>大体构思实现该项目需要什么模块；</li>
-<li>阅读源码。</li>
-</ul>
-<p>当然过程不是一成不变的，对项目的理解起初往往是从外界获取，在阅读源码的过程中会有一些自己的理解融汇进去；同时源码也不是一遍就可以看明白的，这个过程需要反复折回。</p>
-<p>在本文中，分析对象是以golang为主编程语言而开发的Message Queue：NSQ，通过上面提到的过程来进行剖析。网上已有不少NSQ的说明及代码解释文档，我会对其进行参考，也会将参考源地址做好引用。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nsq/">nsq</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/08/go/NSQ-golang-MQ-1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

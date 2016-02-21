@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 18px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 16px;">linux</a> <a href="/tags/nsq/" style="font-size: 14px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 15px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,132 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-translations/Chinese-Translation-of-Principled-Design-of-the-ModernWeb-Architecture" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/02/translations/Chinese-Translation-of-Principled-Design-of-the-ModernWeb-Architecture/" class="article-date">
+  	<time datetime="2015-11-02T08:47:25.000Z" itemprop="datePublished">2015-11-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/02/translations/Chinese-Translation-of-Principled-Design-of-the-ModernWeb-Architecture/">翻译:Principled Design of the Modern Web Architecture</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>前言：
+REST 表征状态传输（英文：Representational State Transfer，简称REST）是<code>Roy Fielding</code>博士于2000年在他的<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">博士论文</a>中提出来的一种软件架构风格。两年后，Roy Fielding和Richard N. Taylor署名发表论文<a href="https://www.ics.uci.edu/~taylor/documents/2002-REST-TOIT.pdf">Principled Design of the Modern Web Architecture</a>，系统介绍了REST Web Architecture在现代Web架构环境下扮演的角色和作用，蕴含REST设计思想及原则。本人以有限的英文水平对此论文进行中文翻译。</li>
+</ul>
+<p>关于论文标题 <strong>Principled Design of the Modern Web Architecture</strong>，本译文中将其翻译为 <strong>关于现代Web架构的原则性设计</strong>，因为“原则性”代表约束性，RESTful本身是一种Web设计风格，是对Web架构设计的约束的抽象体现。</p>
+<ul>
+<li>Translator: <strong>Kerwin Koo</strong></li>
+</ul>
+<h1>正文：</h1>
+<hr>
+<h1>Title: <strong>Principled Design of the Modern Web Architecture</strong></h1>
+<h1>Author: <strong>Roy T. Fielding</strong> and <strong>Richard N. Taylor</strong></h1>
+<hr>
+<h1>摘要</h1>
+<p>万维网(The World Wide Web)的成功，在很大程度上是因为它的 软件体系架构<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 在设计上更加符合互联网规模（Internet-scale）的分布式超媒体系统。现代Web架构强调的是组件交互的可拓展性（scalability of component interactions），接口的通用性（generality of interfaces），组件之间的部署独立性（ndependent deployment of components）和中间化组件（intermediary components）来减少交互延迟，确保执行安全，并对 保留系统<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 进行封装。在本论文中，我们介绍了表征性状态传输的架构风格，作为一种Web架构的抽象模型，来指导我们对超文本传输协议和 统一资源标识符<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> 的设计和定义。我们描述了REST的软件工程学方面的指导原则和保留这些原则在交互上的限制，并与其他架构风格的约束做对照。然后我们会与当前部署的一些Web架构的的抽象模型做比对，来引出目前一些协议和他们所对应的应用程序之间的不协调。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REST/">REST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/translation/">translation</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Translation/">Translation</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/02/translations/Chinese-Translation-of-Principled-Design-of-the-ModernWeb-Architecture/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-linux/github-forking-projects" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/27/linux/github-forking-projects/" class="article-date">
+  	<time datetime="2015-10-27T09:27:34.000Z" itemprop="datePublished">2015-10-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/27/linux/github-forking-projects/">github_forking_projects</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Ubuntu-install-Postgresql" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -686,63 +812,9 @@ python通过标准库<code>getopt</code>，对终端命令行参数进行解析�
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/18/hello-world/" class="article-date">
-  	<time datetime="2015-08-17T16:00:01.000Z" itemprop="datePublished">2015-08-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/18/hello-world/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

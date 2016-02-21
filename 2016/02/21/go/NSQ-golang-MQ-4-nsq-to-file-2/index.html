@@ -3,51 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>NSQ:golang-NSQ源码阅读 2-NSQ功能测试 | KaiQ.Gu|KerwinKoo Blog</title>
+  <title>NSQ-golang-MQ-4-nsq-to-file-2 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NSQ使用体验
-installing
-NSQ的官方安装指南,建议使用go get命令，将NSQ项目源码和依赖库都下到本地方便阅读。
-配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。
-执行测试
-服务端测试搭建
-1.执行NSQ拓扑监控守护进程：nsqlookupd
-
-nsqlookupd
-
-默认情况下，执行如下命令行参数：
-12-http-address=&quot;0.0">
+  <meta name="description" content="继续之前的main函数分析，来具体分析nsq-to-file的与nsq有关的各个功能的实现
+指定channel
+nsq-to-file的channel通过-channel=&amp;quot;nsq_to_file&amp;quot;OPT指定，指定之后，需要将新的channel注册至nsq或loopupd。
+opt中获取及指定默认channel：
+1channel     = flag.String(&quot;chan">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSQ:golang-NSQ源码阅读 2-NSQ功能测试">
-<meta property="og:url" content="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-2/index.html">
+<meta property="og:title" content="NSQ-golang-MQ-4-nsq-to-file-2">
+<meta property="og:url" content="http://yoursite.com/2016/02/21/go/NSQ-golang-MQ-4-nsq-to-file-2/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:description" content="NSQ使用体验
-installing
-NSQ的官方安装指南,建议使用go get命令，将NSQ项目源码和依赖库都下到本地方便阅读。
-配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。
-执行测试
-服务端测试搭建
-1.执行NSQ拓扑监控守护进程：nsqlookupd
-
-nsqlookupd
-
-默认情况下，执行如下命令行参数：
-12-http-address=&quot;0.0">
-<meta property="og:updated_time" content="2016-02-20T15:36:31.647Z">
+<meta property="og:description" content="继续之前的main函数分析，来具体分析nsq-to-file的与nsq有关的各个功能的实现
+指定channel
+nsq-to-file的channel通过-channel=&amp;quot;nsq_to_file&amp;quot;OPT指定，指定之后，需要将新的channel注册至nsq或loopupd。
+opt中获取及指定默认channel：
+1channel     = flag.String(&quot;chan">
+<meta property="og:updated_time" content="2016-02-21T10:08:13.335Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSQ:golang-NSQ源码阅读 2-NSQ功能测试">
-<meta name="twitter:description" content="NSQ使用体验
-installing
-NSQ的官方安装指南,建议使用go get命令，将NSQ项目源码和依赖库都下到本地方便阅读。
-配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。
-执行测试
-服务端测试搭建
-1.执行NSQ拓扑监控守护进程：nsqlookupd
-
-nsqlookupd
-
-默认情况下，执行如下命令行参数：
-12-http-address=&quot;0.0">
+<meta name="twitter:title" content="NSQ-golang-MQ-4-nsq-to-file-2">
+<meta name="twitter:description" content="继续之前的main函数分析，来具体分析nsq-to-file的与nsq有关的各个功能的实现
+指定channel
+nsq-to-file的channel通过-channel=&amp;quot;nsq_to_file&amp;quot;OPT指定，指定之后，需要将新的channel注册至nsq或loopupd。
+opt中获取及指定默认channel：
+1channel     = flag.String(&quot;chan">
   
   
     <link rel="icon" href="/favicon.png">
@@ -201,11 +180,11 @@ nsqlookupd
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-go/NSQ-golang-MQ-2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-go/NSQ-golang-MQ-4-nsq-to-file-2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/08/go/NSQ-golang-MQ-2/" class="article-date">
-  	<time datetime="2016-01-08T14:22:10.000Z" itemprop="datePublished">2016-01-08</time>
+      <a href="/2016/02/21/go/NSQ-golang-MQ-4-nsq-to-file-2/" class="article-date">
+  	<time datetime="2016-02-21T10:06:36.000Z" itemprop="datePublished">2016-02-21</time>
 </a>
     </div>
   
@@ -218,7 +197,7 @@ nsqlookupd
         
   
     <h1 class="article-title" itemprop="name">
-      NSQ:golang-NSQ源码阅读 2-NSQ功能测试
+      NSQ-golang-MQ-4-nsq-to-file-2
     </h1>
   
 
@@ -242,47 +221,16 @@ nsqlookupd
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>NSQ使用体验</h1>
-<h2>installing</h2>
-<p>NSQ的<a href="http://nsq.io/deployment/installing.html" target="_blank" rel="external">官方安装指南</a>,建议使用<code>go get</code>命令，将NSQ项目源码和依赖库都下到本地方便阅读。</p>
-<p>配置完成后，执行项目目录下的“./test.sh”脚本，可生成NSQ的二进制执行文件。</p>
-<h2>执行测试</h2>
-<h3>服务端测试搭建</h3>
-<p>1.执行NSQ拓扑监控守护进程：<code>nsqlookupd</code></p>
-<blockquote>
-<p>nsqlookupd</p>
-</blockquote>
-<p>默认情况下，执行如下命令行参数：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-http-address=<span class="string">"0.0.0.0:4161"</span><span class="symbol">:</span> &lt;addr&gt;<span class="symbol">:&lt;port&gt;`</span>监听 <span class="constant">HTTP </span>客户端</span><br><span class="line">-tcp-address=<span class="string">"0.0.0.0:4160"</span><span class="symbol">:</span> <span class="constant">TCP </span>客户端监听的 &lt;addr&gt;<span class="symbol">:&lt;port&gt;</span></span><br></pre></td></tr></table></figure>
-<p>其中，TCP端用于监听nsqd挂载。</p>
+        <p>继续之前的<code>main</code>函数分析，来具体分析nsq-to-file的与nsq有关的各个功能的实现</p>
+<h1>指定channel</h1>
+<p><code>nsq-to-file</code>的channel通过<code>-channel=&quot;nsq_to_file&quot;</code>OPT指定，指定之后，需要将新的channel注册至nsq或loopupd。</p>
+<h2>opt中获取及指定默认channel：</h2>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel     = flag.String(<span class="string">"channel"</span>, <span class="string">"nsq_to_file"</span>, <span class="string">"nsq channel"</span>)</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>2.另起终端，执行nsqd，并将其挂载到启动后的nsqlookupd监控端口上。</p>
-<blockquote>
-<p>nsqd --lookupd-tcp-address=127.0.0.1:4160</p>
-</blockquote>
-<p>注：nsqd没有对nsqlookupd的HTTP端口挂载。</p>
-<p>默认情况下，端口<code>4151</code>为HTTP监听端口，<code>4150</code>为TCP监听端口，向这两个端口发送消息，则会进入NSQD消息队列。</p>
-<p>3.开第三个终端，启动NSQ状态监控的WEB UI</p>
-<blockquote>
-<p>nsqadmin --lookupd-http-address=127.0.0.1:4161</p>
-</blockquote>
-<p>此时web 监控UI：nsqadmin挂载的是nsqlookupd的HTTP端口地址。显示地址为<code>http://127.0.0.1:4171/</code></p>
-<p>4.开第四个终端，通过<code>curl</code>命令执行信息发布。</p>
-<blockquote>
-<p>curl -d &quot;hello world 1&quot; &quot;http://127.0.0.1:4151/put?topic=test&quot;</p>
-</blockquote>
-<p>注：NSQ的topic命名，是以该话题的第一个<code>PUB</code>或<code>SUB</code>来确定的，并将其创建在nsqd中。同时话题的元数据将会传播给 nsqlookupd 的配置。其他的reader将会通过周期性的查询 nsqlookupd 来发现这个话题。在该命令执行后，会在第二步中执行的nsqd中创建一个名为<code>test</code>的topic。</p>
-<p><code>curl -d</code> 是将信息以<code>POST</code>的形式，发送到4151端口。</p>
-<h3>客户端（消费者）获取消息测试</h3>
-<p>简单的服务端架构已经搭建完成，此时打开监控界面可以看到刚刚发布的消息，一条名为“test”的topic，点开后，<code>message</code>和<code>channel</code>均为1。</p>
-<p>创建一个消费者来执行消息读取测试：</p>
-<blockquote>
-<p>nsq_to_file --topic=test --output-dir=tmp --lookupd-http-address=127.0.0.1:4161</p>
-</blockquote>
-<p>此时<code>nsq_to_file</code>便充当了消费者，将消息读取后，存放于目录<code>tmp</code>中的时间戳文件，打开文件会看到我们之前发送的消息体：<code>hello world 1</code>。</p>
-<p>web UI中也会显示消费者客户端<code>nsq_to_file</code>和对应的接收的信息数及连接状态。</p>
-<p>如果同时开启多个<code>nsq_to_file</code>，则只有一个<code>nsq_to_file</code>会接收到新的消息，因为消息一旦交付成功后将会失效，无法被其他消费者接收。</p>
-<p>nsq_to_file只是一个简单的消费者客户端，消息的订阅可以使用官方开发的go lib客户端：<a href="https://github.com/nsqio/go-nsq" target="_blank" rel="external">go-ndq</a>的read和write功能。</p>
+<h2>channel的使用：</h2>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> newConsumerFileLogger(topic <span class="typename">string</span>, cfg *nsq.Config) (*ConsumerFileLogger, error) &#123;</span><br><span class="line">	f, err := NewFileLogger(*gzipEnabled, *gzipLevel, *filenameFormat, topic) <span class="comment">//获取输出文件句柄f</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="constant">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	consumer, err := nsq.NewConsumer(topic, *channel, cfg) <span class="comment">//注册consumer</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="constant">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	consumer.AddHandler(f)</span><br><span class="line"></span><br><span class="line">	log.Println(<span class="string">"newConsumerFileLogger:"</span>, <span class="string">"nsqdTCPAddrs:"</span>, nsqdTCPAddrs, <span class="string">"lookupdHTTPAddrs:"</span>, lookupdHTTPAddrs)</span><br><span class="line"></span><br><span class="line">	err = consumer.ConnectToNSQDs(nsqdTCPAddrs) <span class="comment">//连接至每个NSQD，参数nsqdTCPAddrs是[]string，内容量为0时不会返回nil</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	err = consumer.ConnectToNSQLookupds(lookupdHTTPAddrs) <span class="comment">//连接至每个NSQLookupd</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> &amp;ConsumerFileLogger&#123;</span><br><span class="line">		C: consumer,</span><br><span class="line">		F: f,</span><br><span class="line">	&#125;, <span class="constant">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>channel</code>的使用，仅用在注册消费者<code>consumer, err := nsq.NewConsumer(topic, *channel, cfg)</code>这么一处地方。</p>
+<p>函数<code>newConsumerFileLogger</code>是main中最终要调用的主要函数，起提纲挈领作用，在main函数中，<code>newConsumerFileLogger</code>会根据Topic的数量来调用多次。</p>
 
       
     </div>
@@ -292,18 +240,9 @@ nsqlookupd
     
 <nav id="article-nav">
   
-    <a href="/2016/01/09/go/golang-flag/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          golang命令行参数解析-flag
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/08/go/NSQ-golang-MQ-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">NSQ:golang-NSQ源码阅读 1-NSQ基本信息</div>
+    <a href="/2016/02/21/go/time-format-trans/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">time_format_trans</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -332,7 +271,7 @@ nsqlookupd
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-2" data-title="NSQ:golang-NSQ源码阅读 2-NSQ功能测试" data-url="http://yoursite.com/2016/01/08/go/NSQ-golang-MQ-2/"></div>
+	<div class="ds-thread" data-thread-key="go/NSQ-golang-MQ-4-nsq-to-file-2" data-title="NSQ-golang-MQ-4-nsq-to-file-2" data-url="http://yoursite.com/2016/02/21/go/NSQ-golang-MQ-4-nsq-to-file-2/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
