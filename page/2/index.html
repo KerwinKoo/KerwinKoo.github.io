@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 17.5px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Go/" style="font-size: 20px;">Go</a> <a href="/tags/HttpRouter/" style="font-size: 10px;">HttpRouter</a> <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/aria2/" style="font-size: 10px;">aria2</a> <a href="/tags/arm/" style="font-size: 12.5px;">arm</a> <a href="/tags/daemon/" style="font-size: 10px;">daemon</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/exec/" style="font-size: 10px;">exec</a> <a href="/tags/flag/" style="font-size: 10px;">flag</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goa/" style="font-size: 17.5px;">goa</a> <a href="/tags/gollum/" style="font-size: 10px;">gollum</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/nsq/" style="font-size: 17.5px;">nsq</a> <a href="/tags/openelec/" style="font-size: 10px;">openelec</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspberry/" style="font-size: 12.5px;">raspberry</a> <a href="/tags/translation/" style="font-size: 10px;">translation</a> <a href="/tags/try/" style="font-size: 10px;">try</a> <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,74 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-go/goa2-RESTful-microservices" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/21/go/goa2-RESTful-microservices/" class="article-date">
+  	<time datetime="2016-01-21T10:56:14.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/21/go/goa2-RESTful-microservices/">goa-2-简单实现RESTful 微服务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>使用Goa</h1>
+<h2>微服务环境搭建</h2>
+<p>首先目录文件一定要创建在<code>$GOPATH/src</code>下，假设做一个<code>cellar</code>服务，首先创建目录<code>$GOPATH/src/cellar</code>， 然后在此目录下创建子文件夹<code>design</code>和文件<code>design/design.go</code>。</p>
+<h2>示例代码</h2>
+<h3>source code list</h3>
+<p>在文件<code>design/design.go</code>中写入代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> design</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">        . <span class="string">"github.com/raphael/goa/design"</span></span><br><span class="line">        . <span class="string">"github.com/raphael/goa/design/dsl"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _ = API(<span class="string">"cellar"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">        Title(<span class="string">"The virtual wine cellar"</span>)</span><br><span class="line">        Description(<span class="string">"A basic example of an API implemented with goa"</span>)</span><br><span class="line">        Scheme(<span class="string">"http"</span>)</span><br><span class="line">        Host(<span class="string">"localhost:8080"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _ = Resource(<span class="string">"bottle"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">        BasePath(<span class="string">"/bottles"</span>)</span><br><span class="line">        DefaultMedia(BottleMedia)</span><br><span class="line">        Action(<span class="string">"show"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">                Description(<span class="string">"Retrieve bottle with given id"</span>)</span><br><span class="line">                Routing(GET(<span class="string">"/:bottleID"</span>))</span><br><span class="line">                Params(<span class="keyword">func</span>() &#123;</span><br><span class="line">                        Param(<span class="string">"bottleID"</span>, Integer, <span class="string">"Bottle ID"</span>)</span><br><span class="line">                &#125;)</span><br><span class="line">                Response(OK)</span><br><span class="line">                Response(NotFound)</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> BottleMedia = MediaType(<span class="string">"application/vnd.goa.example.bottle+json"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">        Description(<span class="string">"A bottle of wine"</span>)</span><br><span class="line">        Attributes(<span class="keyword">func</span>() &#123;</span><br><span class="line">                Attribute(<span class="string">"id"</span>, Integer, <span class="string">"Unique bottle ID"</span>)</span><br><span class="line">                Attribute(<span class="string">"href"</span>, String, <span class="string">"API href for making requests on the bottle"</span>)</span><br><span class="line">                Attribute(<span class="string">"name"</span>, String, <span class="string">"Name of wine"</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        View(<span class="string">"default"</span>, <span class="keyword">func</span>() &#123;</span><br><span class="line">                Attribute(<span class="string">"id"</span>)</span><br><span class="line">                Attribute(<span class="string">"href"</span>)</span><br><span class="line">                Attribute(<span class="string">"name"</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/goa/">goa</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Go/">Go</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/21/go/goa2-RESTful-microservices/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-go/Goa1-golang-goa" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -774,71 +842,6 @@ package bitbucket.org/pkg/inflect: exec: &quot;hg&quot;: executable file not fou
       
         <p class="article-more-link">
           <a  href="/2015/12/23/go/go-get-tools/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-go/golang-exec-command" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/25/go/golang-exec-command/" class="article-date">
-  	<time datetime="2015-11-25T01:58:24.000Z" itemprop="datePublished">2015-11-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/25/go/golang-exec-command/">Golang Exec 调用外部程序</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>用法e.g.</p>
-<pre><code>import &quot;&quot;os/exec&quot;&quot;
-</code></pre>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> FetchDefaultTemplate() &#123;</span><br><span class="line">	cmd := exec.Command(<span class="string">"git"</span>, <span class="string">"clone"</span>, <span class="string">"--depth=1"</span>, <span class="string">"https://github.com/mengzhuo/bla_default_template.git"</span>)</span><br><span class="line">	<span class="keyword">if</span> err := cmd.Start(); err != <span class="constant">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	cmd.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exec/">exec</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/11/25/go/golang-exec-command/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
