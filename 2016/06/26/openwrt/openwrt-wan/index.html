@@ -3,33 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>GoGetTools 问题解决 | KaiQ.Gu|KerwinKoo Blog</title>
+  <title>openwrt-wan/lan获取纯mac/ip地址 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在编译HUGO时遇到的问题。
-报错信息：
+  <meta name="description" content="openwrt-wan
+获取wan口的方式 uci show network.wan.ifname
+只显示结果：
+uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
 
-hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&amp;quot; in any of:{GOPATH}
-
-意思是当前的工程缺少import包文件。但我是通过go get直接在github中获取到本地的，原则上不会缺少包丢失的情况，因此问题定位在go get过程包">
+lan口IP 地址获取方式的proto:
+uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoGetTools 问题解决">
-<meta property="og:url" content="http://yoursite.com/2015/12/23/go/go-get-tools/index.html">
+<meta property="og:title" content="openwrt-wan/lan获取纯mac/ip地址">
+<meta property="og:url" content="http://yoursite.com/2016/06/26/openwrt/openwrt-wan/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:description" content="在编译HUGO时遇到的问题。
-报错信息：
+<meta property="og:description" content="openwrt-wan
+获取wan口的方式 uci show network.wan.ifname
+只显示结果：
+uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
 
-hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&amp;quot; in any of:{GOPATH}
-
-意思是当前的工程缺少import包文件。但我是通过go get直接在github中获取到本地的，原则上不会缺少包丢失的情况，因此问题定位在go get过程包">
-<meta property="og:updated_time" content="2015-12-23T04:30:19.441Z">
+lan口IP 地址获取方式的proto:
+uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
+<meta property="og:updated_time" content="2016-06-26T01:32:02.611Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GoGetTools 问题解决">
-<meta name="twitter:description" content="在编译HUGO时遇到的问题。
-报错信息：
+<meta name="twitter:title" content="openwrt-wan/lan获取纯mac/ip地址">
+<meta name="twitter:description" content="openwrt-wan
+获取wan口的方式 uci show network.wan.ifname
+只显示结果：
+uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
 
-hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&amp;quot; in any of:{GOPATH}
-
-意思是当前的工程缺少import包文件。但我是通过go get直接在github中获取到本地的，原则上不会缺少包丢失的情况，因此问题定位在go get过程包">
+lan口IP 地址获取方式的proto:
+uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
   
   
     <link rel="icon" href="/favicon.png">
@@ -183,11 +186,11 @@ hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&am
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-go/go-get-tools" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-openwrt/openwrt-wan" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/23/go/go-get-tools/" class="article-date">
-  	<time datetime="2015-12-23T04:20:37.000Z" itemprop="datePublished">2015-12-23</time>
+      <a href="/2016/06/26/openwrt/openwrt-wan/" class="article-date">
+  	<time datetime="2016-06-26T01:29:14.000Z" itemprop="datePublished">2016-06-26</time>
 </a>
     </div>
   
@@ -200,7 +203,7 @@ hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&am
         
   
     <h1 class="article-title" itemprop="name">
-      GoGetTools 问题解决
+      openwrt-wan/lan获取纯mac/ip地址
     </h1>
   
 
@@ -209,12 +212,12 @@ hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&am
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openwrt/">openwrt</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
+	<a class="article-category-link" href="/categories/openwrt/">openwrt</a>
 	</div>
 
 
@@ -224,22 +227,16 @@ hugolib/site.go:33:2: cannot find package &amp;quot;bitbucket.org/pkg/inflect&am
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在编译HUGO时遇到的问题。</p>
-<p>报错信息：</p>
-<blockquote>
-<p>hugolib/site.go:33:2: cannot find package &quot;bitbucket.org/pkg/inflect&quot; in any of:{GOPATH}</p>
-</blockquote>
-<p>意思是当前的工程缺少import包文件。但我是通过go get直接在github中获取到本地的，原则上不会缺少包丢失的情况，因此问题定位在go get过程包获取不完整。</p>
-<p>重新go get发现报错信息：</p>
-<pre><code>go: missing Mercurial command. See https://golang.org/s/gogetcmd
-package bitbucket.org/pkg/inflect: exec: &quot;hg&quot;: executable file not found in $PATH
+        <h1>openwrt-wan</h1>
+<p>获取wan口的方式 uci show network.wan.ifname</p>
+<h2>只显示结果：</h2>
+<pre><code>uci show network.wan.ifname|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
 </code></pre>
-<p>说的很明白，无法执行命令<code>hg</code>，是因为缺少<code>Mercurial command</code>。</p>
-<a id="more"></a>
-<p>解决方案，安装Mercurial：</p>
-<pre><code>sudo apt-get install mercurial
+<h2>lan口IP 地址获取方式的proto:</h2>
+<pre><code>uci show network.lan.proto|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
 </code></pre>
-<p>另外go get提示中也提到了获取missing command的介绍:https://golang.org/s/gogetcmd，里面有对于go get过程中需要的命令如何下载进行了汇总，遇到类似的其他问题可以在里面找到解决方案。</p>
+<h2>获取lan口mac地址</h2>
+<pre><code>uci show network.lan.macaddr|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;</code></pre>
 
       
     </div>
@@ -249,18 +246,9 @@ package bitbucket.org/pkg/inflect: exec: &quot;hg&quot;: executable file not fou
     
 <nav id="article-nav">
   
-    <a href="/2015/12/29/github/github-wiki-gollum/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          开源wiki系统:gollum
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/25/go/golang-exec-command/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Golang Exec 调用外部程序</div>
+    <a href="/2016/02/21/go/NSQ-golang-MQ-5-nsq-to-file-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">golang-NSQ源码阅读 5-nsq_to_file源码解析-3 输出</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -289,7 +277,7 @@ package bitbucket.org/pkg/inflect: exec: &quot;hg&quot;: executable file not fou
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="go/go-get-tools" data-title="GoGetTools 问题解决" data-url="http://yoursite.com/2015/12/23/go/go-get-tools/"></div>
+	<div class="ds-thread" data-thread-key="openwrt/openwrt-wan" data-title="openwrt-wan/lan获取纯mac/ip地址" data-url="http://yoursite.com/2016/06/26/openwrt/openwrt-wan/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

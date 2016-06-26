@@ -3,36 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>openwrt-wan/lan获取纯mac/ip地址 | KaiQ.Gu|KerwinKoo Blog</title>
+  <title>Archives: 2016/6 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="openwrt-wan
-获取wan口的方式 uci show network.wan.ifname
-只显示结果：
-uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
-
-lan口IP 地址获取方式的proto:
-uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
-<meta property="og:type" content="article">
-<meta property="og:title" content="openwrt-wan/lan获取纯mac/ip地址">
-<meta property="og:url" content="http://yoursite.com/2015/12/26/openwrt/openwrt-wan/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KaiQ.Gu|KerwinKoo Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2016/06/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:description" content="openwrt-wan
-获取wan口的方式 uci show network.wan.ifname
-只显示结果：
-uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
-
-lan口IP 地址获取方式的proto:
-uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
-<meta property="og:updated_time" content="2016-06-26T01:30:00.418Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="openwrt-wan/lan获取纯mac/ip地址">
-<meta name="twitter:description" content="openwrt-wan
-获取wan口的方式 uci show network.wan.ifname
-只显示结果：
-uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
-
-lan口IP 地址获取方式的proto:
-uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
+<meta name="twitter:title" content="KaiQ.Gu|KerwinKoo Blog">
+<meta name="twitter:description">
   
   
     <link rel="icon" href="/favicon.png">
@@ -186,125 +167,57 @@ uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-openwrt/openwrt-wan" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2015/12/26/openwrt/openwrt-wan/" class="article-date">
-  	<time datetime="2015-12-26T01:29:14.000Z" itemprop="datePublished">2015-12-26</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/06/26/openwrt/openwrt-wan/" class="archive-article-date">
+  	<time datetime="2016-06-26T01:29:14.000Z" itemprop="datePublished">6月 26</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      openwrt-wan/lan获取纯mac/ip地址
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/06/26/openwrt/openwrt-wan/">openwrt-wan/lan获取纯mac/ip地址</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openwrt/">openwrt</a></li></ul>
 	</div>
 
-        
+          
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/openwrt/">openwrt</a>
 	</div>
 
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>openwrt-wan</h1>
-<p>获取wan口的方式 uci show network.wan.ifname</p>
-<h2>只显示结果：</h2>
-<pre><code>uci show network.wan.ifname|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
-</code></pre>
-<h2>lan口IP 地址获取方式的proto:</h2>
-<pre><code>uci show network.lan.proto|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
-</code></pre>
-<h2>获取lan口mac地址</h2>
-<pre><code>uci show network.lan.macaddr|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;</code></pre>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/12/29/github/github-wiki-gollum/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          开源wiki系统:gollum
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/12/23/go/go-get-tools/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">GoGetTools 问题解决</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="openwrt/openwrt-wan" data-title="openwrt-wan/lan获取纯mac/ip地址" data-url="http://yoursite.com/2015/12/26/openwrt/openwrt-wan/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"kerwinkoo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -330,8 +243,8 @@ uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

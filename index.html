@@ -169,6 +169,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-openwrt/openwrt-wan" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/26/openwrt/openwrt-wan/" class="article-date">
+  	<time datetime="2016-06-26T01:29:14.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/26/openwrt/openwrt-wan/">openwrt-wan/lan获取纯mac/ip地址</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>openwrt-wan</h1>
+<p>获取wan口的方式 uci show network.wan.ifname</p>
+<h2>只显示结果：</h2>
+<pre><code>uci show network.wan.ifname|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
+</code></pre>
+<h2>lan口IP 地址获取方式的proto:</h2>
+<pre><code>uci show network.lan.proto|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
+</code></pre>
+<h2>获取lan口mac地址</h2>
+<pre><code>uci show network.lan.macaddr|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;</code></pre>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openwrt/">openwrt</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/openwrt/">openwrt</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-go/NSQ-golang-MQ-5-nsq-to-file-3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -760,80 +828,6 @@ strftime.go
       
         <p class="article-more-link">
           <a  href="/2016/01/21/go/goa2-RESTful-microservices/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-go/Goa1-golang-goa" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/20/go/Goa1-golang-goa/" class="article-date">
-  	<time datetime="2016-01-19T16:33:07.000Z" itemprop="datePublished">2016-01-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/20/go/Goa1-golang-goa/">goa-1-golang微服务框架设计工具：Goa</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1>Goa</h1>
-<p>RESTful go web 快速开发框架，<a href="https://github.com/raphael/goa">Goa</a>与其他go web开发框架有本质的不同，它是以框架设计为主，是 <code>Design-based</code> HTTP微服务框架。</p>
-<h2>Install</h2>
-<p>首先安装goa代码生成工具<code>goagen</code>.
-go get github.com/goadesign/goa/goagen</p>
-<p>goa跟goagen的关系是：goagen是工具，是goa项目的主要产物之一；如果不是修改goagen，基本不需要goa的源码，当然也可以将整体go get下来。</p>
-<hr>
-<p><strong>update 2016-01-25</strong></p>
-<p><strong>注意(这里有坑)</strong>：这里一定是从<code>goadesign/goa/goagen</code>中执行<code>go get</code>，不可以直接<code>go get github.com/goadesign/goa</code>，因为这样会get到一个名为<code>raphael</code>的包，与<code>goa package</code>会产生冲突，可能与<code>Goa</code>版本变更较频繁有关。如果发生版本冲突，移步<a href="https://github.com/goadesign/goa/issues/216">#216</a></p>
-<hr>
-<p>安装代码依赖自动import工具：</p>
-<pre><code>go get golang.org/x/tools/cmd/goimports
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/goa/">goa</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/20/go/Goa1-golang-goa/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
