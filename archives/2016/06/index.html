@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>KaiQ.Gu|KerwinKoo Blog</title>
+  <title>Archives: 2016/6 | KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2016/06/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -169,205 +169,42 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-go/Go-DB-Simple-for-mysql" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/08/23/go/Go-DB-Simple-for-mysql/" class="article-date">
-  	<time datetime="2015-08-23T03:20:37.000Z" itemprop="datePublished">2015-08-23</time>
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/06/26/openwrt/openwrt-wan/" class="archive-article-date">
+  	<time datetime="2016-06-26T01:25:35.033Z" itemprop="datePublished">6月 26</time>
 </a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/23/go/Go-DB-Simple-for-mysql/">Go Mysql Diver的简单使用</a>
-    </h1>
-  
+        </div>
+    	 
+        <div class="article-info info-on-right">
+          
+          
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。</p>
-<h2>包的引用</h2>
-<p>Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
-其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql">github.com/go-sql-driver/mysql</a></p>
-<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> (</span></span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h3>注意：</h3>
-<ul>
-<li>通过引入空白倒入Mysql包（<code>短横线-</code>），完成数据库驱动注册。</li>
-<li>出现问题：<code>failed to open database: sql: unknown driver &quot;mysql&quot; (forgotten import?)</code>说明数据库驱动引用有误（上次出现这个问题是没有空白导入Mysql数据库驱动）。</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/23/go/Go-DB-Simple-for-mysql/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
 </article>
-
-
-
-
-
-
-
   
-    <article id="post-python/python-command-line-analysis" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/08/20/python/python-command-line-analysis/" class="article-date">
-  	<time datetime="2015-08-20T03:41:25.000Z" itemprop="datePublished">2015-08-20</time>
-</a>
-    </div>
+    </div></section>
   
-  <div class="article-inner">
+
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/20/python/python-command-line-analysis/">python 实现命令行参数</a>
-    </h1>
-  
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在终端中输入</p>
-<pre><code>vi -h
-</code></pre>
-<p>或者</p>
-<pre><code>vi --help
-</code></pre>
-<p>他们实现的功能是一样的，都是打印vi编辑器的帮助文档。
-python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/python/">python</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/20/python/python-command-line-analysis/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/18/hello-world/" class="article-date">
-  	<time datetime="2015-08-17T16:00:01.000Z" itemprop="datePublished">2015-08-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/18/hello-world/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -391,9 +228,9 @@ python通过标准库<code>getopt</code>，对终端命令行参数进行解析�
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

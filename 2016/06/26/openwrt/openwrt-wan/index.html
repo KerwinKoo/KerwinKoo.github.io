@@ -5,15 +5,34 @@
   
   <title>KaiQ.Gu|KerwinKoo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta name="description" content="openwrt-wan
+获取wan口的方式 uci show network.wan.ifname
+只显示结果：
+uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
+
+lan口IP 地址获取方式的proto:
+uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
+<meta property="og:type" content="article">
 <meta property="og:title" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/06/26/openwrt/openwrt-wan/index.html">
 <meta property="og:site_name" content="KaiQ.Gu|KerwinKoo Blog">
-<meta property="og:description">
+<meta property="og:description" content="openwrt-wan
+获取wan口的方式 uci show network.wan.ifname
+只显示结果：
+uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
+
+lan口IP 地址获取方式的proto:
+uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
+<meta property="og:updated_time" content="2016-04-20T09:07:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KaiQ.Gu|KerwinKoo Blog">
-<meta name="twitter:description">
+<meta name="twitter:description" content="openwrt-wan
+获取wan口的方式 uci show network.wan.ifname
+只显示结果：
+uci show network.wan.ifname|cut -d&apos;=&apos; -f 2|sed -e &amp;quot;s/&apos;//g&amp;quot;
+
+lan口IP 地址获取方式的proto:
+uci show network.lan.proto|cut -d&apos;=&apos; -f 2|sed -e &amp;qu">
   
   
     <link rel="icon" href="/favicon.png">
@@ -167,13 +186,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-go/Go-DB-Simple-for-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-openwrt/openwrt-wan" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/08/23/go/Go-DB-Simple-for-mysql/" class="article-date">
-  	<time datetime="2015-08-23T03:20:37.000Z" itemprop="datePublished">2015-08-23</time>
+      <a href="/2016/06/26/openwrt/openwrt-wan/" class="article-date">
+  	<time datetime="2016-06-26T01:25:35.033Z" itemprop="datePublished">2016-06-26</time>
 </a>
     </div>
   
@@ -182,192 +199,78 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/23/go/Go-DB-Simple-for-mysql/">Go Mysql Diver的简单使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>因为之前一直用Python进行服务器DB操作，这次转到Go访问MySql，中间遇到的几个坑这里填一下。</p>
-<h2>包的引用</h2>
-<p>Golang对数据库的操作需要连接两个库，首先是Golang的DB基础库database，该库主要提供DB的基本操作支持，如CRUD、Prepared Statement及事务。
-其次需要Import针对具体库类型操作数据库驱动。mysql驱动库使用github提供的包：<a href="https://github.com/go-sql-driver/mysql">github.com/go-sql-driver/mysql</a></p>
-<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"><span class="keyword">import</span> (</span></span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h3>注意：</h3>
-<ul>
-<li>通过引入空白倒入Mysql包（<code>短横线-</code>），完成数据库驱动注册。</li>
-<li>出现问题：<code>failed to open database: sql: unknown driver &quot;mysql&quot; (forgotten import?)</code>说明数据库驱动引用有误（上次出现这个问题是没有空白导入Mysql数据库驱动）。</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Go/">Go</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/23/go/Go-DB-Simple-for-mysql/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-python/python-command-line-analysis" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/20/python/python-command-line-analysis/" class="article-date">
-  	<time datetime="2015-08-20T03:41:25.000Z" itemprop="datePublished">2015-08-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/20/python/python-command-line-analysis/">python 实现命令行参数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在终端中输入</p>
-<pre><code>vi -h
+        <h1>openwrt-wan</h1>
+<p>获取wan口的方式 uci show network.wan.ifname</p>
+<h2>只显示结果：</h2>
+<pre><code>uci show network.wan.ifname|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
 </code></pre>
-<p>或者</p>
-<pre><code>vi --help
+<h2>lan口IP 地址获取方式的proto:</h2>
+<pre><code>uci show network.lan.proto|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;
 </code></pre>
-<p>他们实现的功能是一样的，都是打印vi编辑器的帮助文档。
-python通过标准库<code>getopt</code>，对终端命令行参数进行解析，可以轻松达到以上效果。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-	</div>
+<h2>获取lan口mac地址</h2>
+<pre><code>uci show network.lan.macaddr|cut -d'=' -f 2|sed -e &quot;s/'//g&quot;</code></pre>
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/python/">python</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/20/python/python-command-line-analysis/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
     </div>
     
   </div>
   
-</article>
-
-
-
-
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/08/18/hello-world/" class="article-date">
-  	<time datetime="2015-08-17T16:00:01.000Z" itemprop="datePublished">2015-08-18</time>
-</a>
-    </div>
+    <a href="/2016/02/21/go/NSQ-golang-MQ-5-nsq-to-file-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">golang-NSQ源码阅读 5-nsq_to_file源码解析-3 输出</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/18/hello-world/">Hello World</a>
-    </h1>
-  
+</nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/18/hello-world/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
 
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="openwrt/openwrt-wan" data-title="" data-url="http://yoursite.com/2016/06/26/openwrt/openwrt-wan/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"kerwinkoo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -391,8 +294,8 @@ python通过标准库<code>getopt</code>，对终端命令行参数进行解析�
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
